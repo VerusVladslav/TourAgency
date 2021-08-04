@@ -1,0 +1,15 @@
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\bin\Debug\net5.0\Agency.DAL.deps.json
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\bin\Debug\net5.0\Agency.DAL.runtimeconfig.json
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\bin\Debug\net5.0\Agency.DAL.runtimeconfig.dev.json
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\bin\Debug\net5.0\Agency.DAL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\bin\Debug\net5.0\ref\Agency.DAL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\bin\Debug\net5.0\Agency.DAL.pdb
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\Agency.DAL.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\Agency.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\Agency.DAL.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\Agency.DAL.AssemblyInfo.cs
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\Agency.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\Agency.DAL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\ref\Agency.DAL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\Agency.DAL.pdb
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DAL\obj\Debug\net5.0\Agency.DAL.genruntimeconfig.cache

@@ -1,0 +1,12 @@
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\bin\Debug\net5.0\Agency.DTO.deps.json
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\bin\Debug\net5.0\Agency.DTO.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\bin\Debug\net5.0\ref\Agency.DTO.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\bin\Debug\net5.0\Agency.DTO.pdb
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\obj\Debug\net5.0\Agency.DTO.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\obj\Debug\net5.0\Agency.DTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\obj\Debug\net5.0\Agency.DTO.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\obj\Debug\net5.0\Agency.DTO.AssemblyInfo.cs
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\obj\Debug\net5.0\Agency.DTO.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\obj\Debug\net5.0\Agency.DTO.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\obj\Debug\net5.0\ref\Agency.DTO.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.DTO\obj\Debug\net5.0\Agency.DTO.pdb

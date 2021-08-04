@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Agency.DAL\Agency.DAL.csproj" />
+    <ProjectReference Include="..\Agency.DTO\Agency.DTO.csproj" />
+  </ItemGroup>
+
+</Project>

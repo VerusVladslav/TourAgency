@@ -1,0 +1,17 @@
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\bin\Debug\net5.0\Agency.BLL.deps.json
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\bin\Debug\net5.0\Agency.BLL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\bin\Debug\net5.0\ref\Agency.BLL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\bin\Debug\net5.0\Agency.BLL.pdb
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\bin\Debug\net5.0\Agency.DAL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\bin\Debug\net5.0\Agency.DTO.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\bin\Debug\net5.0\Agency.DAL.pdb
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\bin\Debug\net5.0\Agency.DTO.pdb
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\Agency.BLL.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\Agency.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\Agency.BLL.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\Agency.BLL.AssemblyInfo.cs
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\Agency.BLL.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\Agency.BLL.csproj.CopyComplete
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\Agency.BLL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\ref\Agency.BLL.dll
+C:\Users\Admin\source\repos\LatTourAgency\Agency.BLL\obj\Debug\net5.0\Agency.BLL.pdb
