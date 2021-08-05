@@ -1,0 +1,99 @@
+<p-toast position="top-right"></p-toast>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <div class="card flex flex-column   ">
+    <h3 class="flex align-items-center justify-content-center p-mt-3 ">
+      Register
+    </h3>
+    <div class="form-group p-mt-1">
+
+     
+  
+      <div class="flex align-items-center  p-col-12 p-md-5 p-lg-4 justify-content-center ">
+        <span class="p-float-label   ">
+          <input id="float-input" type="text" formControlName="UserName" class="minwidth" pInputText>
+          <label class="fontsize" for="float-input">Username</label>
+        </span>
+
+      </div>
+    </div>
+
+    <div class="form-group p-mt-1">
+
+
+      <div class="flex align-items-center  p-col-12 p-md-5 p-lg-4 justify-content-center ">
+        <span class="p-float-label   ">
+
+          <input id="float-input" type="email" class="minwidth" formControlName="Email" pInputText>
+          <label class="fontsize" for="float-input">Email</label>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group p-mt-1">
+      <div class="flex align-items-center  p-col-12 p-md-5 p-lg-4 justify-content-center ">
+        <span class="p-float-label   ">
+          <input id="float-input" type="text" class="minwidth" formControlName="SurName" pInputText>
+          <label class="fontsize" for="float-input">Surname</label>
+        </span>
+
+      </div>
+    </div>
+
+
+
+    <div class="form-group p-mt-1">
+      <div class="flex align-items-center  p-col-12 p-md-5 p-lg-4 justify-content-center">
+        <span class="p-float-label   minwidth">
+          <p-calendar name="birth"  class=" minwidth" formControlName="Birth" [showIcon]="true" [monthNavigator]="true"
+            [yearNavigator]="true" yearRange="1900:2021" inputId="navigators"></p-calendar>
+          <label class="fontsize"   for="birth">Birth</label>
+
+        </span>
+      </div>
+    </div>
+
+
+    <div class="form-group p-mt-1">
+
+      <div class="flex align-items-center  justify-content-center p-col-12 p-md-5 p-lg-4">
+        <span class="p-float-label minwidth ">
+
+          <p-password formControlName="Password" class="minwidth " [toggleMask]="true"></p-password>
+
+          <label class="fontsize" for="password" class="minwidth">Password</label>
+
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="form-group p-mt-1">
+
+      <div class="flex align-items-center p-col-12 p-md-5 p-lg-4 justify-content-center">
+        <span class="p-float-label minwidth">
+
+          <p-inputMask mask="(999) 999-9999"   [style]="{'width':'216px'}" id="Phone" formControlName="Phone"></p-inputMask>
+
+
+          <label class="fontsize"  for="Phone">Phone</label>
+
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group p-mt-1">
+
+      <div class="flex align-items-center p-col-12 p-md-5 p-lg-4 justify-content-center ">
+        <button pButton label="Register" class="minwidth" [disabled]="registerForm.invalid"></button>
+      </div>
+    </div>
+    <div class="form-group ">
+
+      <div class="flex align-items-center p-col-12 p-md-5 p-lg-4 justify-content-center p-mb-4">
+        <button pButton label="Login"  [routerLink]="['/login-page']" class=" minwidth" ></button>
+      </div>
+    </div>
+  </div>
+</form>

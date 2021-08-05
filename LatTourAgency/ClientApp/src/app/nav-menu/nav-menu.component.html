@@ -1,45 +1,22 @@
 <header>
-  <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-  >
-    <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">LatTourAgency</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
-        [ngClass]="{ show: isExpanded }"
-      >
-        <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
-        <app-login-menu></app-login-menu>
-      </div>
-    </div>
-  </nav>
+ 
+ 
+
+
+  <p-menubar class="menu p-mb-6 p-mr-0" [model]="items">
+    <ng-template  pTemplate="start">
+      <fa-icon class="icon p-mr-5" [icon]="faGlobe" ></fa-icon>
+    </ng-template>
+    
+    <ng-template pTemplate="end">
+      
+          <!-- <span class="p-input-icon-right">
+            <i class="pi pi-search" onclick="(search)"></i>
+            <input  type="text" pInputText placeholder="Search" />
+        </span> -->
+    
+       
+    </ng-template>
+</p-menubar>
+
 </header>

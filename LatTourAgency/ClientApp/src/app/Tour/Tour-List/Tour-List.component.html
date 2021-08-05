@@ -1,0 +1,44 @@
+<div class="card">
+    <p-dataView #dv [value]="Tours" [paginator]="true" [rows]="9" filterBy="name"
+        [sortField]="sortField" [sortOrder]="sortOrder" layout="list">
+        <ng-template pTemplate="header">
+            <div class="flex justify-content-between  flex-wrap">
+                <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" 
+                (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                <span class="p-input-icon-left p-mb-2 p-mb-md-0">
+                    <i class="pi pi-search"></i>
+                    <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+                    
+                </span>
+              
+             
+            </div>
+        </ng-template>
+
+
+      
+
+        
+        <ng-template let-tour pTemplate="listItem" >
+            <div class="col-12 ">
+                <div class="tour-list-item">
+                    <img [src]="tour.mainimage" [alt]="tour.name"/>
+                    <div class="tour-list-detail">
+                        <div class="tour-name">{{tour.name}}</div>
+                        <div class="tour-description">{{tour.shortdescription}}</div>
+                        <p-rating [ngModel]="tour.grade" [readonly]="true" [cancel]="false"></p-rating>
+                        <!-- <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{tour.category}}</span> -->
+                    </div>
+                    <div class="tour-list-action">
+                        <span class="tour-price">$  {{tour.costindoldars}}</span>
+                        <p-button icon="pi pi-shopping-cart" label="Add to Cart" ></p-button>
+                        <!-- <span [class]="'product-badge status-' + tour.inventoryStatus.toLowerCase()">{{tour.inventoryStatus}}</span> -->
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+   
+        
+      
+    </p-dataView>
+</div>

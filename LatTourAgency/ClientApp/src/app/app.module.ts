@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -27,6 +27,14 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import {AccordionModule} from 'primeng/accordion'; 
+import {MenubarModule} from 'primeng/menubar';
+import { CommonModule } from '@angular/common';
+import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
+import {InputMaskModule} from 'primeng/inputmask';
+import {CalendarModule} from 'primeng/calendar';
+import { RegisterModule } from './register/register.module';
+import { TourListComponent } from './Tour/Tour-List/Tour-List.component';
 
 @NgModule({
   declarations: [
@@ -37,26 +45,35 @@ import {AccordionModule} from 'primeng/accordion';
     FetchDataComponent,
     FooterComponent,
     CardExapleComponent,
-    BenefitsComponent
+    BenefitsComponent,
+    TourListComponent
   ],
   imports: [
-    BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),
+   // BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),
+    CommonModule,
+    BrowserModule,
+    AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
-    AppRoutingModule,
-  FontAwesomeModule,
-  LoginPageModule,
-  CardModule,
-  RatingModule,
-  MenuModule,
-  DataViewModule,
-  ButtonModule,
-  InputTextModule,
-  FormsModule,
-  DropdownModule,
-  BrowserAnimationsModule,
-  AccordionModule,
+    ButtonModule,
+    InputTextModule,
+    FormsModule,
+    PasswordModule,
+    CalendarModule,
+    DropdownModule,
+    BrowserAnimationsModule,
+    AccordionModule, 
+    CardModule,
+    FontAwesomeModule,
+    RatingModule,
+    MenuModule,
+    DataViewModule,
+    MenubarModule,
+    InputMaskModule,
+    ReactiveFormsModule,
+    ToastModule,
+    RegisterModule
 
 
   ],

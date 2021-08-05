@@ -16,7 +16,7 @@ export class LoginPageComponent implements OnInit {
   constructor(private messageService: MessageService) { }
 
   ngOnInit() {
-    this.messageService.add({severity:'success', summary: 'Success ', detail: 'Success'})
+  //  this.messageService.add({severity:'success', summary: 'Success ', detail: 'Success'})
 
   }
   onSubmit(){}
