@@ -1,0 +1,11 @@
+.description{
+    font-size: 22px;
+}
+.myCard:hover{
+    transform: scale(1.05) !important;
+   
+}
+
+h1{
+   color: #4caf50; 
+}

@@ -12,6 +12,21 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FooterComponent } from './footer/footer.component';
+import { LoginPageModule } from './login-page/login-page.module';
+import {CardModule} from 'primeng/card';
+import {MenuModule} from 'primeng/menu';
+import {RatingModule} from 'primeng/rating';
+import {DataViewModule} from 'primeng/dataview';
+import { CardExapleComponent } from './home/card-exaple/card-exaple.component';
+import { BenefitsComponent } from './home/benefits/benefits.component';
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import {AccordionModule} from 'primeng/accordion'; 
 
 @NgModule({
   declarations: [
@@ -19,18 +34,31 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    FooterComponent,
+    CardExapleComponent,
+    BenefitsComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,
-    RouterModule.forRoot([
-    { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'counter', component: CounterComponent },
-    { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-], { relativeLinkResolution: 'legacy' })
+    AppRoutingModule,
+  FontAwesomeModule,
+  LoginPageModule,
+  CardModule,
+  RatingModule,
+  MenuModule,
+  DataViewModule,
+  ButtonModule,
+  InputTextModule,
+  FormsModule,
+  DropdownModule,
+  BrowserAnimationsModule,
+  AccordionModule,
+
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

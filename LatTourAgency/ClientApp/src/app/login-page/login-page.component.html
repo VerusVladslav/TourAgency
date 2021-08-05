@@ -1,0 +1,60 @@
+<p-toast position="top-right"></p-toast>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <div class="card flex flex-column   ">
+    <h3 class="flex align-items-center justify-content-center p-mt-3 ">
+      Login
+    </h3>
+    <div class="form-group p-mt-1">
+    </div>
+     
+  
+    <div class="form-group p-mt-1">
+
+
+      <div class="flex align-items-center  p-col-12 p-md-5 p-lg-4 justify-content-center ">
+        <span class="p-float-label   ">
+
+          <input pInputText id="email" type="email" class="minwidth" formControlName="Email" />
+          <label class="fontsize" for="email">Email</label>
+        </span>
+      </div>
+    </div>
+
+   
+
+
+
+    
+    <div class="form-group p-mt-1">
+
+      <div class="flex align-items-center  justify-content-center p-col-12 p-md-5 p-lg-4">
+        <span class="p-float-label minwidth ">
+
+          <p-password id="password" formControlName="Password" class="minwidth " [toggleMask]="true"></p-password>
+
+          <label class="fontsize" for="password" class="minwidth">Password</label>
+
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="form-group p-mt-1 ">
+
+      <div class="flex align-items-center p-col-12 p-md-5 p-lg-4 justify-content-center p-mb-4">
+        <button pButton label="Login"  class="minwidth" [disabled]="loginForm.invalid"></button>
+      </div>
+    </div>
+
+    <div class="form-group ">
+
+      <div class="flex align-items-center p-col-12 p-md-5 p-lg-4 justify-content-center ">
+        <button pButton label="Register" [routerLink]="['/authentication/register']" class="minwidth" ></button>
+      </div>
+    </div>
+
+  </div>
+</form>
+

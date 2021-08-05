@@ -1,0 +1,27 @@
+<div class="p-ml-5 ">
+
+
+
+
+ 
+<p-card   header="Advanced Card" subheader="Town" [style]="{width: '300px'}" styleClass="p-card-shadow">
+  <ng-template pTemplate="header" class="header-img" >
+      <img alt="Card" src="https://www.industrialempathy.com/img/remote/ZiClJf-1920w.jpg">
+  </ng-template>
+  <p>short desc</p>
+  <ng-template pTemplate="footer">
+   
+  <div class="p-d-flex p-jc-between">  
+  
+            <i class="pi pi-dollar" >
+              <span style="font-size:x-large;">
+                10
+              </span>
+              </i>
+          
+    <p-rating [ngModel]="rating" readonly="true" stars="5" [cancel]="false"></p-rating>
+  </div>
+    </ng-template>
+  </p-card>
+
+</div>
