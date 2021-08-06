@@ -3,20 +3,18 @@
  
 
 
-  <p-menubar class="menu p-mb-6 p-mr-0" [model]="items">
-    <ng-template  pTemplate="start">
-      <fa-icon class="icon p-mr-5" [icon]="faGlobe" ></fa-icon>
-    </ng-template>
-    
-    <ng-template pTemplate="end">
-      
-          <!-- <span class="p-input-icon-right">
-            <i class="pi pi-search" onclick="(search)"></i>
-            <input  type="text" pInputText placeholder="Search" />
-        </span> -->
-    
+  <p-menubar class="menu  mb-3 mr-0" [model]="items">
+  
+     <ng-template  pTemplate="start">
        
-    </ng-template>
+       <fa-icon class="icon mr-3  " [routerLink]='["/"]' [icon]="faGlobe" ></fa-icon>
+      </ng-template>
+      
+      
+   
+ 
+
+    
 </p-menubar>
 
 </header>

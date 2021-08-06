@@ -35,6 +35,7 @@ import {InputMaskModule} from 'primeng/inputmask';
 import {CalendarModule} from 'primeng/calendar';
 import { RegisterModule } from './register/register.module';
 import { TourListComponent } from './Tour/Tour-List/Tour-List.component';
+import { CrudTourComponent } from './Tour/crud-tour/crud-tour.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { TourListComponent } from './Tour/Tour-List/Tour-List.component';
     FooterComponent,
     CardExapleComponent,
     BenefitsComponent,
-    TourListComponent
+    TourListComponent,
+    CrudTourComponent
   ],
   imports: [
    // BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),

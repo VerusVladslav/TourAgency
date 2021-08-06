@@ -17,13 +17,14 @@ export class Tour {
     public description: string;
     public shortDescription: string;
  
-    constructor(name: string, mainimage: string, grade: number, cost: number, desc: string, shortD: string) {
+    constructor(name: string, mainimage: string, grade: number, cost: number, desc: string, shortD: string,id:string) {
         this.costinDolars = cost;
         this.name = name;
         this.mainImage = mainimage;
         this.description = desc;
         this.grade = grade;
         this.shortDescription = shortD;
+        this.id=id;
     }
 }
 export interface SelectItem {

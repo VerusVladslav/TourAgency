@@ -43,9 +43,14 @@ export class NavMenuComponent {
         },
         {
             label:'Tours',
-            icon:'pi pi-fw pi-pencil',
+            icon:'pi pi-fw pi-calendar',
             routerLink: ['/tour']
         },
+        {
+          label:'CRUD Tours',
+          icon:'pi pi-fw pi-pencil',
+          routerLink: ['/crud-tour']
+      },
        
         {
             label:'Users',

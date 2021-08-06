@@ -7,6 +7,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { HomeComponent } from './home/home.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterComponent } from './register/register.component';
+import { CrudTourComponent } from './Tour/crud-tour/crud-tour.component';
 
 import { TourListComponent } from './Tour/Tour-List/Tour-List.component';
 
@@ -19,7 +20,7 @@ const routes: Routes = [
     { path: 'counter', component: CounterComponent },
     { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
     {path: 'tour',component:TourListComponent},
-
+    {path:'crud-tour',component:CrudTourComponent,pathMatch:'full'}
 
 ];
 

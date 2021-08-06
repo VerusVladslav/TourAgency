@@ -76,7 +76,7 @@
                 <div class="list-item">
                     <div class=" m-3 mr-3">
                         
-                        <div class="flex border-solid  hover:border-green-600  border-green-400   flex-wrap justify-content-around ">
+                        <div (click)="tourinfo(tour.id)" class="flex  border-solid   hover:border-green-600  border-green-400   flex-wrap justify-content-around ">
 
                                 <div class="mt-4 border-double  border-green-400 mb-4 flex align-items-center justify-content-center">
                                   <div class="m-1">
@@ -88,14 +88,14 @@
                                 </div>
                                 <div class="flex   m-5 align-items-center justify-content-center">
                                     
-                                    <div class="flex flex-column ">
+                                    <div class="flex flex-column text-center">
                                         
                                         <div class="flex align-items-center justify-content-center  text-lg font-bold">
                                             
                                             {{tour.name}}
                                         </div>
                                         
-                                        <div class="flex">
+                                        <div class="flex text-center">
                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae possimus, l
                                             {{tour.shortDescription}}
                                         </div>

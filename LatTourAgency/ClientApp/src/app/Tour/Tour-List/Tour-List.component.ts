@@ -12,10 +12,18 @@ export class TourListComponent implements OnInit {
   constructor(private tourService:TourService) { }
   Tours: Tour[] 
   = [
-   new Tour('name','https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',5,220.2,"desc",'short desc') ,
-   new Tour('name1','https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg',4,20.2,"desc1",'short213 desc') ,
-   new Tour('name2','https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg',3,220.2,"desc2",'short1231 desc') ,
-   new Tour('name3','https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',2,220.2,"desc3",'short1111 desc') ,
+   new Tour('name',
+   'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',5,220.2,
+   "desc",'short desc',"1") ,
+   new Tour('name1',
+   'https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'
+   ,4,20.2,"desc1",'short213 desc',"2") ,
+   new Tour('name2',
+   'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg'
+   ,3,220.2,"desc2",'short1231 desc',"3") ,
+   new Tour('name3',
+   'https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
+   2,220.2,"desc3",'short1111 desc',"4") ,
 
 
   ]
@@ -40,7 +48,9 @@ export class TourListComponent implements OnInit {
 
   }
 
-
+  tourinfo(id:string){
+    console.log(id);
+  }
 
   onSortChange(event) {
     let value = event.value;
