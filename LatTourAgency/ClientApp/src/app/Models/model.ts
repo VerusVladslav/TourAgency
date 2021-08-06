@@ -11,19 +11,19 @@ export class ApiResponse {
 export class Tour {
     public id: string;
     public name: string;
-    public mainimage: string;
+    public mainImage: string;
     public grade: number;
-    public costindoldars: number;
+    public costinDolars: number;
     public description: string;
-    public shortdescription: string;
-
+    public shortDescription: string;
+ 
     constructor(name: string, mainimage: string, grade: number, cost: number, desc: string, shortD: string) {
-        this.costindoldars = cost;
+        this.costinDolars = cost;
         this.name = name;
-        this.mainimage = mainimage;
+        this.mainImage = mainimage;
         this.description = desc;
         this.grade = grade;
-        this.shortdescription = shortD;
+        this.shortDescription = shortD;
     }
 }
 export interface SelectItem {

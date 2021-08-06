@@ -1,4 +1,4 @@
-<div class="card">
+<!-- <div class="card">
     <p-dataView #dv [value]="Tours" [paginator]="true" [rows]="9" filterBy="name"
         [sortField]="sortField" [sortOrder]="sortOrder" layout="list">
         <ng-template pTemplate="header">
@@ -11,34 +11,158 @@
                     
                 </span>
               
-             
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
             </div>
         </ng-template>
+<P></P>
 
-
-      
-
-        
-        <ng-template let-tour pTemplate="listItem" >
-            <div class="col-12 ">
+        <ng-template let-tour pTemplate="listItem">
+            <div class="col-12">
                 <div class="tour-list-item">
-                    <img [src]="tour.mainimage" [alt]="tour.name"/>
+                    <img [src]="tour.mainImage" [alt]="tour.name"/>
                     <div class="tour-list-detail">
                         <div class="tour-name">{{tour.name}}</div>
-                        <div class="tour-description">{{tour.shortdescription}}</div>
+                        <div class="tour-description">{{tour.shortDescription}}</div>
                         <p-rating [ngModel]="tour.grade" [readonly]="true" [cancel]="false"></p-rating>
-                        <!-- <i class="pi pi-tag product-category-icon"></i><span class="product-category">{{tour.category}}</span> -->
+                        <i class="pi pi-tag tour-category-icon"></i><span class="tour-category">{{tour.category}}</span>
                     </div>
                     <div class="tour-list-action">
-                        <span class="tour-price">$  {{tour.costindoldars}}</span>
-                        <p-button icon="pi pi-shopping-cart" label="Add to Cart" ></p-button>
-                        <!-- <span [class]="'product-badge status-' + tour.inventoryStatus.toLowerCase()">{{tour.inventoryStatus}}</span> -->
+                        <span class="tour-price">${{tour.costinDolars}}</span>
+                        <p-button icon="pi pi-shopping-cart" label="Add to Cart" [disabled]="tour.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+                        <span [class]="'tour-badge status-' + tour.inventoryStatus.toLowerCase()">{{tour.inventoryStatus}}</span>
                     </div>
                 </div>
             </div>
         </ng-template>
+        <ng-template let-product pTemplate="gridItem">
+            <div class="col-12 md-4">
+                <div class="tour-grid-item card">
+                    <div class="tour-grid-item-top">
+                        <div>
+                            <i class="pi pi-tag tour-category-icon"></i>
+                            <span class="tour-category">{{tour.category}}</span>
+                        </div>
+                        <span [class]="'tour-badge status-' + tour.inventoryStatus.toLowerCase()">{{tour.inventoryStatus}}</span>
+                    </div>
+                    <div class="tour-grid-item-content">
+                        <img [src]=" tour.mainImage" [alt]="tour.name"/>
+                        <div class="tour-name">{{tour.name}}</div>
+                        <div class="tour-description">{{tour.shortDescription}}</div>
+                        <p-rating [ngModel]="tour.grade" [readonly]="true" [cancel]="false"></p-rating>
+                    </div>
+                    <div class="tour-grid-item-bottom">
+                        <span class="tour-price">${{tour.costinDolars}}</span>
+                        <p-button icon="pi pi-shopping-cart" [disabled]="tour.inventoryStatus === 'OUTOFSTOCK'"></p-button>
+                    </div>
+                </div>
+            </div>
+        </ng-template> -->
+        <p-dataView #dv [value]="Tours" [paginator]="true" [rows]="9" filterBy="name"
+        [sortField]="sortField" [sortOrder]="sortOrder" >
+        <ng-template pTemplate="header">
+            <div class="flex justify-content-between  flex-wrap">
+                <p-dropdown class="mb-2" [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                <span class="p-input-icon-left mb-2 mb-md-0">
+                    <i class="pi pi-search"></i>
+                    <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+                </span>
+              </div>
+        </ng-template>
+      
+
+        
+            <ng-template let-tour pTemplate="listItem">
+              
+                <div class="list-item">
+                    <div class=" m-3 mr-3">
+                        
+                        <div class="flex border-solid  hover:border-green-600  border-green-400   flex-wrap justify-content-around ">
+
+                                <div class="mt-4 border-double  border-green-400 mb-4 flex align-items-center justify-content-center">
+                                  <div class="m-1">
+
+                                      <img [src]="tour.mainImage"/>
+                                  </div>
+                                   
+                                    
+                                </div>
+                                <div class="flex   m-5 align-items-center justify-content-center">
+                                    
+                                    <div class="flex flex-column ">
+                                        
+                                        <div class="flex align-items-center justify-content-center  text-lg font-bold">
+                                            
+                                            {{tour.name}}
+                                        </div>
+                                        
+                                        <div class="flex">
+                                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae possimus, l
+                                            {{tour.shortDescription}}
+                                        </div>
+                                        
+                                        <div class="flex mt-4 flex-row-reverse ">
+                                            <div class="flex ">
+                                                <span>$ {{tour.costinDolars}}</span>
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                        
+                                        <div class="flex mt-2 flex-row-reverse">
+                                            
+                                            <p-button  icon="pi pi-shopping-cart" ></p-button>
+                                        </div>
+                                    </div>
+                                
+                           
+                                
+                          
+                        </div>
+                              
+                          
+                          
+                      
+                        </div>
+                    </div>
+                        
+                </div>
+              
+          
+            </ng-template>
+        </p-dataView>
+        
+        <!-- <ng-template let-tour pTemplate="listItem" >
+           
+                <div class="flex ">
+
+               
+                <div class=" flex-shrink-1 font-bold  shadow-1 m-6 flex align-items-center justify-content-center ">
+                    <img [src]="tour.mainImage" [alt]="tour.name"/>
+                </div>
+                    <div class="flex-shrink-0 font-bold    flex align-items-center justify-content-center">
+                        <div class="tour-name">{{tour.name}}</div>
+                        
+                        <div class="tour-description">{{tour.shortDescription}}</div>
+                        <p-rating [ngModel]="tour.grade" [readonly]="true" [cancel]="false"></p-rating>
+                    </div>
+                    <div class="flex-grow-1 flex-shrink-1    flex align-items-center justify-content-center">
+                        <div class="flex-wrap ">
+                            <div class=" ">
+
+                                <span class="tour-price">$  {{tour.costinDoldars}}</span>
+                            </div>
+                            <div class="">
+
+                            <p-button icon="pi pi-shopping-cart" label="Add to Cart" ></p-button>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+         
+           
+        </ng-template> -->
    
         
       
-    </p-dataView>
-</div>
+    <!-- </p-dataView>
+</div> -->

@@ -27,14 +27,14 @@ export class TourListComponent implements OnInit {
     sortField: string;
   ngOnInit() {
     this.tourService.getAllTours().subscribe(data=>{
-     // this.Tours=data;
+    //  this.Tours=data;
       console.log(this.Tours);
     });
  
     
     this.sortOptions = [
-      {label: 'Price High to Low', value: '!costindoldars'},
-      {label: 'Price Low to High', value: 'costindoldars'}
+      {label: 'Price High to Low', value: '!costinDolars'},
+      {label: 'Price Low to High', value: 'costinDolars'}
   ];
      
 
