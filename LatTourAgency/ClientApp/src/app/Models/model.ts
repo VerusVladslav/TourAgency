@@ -16,8 +16,25 @@ export class Tour {
     public costinDolars: number;
     public description: string;
     public shortDescription: string;
- 
-    constructor(name: string, mainimage: string, grade: number, cost: number, desc: string, shortD: string,id:string) {
+    public duration: number;
+    public minCountofPeople: number;
+    public maxCountofPeople: number;
+
+  
+    constructor(name: string, 
+        mainimage: string, 
+        grade: number, 
+        cost: number, 
+        desc: string, 
+        shortD: string,
+        id:string,
+        dur: number, 
+        minpeople: number, 
+        maxpeople: number, 
+        
+        ) {
+
+
         this.costinDolars = cost;
         this.name = name;
         this.mainImage = mainimage;
@@ -25,6 +42,9 @@ export class Tour {
         this.grade = grade;
         this.shortDescription = shortD;
         this.id=id;
+        this.duration=dur;
+        this.maxCountofPeople=maxpeople;
+        this.minCountofPeople=minpeople;
     }
 }
 export interface SelectItem {
