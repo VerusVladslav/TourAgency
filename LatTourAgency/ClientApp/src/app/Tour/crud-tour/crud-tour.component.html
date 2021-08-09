@@ -1,4 +1,133 @@
 <p-toast></p-toast>
-<p>
-  crud-tour works!
-</p>
+<div class="card" >
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="button-success mr-2" (click)="openNew()"></button>
+        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedTours()"
+         [disabled]="!selectedTours || !selectedTours.length"></button>
+    </ng-template>
+
+   
+</p-toolbar>
+<p-table #dt [value]="tours" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
+        [(selection)]="selectedTours" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+              <h5 class="m-0">Manage Tours</h5>
+              <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+              </span>
+          </div>
+     
+     
+     
+
+        </ng-template>
+
+
+        <ng-template pTemplate="header">
+          <tr>
+              <th style="width: 3rem">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th>Image</th>
+              <th pSortableColumn="costinDolars">Price <p-sortIcon field="costinDolars"></p-sortIcon></th>
+              <th pSortableColumn="minCountofPeople">Min Count <p-sortIcon field="minCountofPeople"></p-sortIcon></th>
+              <th pSortableColumn="maxCountofPeople">Max Count <p-sortIcon field="maxCountofPeople"></p-sortIcon></th>
+              <th pSortableColumn="duration">Duration <p-sortIcon field="duration"></p-sortIcon></th>
+              <th pSortableColumn="grade">Reviews <p-sortIcon field="grade"></p-sortIcon></th>
+             <th></th>
+          </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-tour>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="tour"></p-tableCheckbox>
+            </td>
+            <td>{{tour.name}}</td>
+            <td><img [src]="tour.mainImage" [alt]="tour.name" width="100" class="shadow-4" /></td>
+            <td>{{tour.costinDolars | currency:'USD'}}</td>
+            <td>{{tour.minCountofPeople}}</td>
+            <td>{{tour.maxCountofPeople}}</td>
+            <td>{{tour.duration}}</td>
+            <td><p-rating [ngModel]="tour.grade" [readonly]="true" [cancel]="false"></p-rating></td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editTour(tour)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteTour(tour)"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            In total there are {{tours ? tours.length : 0 }} tours.
+        </div>
+    </ng-template>
+
+</p-table>
+
+
+</div>
+
+<p-dialog [(visible)]="tourDialog" [style]="{width: '450px'}" header="Tour Details" [modal]="true" styleClass="fluid">
+
+  <ng-template pTemplate="content">
+    <!-- <img [src]="tour.mainImage" [alt]="tour.mainImage" class="product-image" *ngIf="tour.mainImage">   -->
+    <div class="">
+      
+      <div class="field">
+          <label for="name">Name</label>
+          <input pInputText  type="text" class="inputfield w-full" id="name" [(ngModel)]="tour.name" required autofocus>        
+          <small class="error" *ngIf="submitted && !tour.name">Name is required.</small>
+      </div>
+      <div class="field">
+        <label for="shortdescription">Short Description</label>
+        <textarea rows="1"  class="inputfield w-full  p-inputtext " id="shortdescription" 
+        pInputTextarea autoResize="autoResize" 
+         [(ngModel)]="tour.shortDescription"></textarea>
+       
+      </div>
+      <div class="field">
+        <label for="description">Description</label>
+        <textarea rows="3"  class="inputfield w-full  p-inputtext " id="description" 
+        pInputTextarea autoResize="autoResize"
+          [(ngModel)]="tour.description"></textarea>
+       
+      </div>
+      <div class="field ">
+        <div class="flex align-items-center justify-content-center">
+          <div class="flex flex-column">
+
+            <label for="price">Price</label>
+            <p-inputNumber id="price"
+            
+            [(ngModel)]="tour.costinDolars" mode="currency" 
+            currency="USD" locale="en-US"></p-inputNumber>
+            </div>
+            <div class="flex ml-2 flex-column">
+            
+            <label for="price">Price</label>
+            <p-inputNumber id="price"
+            
+            [(ngModel)]="tour.costinDolars" mode="currency" 
+            currency="USD" locale="en-US"></p-inputNumber>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="button-text" (click)="saveTour()"></button>
+</ng-template>
+
+
+  
+</p-dialog>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

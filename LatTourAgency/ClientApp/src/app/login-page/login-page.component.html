@@ -1,21 +1,19 @@
 <p-toast position="top-right"></p-toast>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-  <div class="card flex flex-column   ">
-    <h3 class="flex align-items-center justify-content-center p-mt-3 ">
+  <div class=" flex flex-column   ">
+    <h3 class="flex align-items-center justify-content-center mt-3 ">
       Login
     </h3>
-    <div class="form-group p-mt-1">
-    </div>
-     
   
-    <div class="form-group p-mt-1">
+  
+    <div class="form-group mt-1">
 
 
       <div class="flex align-items-center  p-col-12 p-md-5 p-lg-4 justify-content-center ">
         <span class="p-float-label   ">
 
-          <input pInputText id="email" type="email" class="minwidth" formControlName="Email" />
+          <input pInputText id="email" type="email" class="minwidth p-inputtext" formControlName="Email" />
           <label class="fontsize" for="email">Email</label>
         </span>
       </div>
@@ -31,7 +29,7 @@
       <div class="flex align-items-center  justify-content-center p-col-12 p-md-5 p-lg-4">
         <span class="p-float-label minwidth ">
 
-          <p-password id="password" formControlName="Password" class="minwidth " [toggleMask]="true"></p-password>
+          <p-password id="password" formControlName="Password" class="minwidth p-password-input p-inputtext p-component " [toggleMask]="true"></p-password>
 
           <label class="fontsize" for="password" class="minwidth">Password</label>
 
@@ -44,7 +42,7 @@
     <div class="form-group p-mt-1 ">
 
       <div class="flex align-items-center p-col-12 p-md-5 p-lg-4 justify-content-center p-mb-4">
-        <button pButton label="Login"  class="minwidth" [disabled]="loginForm.invalid"></button>
+        <button pButton label="Login"  class="minwidth p-button p-component" [disabled]="loginForm.invalid"></button>
       </div>
     </div>
 

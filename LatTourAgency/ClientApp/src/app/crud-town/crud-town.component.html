@@ -1,0 +1,91 @@
+<p-toast></p-toast>
+<p-dialog id="dialog" [(visible)]="spinner" [showHeader]="false"   [modal]="true" 
+ >
+   
+       <p-progressSpinner ></p-progressSpinner>
+   
+</p-dialog>
+<div class="card" >
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="button-success mr-2" (click)="openNew()"></button>
+        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedTowns()"
+         [disabled]="!selectedTowns || !selectedTowns.length"></button>
+    </ng-template>
+
+   
+</p-toolbar>
+<p-table #tabletown [value]="towns" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
+        [(selection)]="selectedTowns" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+              <h5 class="m-0">Manage Towns</h5>
+              <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="tabletown.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+              </span>
+          </div>
+     
+     
+     
+
+        </ng-template>
+
+
+        <ng-template pTemplate="header">
+          <tr>
+              <th style="width: 3rem">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+            
+             <th></th>
+          </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-town>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="town"></p-tableCheckbox>
+            </td>
+            <td>{{town.name}}</td>
+           
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editTown(town)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteTown(town)"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            In total there are {{town ? town.length : 0 }} town.
+        </div>
+    </ng-template>
+
+</p-table>
+
+
+</div>
+<p-dialog [(visible)]="townDialog" [style]="{width: '450px'}" header="Tour Details" [modal]="true" styleClass="fluid">
+
+    <ng-template pTemplate="content">
+       <div class="">
+        
+        <div class="field">
+            <label for="name">Name</label>
+            <input pInputText  type="text" class="inputfield w-full" id="name" [(ngModel)]="town.name" required autofocus>        
+            <small class="error" *ngIf="submitted && !town.name">Name is required.</small>
+        </div>
+       
+    </div>
+  
+  
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="button-text" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="button-text" (click)="saveTown()"></button>
+  </ng-template>
+</p-dialog>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

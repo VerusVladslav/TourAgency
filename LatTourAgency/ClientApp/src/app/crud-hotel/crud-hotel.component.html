@@ -1,0 +1,105 @@
+<p-toast></p-toast>
+<div class="card" >
+  <p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+        <button pButton pRipple label="New" icon="pi pi-plus" class="button-success mr-2" (click)="openNew()"></button>
+        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedHotels()"
+         [disabled]="!selectedHotels || !selectedHotels.length"></button>
+    </ng-template>
+
+   
+</p-toolbar>
+<p-table #tablehotel [value]="hotels" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
+        [(selection)]="selectedHotels" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+
+        <ng-template pTemplate="caption">
+          <div class="flex align-items-center justify-content-between">
+              <h5 class="m-0">Manage Hotels</h5>
+              <span class="p-input-icon-left">
+                  <i class="pi pi-search"></i>
+                  <input pInputText type="text" (input)="tablehotel.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+              </span>
+          </div>
+     
+     
+     
+
+        </ng-template>
+
+
+        <ng-template pTemplate="header">
+          <tr>
+              <th style="width: 3rem">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+              <th>Image</th>
+              <th pSortableColumn="town">Town <p-sortIcon field="town"></p-sortIcon></th>
+              <th pSortableColumn="stars">Stars <p-sortIcon field="stars"></p-sortIcon></th>
+             <th></th>
+          </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-hotel>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="hotel"></p-tableCheckbox>
+            </td>
+            <td>{{hotel.name}}</td>
+            <td><img [src]="hotel.mainImage" [alt]="hotel.name" width="100" class="shadow-4" /></td>
+            
+            <td>{{hotel.town}}</td>
+           
+            <td><p-rating [ngModel]="hotel.stars" [readonly]="true" [cancel]="false"></p-rating></td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editHotel(hotel)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteHotel(hotel)"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+            In total there are {{hotel ? hotel.length : 0 }} hotel.
+        </div>
+    </ng-template>
+
+</p-table>
+
+
+</div>
+
+
+
+
+<p-dialog [(visible)]="hotelDialog" [style]="{width: '450px'}" header="Tour Details" [modal]="true" styleClass="fluid">
+
+  <ng-template pTemplate="content">
+    <!-- <img [src]="tour.mainImage" [alt]="tour.mainImage" class="product-image" *ngIf="tour.mainImage">   -->
+    <div class="">
+      
+      <div class="field">
+          <label for="name">Name</label>
+          <input pInputText  type="text" class="inputfield w-full" id="name" [(ngModel)]="hotel.name" required autofocus>        
+          <small class="error" *ngIf="submitted && !hotel.name">Name is required.</small>
+      </div>
+      <div class="field ">
+        <label for="minmax-buttons">Stars</label>
+        <p-inputNumber [(ngModel)]="hotel.stars" class="inputfield w-full" mode="decimal" [showButtons]="true" 
+        inputId="minmax-buttons" [min]="1" [max]="5">
+        </p-inputNumber>
+      </div>
+    
+  </div>
+
+
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="button-text" (click)="saveHotel()"></button>
+</ng-template>
+
+
+  
+</p-dialog>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

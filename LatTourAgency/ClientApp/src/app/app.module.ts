@@ -36,9 +36,16 @@ import {CalendarModule} from 'primeng/calendar';
 import { RegisterModule } from './register/register.module';
 import { TourListComponent } from './Tour/Tour-List/Tour-List.component';
 import { CrudTourComponent } from './Tour/crud-tour/crud-tour.component';
-
+import {ToolbarModule} from 'primeng/toolbar';
+import {TableModule} from 'primeng/table';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from 'primeng/dialog';
+import {InputNumberModule} from 'primeng/inputnumber';
+import { CrudHotelComponent } from './crud-hotel/crud-hotel.component';
+import { CrudTownComponent } from './crud-town/crud-town.component';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 @NgModule({
-  declarations: [
+  declarations: [		
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -48,8 +55,10 @@ import { CrudTourComponent } from './Tour/crud-tour/crud-tour.component';
     CardExapleComponent,
     BenefitsComponent,
     TourListComponent,
-    CrudTourComponent
-  ],
+    CrudTourComponent,
+      CrudHotelComponent,
+      CrudTownComponent
+   ],
   imports: [
    // BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),
     CommonModule,
@@ -75,7 +84,13 @@ import { CrudTourComponent } from './Tour/crud-tour/crud-tour.component';
     InputMaskModule,
     ReactiveFormsModule,
     ToastModule,
-    RegisterModule
+    RegisterModule,
+    ToolbarModule,
+    TableModule,
+    ConfirmDialogModule,
+    DialogModule,
+    InputNumberModule,
+    ProgressSpinnerModule
 
 
   ],
