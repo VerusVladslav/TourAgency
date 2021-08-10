@@ -2,8 +2,8 @@ import { User } from "oidc-client";
 import { isTemplateTail } from "typescript";
 
 export class ApiResponse {
-    public status: number;
-    public message: string;
+    public status?: number;
+    public message?: string;
 
 }
 

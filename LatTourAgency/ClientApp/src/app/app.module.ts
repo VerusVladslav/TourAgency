@@ -43,7 +43,7 @@ import {DialogModule} from 'primeng/dialog';
 import {InputNumberModule} from 'primeng/inputnumber';
 import { CrudHotelComponent } from './crud-hotel/crud-hotel.component';
 import { CrudTownComponent } from './crud-town/crud-town.component';
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [		
     AppComponent,
@@ -90,7 +90,7 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     ConfirmDialogModule,
     DialogModule,
     InputNumberModule,
-    ProgressSpinnerModule
+    NgxSpinnerModule
 
 
   ],

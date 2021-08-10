@@ -12,12 +12,15 @@ let applicationPaths : ApplicationPath = {
     AddHotel:"/api/Hotel/AddHotel",
     DeleteHotel:"/api/Hotel/Delete/",
     UpdateHotel:"/api/Hotel/Update",
+    HotelRemoveRange:"/api/Hotel/DeleteRange/",
+
 
     GetAllTowns:"/api/Town/AllTowns",
     GetTownById:"/api/Town/ById/",
     AddTown:"/api/Town/AddTown",
     DeleteTown:"/api/Town/Delete/",
     UpdateTown:"/api/Town/Update",
+    TownRemoveRange:"/api/Town/DeleteRange/"
 }
 
 interface ApplicationPath {
@@ -33,8 +36,10 @@ interface ApplicationPath {
     readonly AddHotel: string;
     readonly DeleteHotel: string;
     readonly UpdateHotel: string;
+    readonly HotelRemoveRange: string;
 
 
+    readonly TownRemoveRange: string;
     readonly GetAllTowns: string;
     readonly GetTownById: string;
     readonly AddTown: string;

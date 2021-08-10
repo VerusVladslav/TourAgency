@@ -83,8 +83,69 @@
           <input pInputText  type="text" class="inputfield w-full" id="name" [(ngModel)]="hotel.name" required autofocus>        
           <small class="error" *ngIf="submitted && !hotel.name">Name is required.</small>
       </div>
+      <div class="field">
+        <label class="w-full" for="towns">Town</label>
+        <p-dropdown [class]="w-full" [options]="towns" [(ngModel)]="hotel.town"  
+        optionLabel="name" [showClear]="true"  [virtualScroll]="true" [itemSize]="10" ></p-dropdown>
+        <!-- <p-dropdown class="w-full" [(ngModel)]="hotel.town" inputId="towns" [options]="towns" 
+        placeholder="Select">
+            <ng-template let-town pTemplate="town">
+                <span >{{town.name}}</span>
+            </ng-template>
+        </p-dropdown> -->
+        </div>
+        <div class="field">
+            <label for="description">Description</label>
+            <textarea rows="3"  class="inputfield w-full  p-inputtext " id="description" 
+            pInputTextarea autoResize="autoResize"
+              [(ngModel)]="hotel.description"></textarea>
+           
+          </div>
+          <div class="field">
+            <label for="address">Address</label>
+            <textarea rows="1"  class="inputfield w-full  p-inputtext " id="address" 
+            pInputTextarea autoResize="autoResize"
+              [(ngModel)]="hotel.address"></textarea>
+           
+          </div>
+
+          <div class="field">
+            <label for="services">Services</label>
+            <textarea rows="3"  class="inputfield w-full  p-inputtext " id="services" 
+            pInputTextarea autoResize="autoResize"
+              [(ngModel)]="hotel.services"></textarea>
+           
+          </div>
+          <div class="field">
+            <label for="roomAmenities">Room Amenities</label>
+            <textarea rows="3"  class="inputfield w-full  p-inputtext " id="roomAmenities" 
+            pInputTextarea autoResize="autoResize"
+              [(ngModel)]="hotel.roomAmenities"></textarea>
+           
+          </div>
+          <div class="field">
+            <label for="beach">Beach</label>
+            <textarea rows="2"  class="inputfield w-full  p-inputtext " id="beach" 
+            pInputTextarea autoResize="autoResize"
+              [(ngModel)]="hotel.beach"></textarea>
+           
+          </div>
+          <div class="field">
+            <label for="sport">Sport</label>
+            <textarea rows="1"  class="inputfield w-full  p-inputtext " id="sport" 
+            pInputTextarea autoResize="autoResize"
+              [(ngModel)]="hotel.sport"></textarea>
+           
+          </div>
+          <div class="field">
+            <label for="forKids">For Kids</label>
+            <textarea rows="1"  class="inputfield w-full  p-inputtext " id="forKids" 
+            pInputTextarea autoResize="autoResize"
+              [(ngModel)]="hotel.forKids"></textarea>
+           
+          </div>
       <div class="field ">
-        <label for="minmax-buttons">Stars</label>
+        <label class="w-full" for="minmax-buttons">Stars</label>
         <p-inputNumber [(ngModel)]="hotel.stars" class="inputfield w-full" mode="decimal" [showButtons]="true" 
         inputId="minmax-buttons" [min]="1" [max]="5">
         </p-inputNumber>

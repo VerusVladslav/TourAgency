@@ -29,4 +29,5 @@ export class TourService {
     deleteTour(id: string): Observable<ApiResponse> {
       return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteTour + id);
     }
+  
 }

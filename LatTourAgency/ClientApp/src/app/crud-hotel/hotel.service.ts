@@ -31,4 +31,7 @@ export class HotelService {
     deleteHotel(id: string): Observable<ApiResponse> {
       return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteHotel + id);
     }
+    deleteHotelRange(hotel: Hotel[]): Observable<ApiResponse[]> {
+      return this.http.put<ApiResponse[]>(ApplicationRoutes.HotelRemoveRange,hotel);
+    }
 }

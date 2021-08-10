@@ -30,5 +30,7 @@ export class TownService {
     deleteTown(id: string): Observable<ApiResponse> {
       return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteTown + id);
     }
-
+    deleteTownRange(towns : Town[]): Observable<ApiResponse[]> {
+      return this.http.put<ApiResponse[]>(ApplicationRoutes.TownRemoveRange,towns);
+    }
 }
