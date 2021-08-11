@@ -22,7 +22,8 @@ export class CrudHotelComponent implements OnInit {
 
   hotel:  Hotel;
   response: ApiResponse[];
-  
+  public imagePath;
+  imageURl:any;
   hotels: Hotel[] 
   // =[
   //  new Hotel("Piece",
@@ -292,7 +293,27 @@ saveHotel() {
 }
 
 
+preview(files) {
+  if (files.length === 0)
+    return;
 
+  var mimeType = files[0].type;
+  if (mimeType.match(/image\/*/) == null) {
+    this.messageService.add({severity:'error', summary: 'Error', detail: "Only images are supported.", life: 3000});
+
+    
+    return;
+  }
+
+  var reader = new FileReader();
+  this.imagePath = files;
+  reader.readAsDataURL(files[0]);
+  reader.onload = (_event) => {
+    this.imageURl = reader.result;
+  
+  }
+  this.hotel.mainImage=this.imageURl;
+}
 
 showMessageResponse(){
 

@@ -135,7 +135,7 @@ export class SignUpModel {
 
 }
 
-export class SignInModel extends User {
+export class SignInModel{
     public Email: string;
     public Password: string;
 

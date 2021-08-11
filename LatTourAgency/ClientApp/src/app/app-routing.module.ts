@@ -24,7 +24,8 @@ const routes: Routes = [
     {path: 'tour',component:TourListComponent},
     {path:'crud-tour',component:CrudTourComponent,pathMatch:'full'},
     {path:'crud-hotel',component:CrudHotelComponent,pathMatch:'full'},
-    {path:'crud-town',component:CrudTownComponent,pathMatch:'full'}
+    {path:'crud-town',component:CrudTownComponent,pathMatch:'full'},
+    
 
 
 

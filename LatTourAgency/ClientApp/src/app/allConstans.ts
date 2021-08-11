@@ -1,23 +1,23 @@
 
 let applicationPaths : ApplicationPath = {
     GetTourById:"/api/Tour/ById/",
-    AddTour:"/api/Tour/AddTour",
+    AddTour:"/api/Tour/Add",
     UpdateTour:"/api/Tour/Update",
     DeleteTour:"/api/Tour/Delete/",
-    GetAllTours:"/api/Tour/AllTours",
+    GetAllTours:"/api/Tour/All",
     Register:"/api/User/Register",
 
-    GetAllHotels:"/api/Hotel/AllHotels",
+    GetAllHotels:"/api/Hotel/All",
     GetHotelById:"/api/Hotel/ById/",
-    AddHotel:"/api/Hotel/AddHotel",
+    AddHotel:"/api/Hotel/Add",
     DeleteHotel:"/api/Hotel/Delete/",
     UpdateHotel:"/api/Hotel/Update",
     HotelRemoveRange:"/api/Hotel/DeleteRange/",
 
 
-    GetAllTowns:"/api/Town/AllTowns",
+    GetAllTowns:"/api/Town/All",
     GetTownById:"/api/Town/ById/",
-    AddTown:"/api/Town/AddTown",
+    AddTown:"/api/Town/Add",
     DeleteTown:"/api/Town/Delete/",
     UpdateTown:"/api/Town/Update",
     TownRemoveRange:"/api/Town/DeleteRange/"

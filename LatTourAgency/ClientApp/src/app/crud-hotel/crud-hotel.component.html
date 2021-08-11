@@ -6,7 +6,10 @@
         <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedHotels()"
          [disabled]="!selectedHotels || !selectedHotels.length"></button>
     </ng-template>
-
+    <ng-template pTemplate="right">
+        <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+        <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
+    </ng-template>
    
 </p-toolbar>
 <p-table #tablehotel [value]="hotels" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
@@ -47,7 +50,7 @@
                 <p-tableCheckbox [value]="hotel"></p-tableCheckbox>
             </td>
             <td>{{hotel.name}}</td>
-            <td><img [src]="hotel.mainImage" [alt]="hotel.name" width="100" class="shadow-4" /></td>
+            <td><img [src]="'ImageHotel/'+ hotel.mainImage" [alt]="hotel.name" width="100" class="shadow-4" /></td>
             
             <td>{{hotel.town}}</td>
            

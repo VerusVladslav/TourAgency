@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SignInModel,ApiResponse } from '../Models/model';
 import { MessageService } from 'primeng/api';
 
@@ -11,13 +11,34 @@ import { MessageService } from 'primeng/api';
 export class LoginPageComponent implements OnInit {
 
 
-  User:SignInModel;
+  model:SignInModel;
   loginForm: FormGroup;
-  constructor(private messageService: MessageService) { }
+  result:ApiResponse;
+  constructor(private messageService: MessageService,
+    private formBuilder: FormBuilder,) { }
 
   ngOnInit() {
-  //  this.messageService.add({severity:'success', summary: 'Success ', detail: 'Success'})
-
+    this.loginForm = this.formBuilder.group({
+      Email: ['', Validators.required],
+      Password: ['', Validators.required]
+     
+  
+    });
   }
-  onSubmit(){}
+  onSubmit(){
+    try {
+      if (this.loginForm.invalid ) {
+            return;
+       }
+      this.model = {
+        Email: this.loginForm.controls.Email.value,
+        Password: this.loginForm.controls.Password.value,
+      };
+
+    
+ 
+    } catch(error) {
+        this.messageService.add({severity:'error', summary: 'Error ', detail: error})
+      }
+  }
 }

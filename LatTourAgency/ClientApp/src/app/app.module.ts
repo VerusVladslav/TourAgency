@@ -44,6 +44,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import { CrudHotelComponent } from './crud-hotel/crud-hotel.component';
 import { CrudTownComponent } from './crud-town/crud-town.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {FileUploadModule} from 'primeng/fileupload';
 @NgModule({
   declarations: [		
     AppComponent,
@@ -90,8 +91,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ConfirmDialogModule,
     DialogModule,
     InputNumberModule,
-    NgxSpinnerModule
-
+    NgxSpinnerModule,
+    FileUploadModule
 
   ],
   providers: [

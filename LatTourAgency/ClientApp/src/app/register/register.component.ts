@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ApiResponse, SignUpModel } from '../Models/model';
 import { RegisterService } from './register.service';
 import { MessageService } from 'primeng/api';
+import { NgxSpinnerService } from "ngx-spinner";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,8 @@ export class RegisterComponent implements OnInit {
   constructor(private registerService: RegisterService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private spinner :NgxSpinnerService) {
 
 
   }
@@ -25,37 +28,57 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   result:ApiResponse;
 
+  register(){
+    this.spinner.show();
+  
+    this.registerService.SignUp(this.model).subscribe(data => {
+      this.result=data;
+      if(this.result.status==200){
+        setTimeout(() => {
+      
+          this.spinner.hide();
+          this.messageService.add({severity:'success', summary: 'Success ', detail: this.result.message})
+        }, 1000);
+
+      }
+         else{
+          this.spinner.hide();
+
+           this.messageService.add({severity:'error', summary: 'Error ', detail: this.result.message})
+
+        }
+    },
+    (error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+       
+        this.spinner.hide();
+      }, 5000);
+    });
+    console.log(this.result);
+    this.router.navigate(['/']);
+     
+    
+
+  }
+
   onSubmit() {
-    try {
+    
+    
       if (this.registerForm.invalid ) {
             return;
        }
       this.model = {
-        Email: this.registerForm.controls.Email.value,
-        Phone: this.registerForm.controls.Phone.value,
-        SurName: this.registerForm.controls.SurName.value,
-        UserName: this.registerForm.controls.UserName.value,
-        Password: this.registerForm.controls.Password.value,
-        Birth: this.registerForm.controls.Birth.value
+        Email: "asd@asd.com",//this.registerForm.controls.Email.value,
+        Phone: "1234567891",// this.registerForm.controls.Phone.value,
+        SurName:"suraname",// this.registerForm.controls.SurName.value,
+        UserName:"username",// this.registerForm.controls.UserName.value,
+        Password: "Qwerty1-",// this.registerForm.controls.Password.value,
+        Birth: new Date()// this.registerForm.controls.Birth.value
 
       };
-
-      this.registerService.SignUp(this.model).subscribe(data => {
-        this.result=data;
-        if(this.result.status==200){
-        this.messageService.add({severity:'success', summary: 'Success ', detail: this.result.message})
-
-        }
-           else{
-          this.messageService.add({severity:'error', summary: 'Error ', detail: this.result.message})
-  
-          }
-      });
- 
-    } catch(error) {
-        this.messageService.add({severity:'error', summary: 'Error ', detail: error})
-      }
-
+      console.log(this.model);
+      this.register();
    
 }
 ngOnInit() {
@@ -70,6 +93,19 @@ ngOnInit() {
     Birth: ['', Validators.required],
 
   });
+
+
+  this.model = {
+    Email: "asd@asd.com",//this.registerForm.controls.Email.value,
+    Phone: "1234567891",// this.registerForm.controls.Phone.value,
+    SurName:"suraname",// this.registerForm.controls.SurName.value,
+    UserName:"username",// this.registerForm.controls.UserName.value,
+    Password: "Qwerty1-",// this.registerForm.controls.Password.value,
+    Birth: new Date()// this.registerForm.controls.Birth.value
+
+  };
+
+  this.register();
 }
 
 
