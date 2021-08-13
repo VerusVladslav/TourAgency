@@ -1,7 +1,11 @@
-.margintop{
+.margin{
     margin-top: 130px !important;
     
     min-height:90vh;
+
+    margin-left: 10%;
+    margin-right: 10%;
+
 }
 
 body{

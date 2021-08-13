@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { CrudTourComponent } from './Tour/crud-tour/crud-tour.component';
 
 import { TourListComponent } from './Tour/Tour-List/Tour-List.component';
+import { TourpageComponent } from './Tour/tourpage/tourpage.component';
 
 const routes: Routes = [
 
@@ -21,10 +22,11 @@ const routes: Routes = [
 
     { path: 'counter', component: CounterComponent },
     { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] },
-    {path: 'tour',component:TourListComponent},
     {path:'crud-tour',component:CrudTourComponent,pathMatch:'full'},
     {path:'crud-hotel',component:CrudHotelComponent,pathMatch:'full'},
     {path:'crud-town',component:CrudTownComponent,pathMatch:'full'},
+    {path: 'tour-list',component:TourListComponent},
+    {path:'tour',component:TourpageComponent}
     
 
 

@@ -44,27 +44,38 @@ export class NavMenuComponent {
         {
             label:'Tours',
             icon:'pi pi-fw pi-calendar',
-            routerLink: ['/tour']
+            routerLink: ['/tour-list']
         },
+
         {
-          label:'CRUD Tours',
-          icon:'pi pi-fw pi-pencil',
-          routerLink: ['/crud-tour']
-      }, 
-       {
-        label:'CRUD Hotels',
-        icon:'pi pi-fw pi-pencil',
-        routerLink: ['/crud-hotel']
-    },
-    {
-      label:'CRUD Towns',
-      icon:'pi pi-fw pi-pencil',
-      routerLink: ['/crud-town']
-  },
+          label: 'CRUD',
+          icon: 'pi pi-fw pi-pencil',
+          items: [
+              {label: 'Tours', icon: 'pi pi-fw pi-pencil', routerLink: ['/crud-tour']},
+              {label: 'Hotels', icon: 'pi pi-fw pi-pencil', routerLink: ['/crud-hotel']},
+              {label: 'Towns', icon: 'pi pi-fw pi-pencil', routerLink: ['/crud-town']},
+
+          ]
+      },
+  //       {
+  //         label:'CRUD Tours',
+  //         icon:'pi pi-fw pi-pencil',
+  //         routerLink: ['/crud-tour']
+  //     }, 
+  //      {
+  //       label:'CRUD Hotels',
+  //       icon:'pi pi-fw pi-pencil',
+  //       routerLink: ['/crud-hotel']
+  //   },
+  //   {
+  //     label:'CRUD Towns',
+  //     icon:'pi pi-fw pi-pencil',
+  //     routerLink: ['/crud-town']
+  // },
         {
-            label:'Users',
+            label:'Tour',
             icon:'pi pi-fw pi-user',
-       
+            routerLink: ['/tour']
         },
         {
             label:'Events',

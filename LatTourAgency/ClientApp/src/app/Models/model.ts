@@ -17,12 +17,9 @@ export class Hotel {
     public stars?: number = 0;
     public address?: string ="";
     public description?: string = "";
-    public services?: string = "";
+  
     public town?: string = "";
-    public roomAmenities?: string = "";
-    public beach?: string = "";
-    public sport?: string = "";
-    public forKids?: string = "";
+  
   
    
     
@@ -33,12 +30,9 @@ export class Hotel {
         town: string = "town",
         id:string = "randmid",
         address: string = "adress", 
-        desc: string ="description", 
-        services: string = "services",      
-        roomAmenities: string = "roomAmenities",
-        beach:string = "beach",
-        sport: string = "sport",
-        forKids:string = "forkids"
+        desc: string ="description"
+        
+      
       
       
         ) {
@@ -49,13 +43,10 @@ export class Hotel {
         this.mainImage = mainimage;
         this.description = desc;
         this.stars = stars;
-        this.services = services;
+      
         this.id=id;
         this.town=town;
-        this.roomAmenities=roomAmenities;
-        this.beach=beach;
-        this.sport=sport;
-        this.forKids=forKids;
+      
 
     }
 }

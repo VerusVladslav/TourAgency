@@ -6,6 +6,7 @@ import { RegisterService } from './register.service';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from "ngx-spinner";
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
 
 @Component({
   selector: 'app-register',
@@ -19,27 +20,30 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private messageService: MessageService,
-    private spinner :NgxSpinnerService) {
+    private spinner :NgxSpinnerService,
+    private authService:AuthorizeService) {
 
 
   }
-
+  currentYear: string = new Date().getFullYear().toString();
   model: SignUpModel;
   registerForm: FormGroup;
-  result:ApiResponse;
-
-  register(){
+  result:ApiResponse ;
+ register(){
     this.spinner.show();
   
     this.registerService.SignUp(this.model).subscribe(data => {
       this.result=data;
       if(this.result.status==200){
         setTimeout(() => {
-      
+          
           this.spinner.hide();
           this.messageService.add({severity:'success', summary: 'Success ', detail: this.result.message})
         }, 1000);
-
+        setTimeout(() => {
+          //this.authService.signIn()
+       // this.router.navigate(['/']);
+        },2000);
       }
          else{
           this.spinner.hide();
@@ -55,8 +59,8 @@ export class RegisterComponent implements OnInit {
         this.spinner.hide();
       }, 5000);
     });
-    console.log(this.result);
-    this.router.navigate(['/']);
+   
+    //
      
     
 
@@ -65,20 +69,29 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     
     
-      if (this.registerForm.invalid ) {
+      if (this.registerForm.invalid) {
+          this.messageService.add({severity:'error', summary: 'Error ', detail: "Invalid form"})
+
             return;
        }
+    
+       if (!this.isEmail()) {
+        this.messageService.add({severity:'error', summary: 'Error ', detail: "Email is invalid"})
+
+         return;
+       }
       this.model = {
-        Email: "asd@asd.com",//this.registerForm.controls.Email.value,
-        Phone: "1234567891",// this.registerForm.controls.Phone.value,
-        SurName:"suraname",// this.registerForm.controls.SurName.value,
-        UserName:"username",// this.registerForm.controls.UserName.value,
-        Password: "Qwerty1-",// this.registerForm.controls.Password.value,
-        Birth: new Date()// this.registerForm.controls.Birth.value
+        Email: this.registerForm.controls.Email.value,
+        Phone: this.registerForm.controls.Phone.value,
+        SurName: this.registerForm.controls.SurName.value,
+        UserName: this.registerForm.controls.UserName.value,
+        Password:  this.registerForm.controls.Password.value,
+        Birth: this.registerForm.controls.Birth.value
 
       };
       console.log(this.model);
       this.register();
+      
    
 }
 ngOnInit() {
@@ -95,17 +108,7 @@ ngOnInit() {
   });
 
 
-  this.model = {
-    Email: "asd@asd.com",//this.registerForm.controls.Email.value,
-    Phone: "1234567891",// this.registerForm.controls.Phone.value,
-    SurName:"suraname",// this.registerForm.controls.SurName.value,
-    UserName:"username",// this.registerForm.controls.UserName.value,
-    Password: "Qwerty1-",// this.registerForm.controls.Password.value,
-    Birth: new Date()// this.registerForm.controls.Birth.value
-
-  };
-
-  this.register();
+  
 }
 
 

@@ -1,0 +1,63 @@
+
+<p-galleria [(value)]="images" [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '850px'}" [numVisible]="7"
+[circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000"> 
+<ng-template pTemplate="item" let-item>
+    <img [src]="item.previewImageSrc" style="width: 100%; display: block;"/>
+</ng-template>
+<ng-template pTemplate="thumbnail" let-item>
+    <div class="p-grid p-nogutter p-justify-center">
+        <img [src]="item.thumbnailImageSrc" style="display: block;"/>
+    </div>
+</ng-template>
+</p-galleria>
+
+
+<div class="card p-3">
+  <div class="flex">
+    <div class="flex-1 flex justify-content-center">  
+      <div class=" p-1 hover:bg-green-400 cursor-pointer">
+
+        <img [src]="tour.mainImage" style="height: 270px;" (click)="displayBasic = true"/>
+      </div>
+    </div>
+  
+  
+    <div class=" flex-1 flex-column">
+       <div class=" flex justify-content-center ">  
+
+         <div >
+          <h2 >
+            {{tour.name}}
+          </h2>
+        </div>
+        
+        
+        
+      </div>
+      <div class="flex mt-4 ml-5">
+        {{tour.shortDescription}}
+      </div>
+
+    </div>
+  
+  
+  </div>
+
+
+  <div class="flex mt-5 ml-3 align-items-center">
+    
+      <div class="text-xl">
+
+        Towns :
+      </div>
+    
+    
+        <div *ngFor="let town of towns">
+          <div class="ml-2 mt-1">
+
+            {{town.name}}
+          </div>
+        </div>
+     
+  </div>
+</div>

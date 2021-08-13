@@ -50,7 +50,7 @@
                 <p-tableCheckbox [value]="hotel"></p-tableCheckbox>
             </td>
             <td>{{hotel.name}}</td>
-            <td><img [src]="'ImageHotel/'+ hotel.mainImage" [alt]="hotel.name" width="100" class="shadow-4" /></td>
+            <td><img [src]=" hotel.mainImage" [alt]="hotel.name" width="100" class="shadow-4" /></td>
             
             <td>{{hotel.town}}</td>
            
@@ -75,7 +75,7 @@
 
 
 
-<p-dialog [(visible)]="hotelDialog" [style]="{width: '450px'}" header="Tour Details" [modal]="true" styleClass="fluid">
+<p-dialog [(visible)]="hotelDialog" [style]="{width: '600px'}" header="Tour Details" [modal]="true" styleClass="fluid">
 
   <ng-template pTemplate="content">
     <!-- <img [src]="tour.mainImage" [alt]="tour.mainImage" class="product-image" *ngIf="tour.mainImage">   -->
@@ -88,14 +88,25 @@
       </div>
       <div class="field">
         <label class="w-full" for="towns">Town</label>
-        <p-dropdown [class]="w-full" [options]="towns" [(ngModel)]="hotel.town"  
-        optionLabel="name" [showClear]="true"  [virtualScroll]="true" [itemSize]="10" ></p-dropdown>
-        <!-- <p-dropdown class="w-full" [(ngModel)]="hotel.town" inputId="towns" [options]="towns" 
-        placeholder="Select">
-            <ng-template let-town pTemplate="town">
-                <span >{{town.name}}</span>
-            </ng-template>
-        </p-dropdown> -->
+        
+        <p-dropdown  class="max-w-min md:max-w-max" [options]="towns" [(ngModel)]="hotel.town"  
+        optionLabel="name" [showClear]="true"  [virtualScroll]="true" [itemSize]="10" 
+        [style]="{width: '535px'}" ></p-dropdown>
+      
+        </div>
+        <div class="field">
+          <label for="address" >Address</label>
+          <textarea rows="1"    class="inputfield w-full   p-inputtext " id="address" 
+          pInputTextarea autoResize="autoResize"
+            [(ngModel)]="hotel.address"></textarea>
+         
+        </div>
+        <div class="field ">
+          <label class="w-full" for="minmax-buttons">Stars</label>
+          <p-inputNumber [style]="{width: '535px'}"  
+          [(ngModel)]="hotel.stars" class="inputfield w-full" mode="decimal" [showButtons]="true" 
+          inputId="minmax-buttons" [min]="1" [max]="5">
+          </p-inputNumber>
         </div>
         <div class="field">
             <label for="description">Description</label>
@@ -105,53 +116,69 @@
            
           </div>
           <div class="field">
-            <label for="address">Address</label>
-            <textarea rows="1"  class="inputfield w-full  p-inputtext " id="address" 
-            pInputTextarea autoResize="autoResize"
-              [(ngModel)]="hotel.address"></textarea>
-           
+            <div class="flex justify-content-center ">
+    
+              <label class=" text-2xl " for="minmax-buttons">Services</label>
+              
+            </div>
+    
+          </div>
+          <div class="field">
+            <label  class="w-full text-lg">General </label>
+            <p-multiSelect [options]="general" [(ngModel)]="selectedGeneralService" 
+            optionLabel="name" id="general" display="chip"  [style]="{width: '535px'}" 
+            [virtualScroll]="true" 
+            ></p-multiSelect>
+            
           </div>
 
           <div class="field">
-            <label for="services">Services</label>
-            <textarea rows="3"  class="inputfield w-full  p-inputtext " id="services" 
-            pInputTextarea autoResize="autoResize"
-              [(ngModel)]="hotel.services"></textarea>
+            <label for="entertainment" class="w-full">Entertainment and Sport Services</label>
+            <p-multiSelect [options]="entertainment" [(ngModel)]="selectedEntertainmentService" 
+            optionLabel="name" id="entertainment" display="chip"  [style]="{width: '535px'}" 
+            [virtualScroll]="true"
+            ></p-multiSelect>
            
           </div>
           <div class="field">
-            <label for="roomAmenities">Room Amenities</label>
-            <textarea rows="3"  class="inputfield w-full  p-inputtext " id="roomAmenities" 
-            pInputTextarea autoResize="autoResize"
-              [(ngModel)]="hotel.roomAmenities"></textarea>
+            <label for="beach" class="w-full">Beach </label>
+            <p-multiSelect [options]="beach" [(ngModel)]="selectedBeach" 
+            optionLabel="name" id="beach" display="chip"  [style]="{width: '535px'}" 
+            [virtualScroll]="true"
+            ></p-multiSelect>
            
           </div>
           <div class="field">
-            <label for="beach">Beach</label>
-            <textarea rows="2"  class="inputfield w-full  p-inputtext " id="beach" 
-            pInputTextarea autoResize="autoResize"
-              [(ngModel)]="hotel.beach"></textarea>
+            
+            <label  class="w-full text-lg">For Kids</label>
+             
+            <p-multiSelect [options]="forkids" [(ngModel)]="selectedForKids" 
+            [selectedItems]="selectedForKids"
+            optionLabel="name" id="forkids" display="chip"
+           
+            optionValue="name"
+            [style]="{width: '535px'}" 
+            [virtualScroll]="true"
+            ></p-multiSelect>
+
+           
            
           </div>
-          <div class="field">
-            <label for="sport">Sport</label>
-            <textarea rows="1"  class="inputfield w-full  p-inputtext " id="sport" 
-            pInputTextarea autoResize="autoResize"
-              [(ngModel)]="hotel.sport"></textarea>
-           
-          </div>
-          <div class="field">
-            <label for="forKids">For Kids</label>
-            <textarea rows="1"  class="inputfield w-full  p-inputtext " id="forKids" 
-            pInputTextarea autoResize="autoResize"
-              [(ngModel)]="hotel.forKids"></textarea>
-           
-          </div>
-      <div class="field ">
-        <label class="w-full" for="minmax-buttons">Stars</label>
-        <p-inputNumber [(ngModel)]="hotel.stars" class="inputfield w-full" mode="decimal" [showButtons]="true" 
-        inputId="minmax-buttons" [min]="1" [max]="5">
-        </p-inputNumber>
+
+         
+
+  
+          
+     
+
+
+      <div class="field">
+        <div class="flex justify-content-center ">
+
+          <label class=" text-2xl " for="minmax-buttons">Cost</label>
+          
+        </div>
+
       </div>
     
   </div>

@@ -5,6 +5,7 @@ import { HotelService } from './hotel.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TownService } from '../crud-town/town.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { IHotelServices } from '../allConstans';
 
 
 @Component({
@@ -24,17 +25,33 @@ export class CrudHotelComponent implements OnInit {
   response: ApiResponse[];
   public imagePath;
   imageURl:any;
+
+  selectedForKids:IHotelServices[];
+  forkids:IHotelServices[];
+
+
+  beach:any[];
+  selectedBeach:any[];
+
+
+  general:any[];
+  selectedGeneralService:any[];
+
+  entertainment:any[];
+  selectedEntertainmentService:any[];
+
+
   hotels: Hotel[] 
-  // =[
-  //  new Hotel("Piece",
-  //  "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg",5,"Rivne","1"),
-  //  new Hotel("Kyiv",
-  //  "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/96/95/96959_v6.jpeg",5,"Kyiv","2"),
-  //  new Hotel("Rivne Hotel",
-  //  "https://cdn.galaxy.tf/thumb/sizeW1920/uploads/2s/cms_image/001/597/742/1597742695_5f3b9e671b2f4-thumb.jpg",4,"Rivne","3"),
-  //  new Hotel("Rivne",
-  //  "https://www.fairmont-ru.com/assets/0/104/1785/1790/5059/5067/ba5c8a82-6dd5-4635-8ac8-f29dc63c9e9a.jpg",3,"Rivne","4"),
-  // ];
+  =[
+   new Hotel("Piece",
+   "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg",5,"Rivne","1"),
+   new Hotel("Kyiv",
+   "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/96/95/96959_v6.jpeg",5,"Kyiv","2"),
+   new Hotel("Rivne Hotel",
+   "https://cdn.galaxy.tf/thumb/sizeW1920/uploads/2s/cms_image/001/597/742/1597742695_5f3b9e671b2f4-thumb.jpg",4,"Rivne","3"),
+   new Hotel("Rivne",
+   "https://www.fairmont-ru.com/assets/0/104/1785/1790/5059/5067/ba5c8a82-6dd5-4635-8ac8-f29dc63c9e9a.jpg",3,"Rivne","4"),
+  ];
   towns: Town[];
 
   constructor( private messageService: MessageService, 
@@ -45,13 +62,15 @@ export class CrudHotelComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.spinner.show()
+    this.getServices();
+  //   this.spinner.show()
     
-    this.GetAllHotelsRequest();
-    setTimeout(() => {
+  //   this.GetAllHotelsRequest();
+  //   setTimeout(() => {
      
-      this.spinner.hide();
-    }, 5000);
+  //     this.spinner.hide();
+  //   }, 5000);
+  
   }
 
   GetAllHotelsRequest(){
@@ -343,4 +362,37 @@ checkIfSuccess(): boolean{
   })
   return false;
 }
+
+
+getServices() {
+  this.forkids= this.hotelService.getArrayForKids();
+  this.general=this.hotelService.getArrayGeneral();
+  this.beach=this.hotelService.getArrayBleach();
+  this.entertainment=this.hotelService.getArrayEntertainment();
+ 
+
 }
+
+// GeneralServiceSelected(array:any[])
+// {
+  
+  
+//   this.general=this.hotelService.changeGeneralServices(array);
+// }
+
+// ForKidsFreeServiceSelected(array:string[]){
+ 
+  
+//  this.forkidsPaid= this.hotelService.changeForKiadsServices(array);
+
+// }
+// ForKidsPaidServiceSelected(array:string[]){
+ 
+  
+//   this.forkidsFree= this.hotelService.changeForKiadsServices(array);
+ 
+//  }
+
+}
+
+

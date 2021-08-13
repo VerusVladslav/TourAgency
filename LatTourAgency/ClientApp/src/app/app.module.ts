@@ -45,6 +45,12 @@ import { CrudHotelComponent } from './crud-hotel/crud-hotel.component';
 import { CrudTownComponent } from './crud-town/crud-town.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {FileUploadModule} from 'primeng/fileupload';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {MessageModule} from 'primeng/message';
+import { CreateOwnTourComponent } from './Tour/create-own-tour/create-own-tour.component';
+import { TourpageComponent } from './Tour/tourpage/tourpage.component';
+import {GalleriaModule} from 'primeng/galleria';
+import {MultiSelectModule} from 'primeng/multiselect';
 @NgModule({
   declarations: [		
     AppComponent,
@@ -58,7 +64,9 @@ import {FileUploadModule} from 'primeng/fileupload';
     TourListComponent,
     CrudTourComponent,
       CrudHotelComponent,
-      CrudTownComponent
+      CrudTownComponent,
+      CreateOwnTourComponent,
+      TourpageComponent
    ],
   imports: [
    // BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -92,7 +100,11 @@ import {FileUploadModule} from 'primeng/fileupload';
     DialogModule,
     InputNumberModule,
     NgxSpinnerModule,
-    FileUploadModule
+    FileUploadModule,
+    KeyFilterModule,
+    MessageModule,
+    GalleriaModule,
+    MultiSelectModule
 
   ],
   providers: [

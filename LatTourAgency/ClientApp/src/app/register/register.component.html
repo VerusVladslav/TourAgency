@@ -23,9 +23,13 @@
 
       <div class="fflex align-items-center col-12 md-5 lg-4 justify-content-center ">
         <span class="p-float-label   ">
+         
 
-          <input id="float-input" type="email" class="minwidth" formControlName="Email" pInputText>
-          <label class="fontsize" for="float-input">Email</label>
+        
+          <input id="float-input" formControlName="Email" type="email" class="minwidth" pInputText>
+          <label class="fontsize" for="float-input">Email</label> 
+         
+            
         </span>
       </div>
     </div>
@@ -45,8 +49,9 @@
     <div class="form-group mt-1">
       <div class="flex align-items-center col-12 md-5 lg-4 justify-content-center ">
         <span class="p-float-label   minwidth">
-          <p-calendar name="birth"  class=" minwidth" formControlName="Birth" [showIcon]="true" [monthNavigator]="true"
-            [yearNavigator]="true" yearRange="1900:2021" inputId="navigators"></p-calendar>
+          <p-calendar name="birth"  class=" minwidth" formControlName="Birth" 
+            [showIcon]="true" [monthNavigator]="true"
+            [yearNavigator]="true" yearRange="1900:{{currentYear}}" inputId="navigators"></p-calendar>
           <label class="fontsize"   for="birth">Birth</label>
 
         </span>
