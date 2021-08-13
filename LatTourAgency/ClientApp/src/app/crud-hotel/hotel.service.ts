@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
 import { Observable } from 'rxjs';
-import { ApiResponse, Hotel } from 'src/app/Models/model';
+import { ApiResponse, Hotel, IFood, IHotelRoom } from 'src/app/Models/model';
 import { ApplicationRoutes, ForKidsServiceCostants,
   EntertainmentAndSportServiceCostants,BeachHotelServiceConstants,
   GenerelServiceConstants, 
@@ -122,6 +122,39 @@ export class HotelService {
       return this.http.put<ApiResponse[]>(ApplicationRoutes.HotelRemoveRange,hotel);
     }
 
+    addHotelRommsToHotel(listRooms:IHotelRoom[],id:string):Observable<ApiResponse>  {
+      return this.http.put<ApiResponse>(ApplicationRoutes.AddHotelRoomsToHotel+id, listRooms);
+    }
+
+    addFoodToHotel(listFoods:IFood[]):Observable<ApiResponse>  {
+      return this.http.put<ApiResponse>(ApplicationRoutes.AddFoodsToHotel, listFoods);
+    }
+
+    getHotelRomms(id: string): Observable<IHotelRoom[]> {
+      return this.http.get<IHotelRoom[]>(ApplicationRoutes.GetHotelRoomsHotel + id);
+    }
+
+    getFoods(id: string): Observable<IFood[]> {
+      return this.http.get<IFood[]>(ApplicationRoutes.GetFoodsHotel + id);
+    }
+
+    updateHotelRomms(listhotel: IHotelRoom[]): Observable<ApiResponse> {
+      return this.http.put<ApiResponse>(ApplicationRoutes.UpdateHotelRoomsHotel, listhotel);
+    }
+
+    updateFoods(listhotel: IFood[]): Observable<ApiResponse> {
+      return this.http.put<ApiResponse>(ApplicationRoutes.UpdateFoodsHotel, listhotel);
+    }
+
+
+    deleteFoodsByIdHotel(idHotel: string): Observable<ApiResponse> {
+      return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteFoodsHotel + idHotel);
+    }
+
+    deleteHotelsRoomByIdHotel(idHotel: string): Observable<ApiResponse> {
+      return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteHotelRoomsHotel + idHotel);
+    }
+
 
     getArrayForKids(): IHotelServices[]{
         return this.ForKidsServices;
@@ -136,60 +169,60 @@ export class HotelService {
       return this.GeneralService;
   }
 
-  changeGeneralServices(selected:string[]):string[]  {
+  // changeGeneralServices(selected:string[]):string[]  {
    
-     let GenerealArray=this.GeneralService;
+  //    let GenerealArray=this.GeneralService;
 
-     GenerealArray.forEach( element => {
-      selected.forEach(selectedElements => {          
-        {
-         if(element===selectedElements)
-         {
-           let index=GenerealArray.indexOf(element);
+  //    GenerealArray.forEach( element => {
+  //     selected.forEach(selectedElements => {          
+  //       {
+  //        if(element===selectedElements)
+  //        {
+  //          let index=GenerealArray.indexOf(element);
           
-          GenerealArray.slice(index,1);
-         }
-        }
-      });
-     });
+  //         GenerealArray.slice(index,1);
+  //        }
+  //       }
+  //     });
+  //    });
 
      
       
     
 
 
-      return GenerealArray;
-  }
+  //     return GenerealArray;
+  // }
 
-  changeForKiadsServices(selected:string[]):IHotelServices[]  {
+  // changeForKiadsServices(selected:string[]):IHotelServices[]  {
      
-    console.log(selected);
-    if(selected!=undefined){
+  //   console.log(selected);
+  //   if(selected!=undefined){
    
       
-      let ForKidsArraythis=this.ForKidsServices;
+  //     let ForKidsArraythis=this.ForKidsServices;
 
-      this.ForKidsServices.forEach(element=>{
-        selected.forEach(Selected=>{
-          if(element.name==Selected)
-          {
-            console.log(element);
-            let index=ForKidsArraythis.indexOf(element);
-            console.log(index);
-            if (index > -1) {
-              ForKidsArraythis.splice(index, 1);
-           }
-          //  ForKidsArraythis= ForKidsArraythis.slice(index,1);
-          //  console.log("Arra");
-           // console.log(ForKidsArraythis);
+  //     this.ForKidsServices.forEach(element=>{
+  //       selected.forEach(Selected=>{
+  //         if(element.name==Selected)
+  //         {
+  //           console.log(element);
+  //           let index=ForKidsArraythis.indexOf(element);
+  //           console.log(index);
+  //           if (index > -1) {
+  //             ForKidsArraythis.splice(index, 1);
+  //          }
+  //         //  ForKidsArraythis= ForKidsArraythis.slice(index,1);
+  //         //  console.log("Arra");
+  //          // console.log(ForKidsArraythis);
 
-          }
-        });
+  //         }
+  //       });
 
-      });
-        return ForKidsArraythis;
+  //     });
+  //       return ForKidsArraythis;
 
-    }
+  //   }
    
     
     
@@ -200,6 +233,6 @@ export class HotelService {
     
 
 
-      return this.ForKidsServices;
-  }
+  //     return this.ForKidsServices;
+  // }
 }

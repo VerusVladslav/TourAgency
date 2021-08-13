@@ -1,5 +1,4 @@
-import { User } from "oidc-client";
-import { isTemplateTail } from "typescript";
+
 
 export class ApiResponse {
     public status?: number;
@@ -17,6 +16,7 @@ export class Hotel {
     public stars?: number = 0;
     public address?: string ="";
     public description?: string = "";
+    public site?: string ="";
   
     public town?: string = "";
   
@@ -30,8 +30,8 @@ export class Hotel {
         town: string = "town",
         id:string = "randmid",
         address: string = "adress", 
-        desc: string ="description"
-        
+        desc: string ="description",
+        site: string ="site"
       
       
       
@@ -43,7 +43,7 @@ export class Hotel {
         this.mainImage = mainimage;
         this.description = desc;
         this.stars = stars;
-      
+        this.site=site;
         this.id=id;
         this.town=town;
       
@@ -133,4 +133,39 @@ export class SignInModel{
 
 }
 
+export class IHotelRoom {
+    public  id? :string="";
+    public  costinDoldarsForOneDay? :number=0;
+    public  type? :string="";
+    public  hotel? :string="";
 
+    /**
+     *
+     */
+    constructor(type="",cost=0,
+    id="", hotel=""
+    ) {
+        this.costinDoldarsForOneDay=cost;
+        this.type=type;
+        this.hotel=hotel;
+        this.id=id
+    }
+}
+
+export class IFood {
+    public  costinDoldars? :number=0;
+    public  type? :string="";
+   public  hotelId? :string="";
+
+    /**
+     *
+     */
+    constructor(type="",cost=0,
+    hotelId=""
+    ) {
+        this.costinDoldars=cost;
+        this.type=type;
+       this.hotelId=hotelId;
+        
+    }
+}

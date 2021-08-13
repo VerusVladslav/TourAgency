@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ApiResponse, Hotel, Town } from '../Models/model';
+import { ApiResponse, Hotel, IFood, IHotelRoom, Town } from '../Models/model';
 import { HotelService } from './hotel.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TownService } from '../crud-town/town.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { IHotelServices } from '../allConstans';
+import { FoodConstants, HotelRoomConstants, HotelServiceConstants, IHotelServices } from '../allConstans';
 
 
 @Component({
@@ -41,6 +41,21 @@ export class CrudHotelComponent implements OnInit {
   selectedEntertainmentService:any[];
 
 
+  vipRoomCost:number;
+  singleRoomCost:number;
+  doubleRoomCost:number;
+  tripleRoomCost:number;
+  extra_BedRoomCost:number;
+  childRoomCost:number;
+
+
+  foodUltraCost: number;
+  foodAllInclusiveCost : number;
+  foodFullPassionCost : number;
+  foodDinnerCost : number;
+  foodBreakfastCost : number;
+
+
   hotels: Hotel[] 
   =[
    new Hotel("Piece",
@@ -63,6 +78,31 @@ export class CrudHotelComponent implements OnInit {
 
   ngOnInit() {
     this.getServices();
+
+    let roomList:IHotelRoom[]=[
+      new IHotelRoom(HotelRoomConstants.Vip,20),
+      new IHotelRoom(HotelRoomConstants.Single,30),
+      new IHotelRoom(HotelRoomConstants.Double,40)
+      
+    
+      ];
+      
+      this.hotelService.addHotelRommsToHotel(roomList,"30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
+      console.log("add");
+        
+        console.log(result);
+      });
+    // this.hotelService.getHotelRomms("30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
+    //   console.log("Res");
+    //     console.log(result);
+    // });
+
+  //   this.hotelService.deleteHotelsRoomByIdHotel("30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
+  //     console.log(result);
+  //   });
+  //   this.hotelService.getHotelRomms("30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
+  //     console.log(result);
+  // });
   //   this.spinner.show()
     
   //   this.GetAllHotelsRequest();
@@ -284,6 +324,8 @@ createId(): string {
 
 saveHotel() {
   this.submitted = true;
+if(this.hotel.name!==null && this.hotel.name!==undefined){
+
 
   if (this.hotel.name.trim()) {
       if (this.hotel.id) {
@@ -297,7 +339,15 @@ saveHotel() {
             }
       else {
         this.hotel.id = this.createId();
-        this.CreateHotelRequest(this.hotel);
+
+     //   this.CreateHotelRequest(this.hotel);
+        // console.log(this.createFoodlist());
+        // console.log(this.createRoomlist());
+       // console.log(this.createFoodlist());
+      //  console.log(this.createRoomlist());
+
+
+
         if(this.checkIfSuccess){
 
           this.hotels.push(this.hotel);
@@ -308,6 +358,10 @@ saveHotel() {
 
      
       this.hotel = {};
+  }
+}
+  else {
+    this.messageService.add({severity:'error', summary: 'Error', detail: "Name is required", life: 3000});
   }
 }
 
@@ -372,6 +426,43 @@ getServices() {
  
 
 }
+
+createFoodlist(idHotel:string){
+ let foodList:IFood[]=[
+  new IFood(FoodConstants.Food_Ultra,this.foodUltraCost,idHotel),
+  new IFood(FoodConstants.Food_AllInclusive,this.foodAllInclusiveCost,idHotel),
+  new IFood(FoodConstants.Food_FullPassion,this.foodFullPassionCost,idHotel),
+  new IFood(FoodConstants.Food_Dinner,this.foodDinnerCost,idHotel),
+  new IFood(FoodConstants.Food_Breakfast,this.foodBreakfastCost,idHotel),
+
+  ];
+
+ return foodList;
+ 
+  
+}
+
+
+createRoomlist(idHotel:string){
+  let roomList:IHotelRoom[]=[
+   new IHotelRoom(HotelRoomConstants.Vip,this.vipRoomCost,idHotel),
+   new IHotelRoom(HotelRoomConstants.Single,this.singleRoomCost,idHotel),
+   new IHotelRoom(HotelRoomConstants.Double,this.doubleRoomCost,idHotel),
+   new IHotelRoom(HotelRoomConstants.Triple,this.tripleRoomCost,idHotel),
+   new IHotelRoom(HotelRoomConstants.Extra_Bed,this.extra_BedRoomCost,idHotel),
+   new IHotelRoom(HotelRoomConstants.Child,this.childRoomCost,idHotel)
+ 
+   ];
+
+  
+  
+ 
+  return roomList;
+  
+   
+ }
+
+
 
 // GeneralServiceSelected(array:any[])
 // {

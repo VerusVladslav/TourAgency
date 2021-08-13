@@ -10,6 +10,17 @@ let applicationPaths : ApplicationPath = {
     GetAllHotels:"/api/Hotel/All",
     GetHotelById:"/api/Hotel/ById/",
     AddHotel:"/api/Hotel/Add",
+    AddHotelRoomsToHotel:"/api/HotelRoom/Add/",
+    GetHotelRoomsHotel:"/api/HotelRoom/All/",
+    UpdateHotelRoomsHotel:"/api/HotelRoom/Update/",
+    DeleteHotelRoomsHotel:"/api/HotelRoom/Delete/",
+
+    AddFoodsToHotel:"/api/Food/Add/",
+    GetFoodsHotel:"/api/Food/All/",
+    UpdateFoodsHotel:"/api/Food/Update/",
+    DeleteFoodsHotel:"/api/Food/Delete/",
+
+
     DeleteHotel:"/api/Hotel/Delete/",
     UpdateHotel:"/api/Hotel/Update",
     HotelRemoveRange:"/api/Hotel/DeleteRange/",
@@ -34,9 +45,20 @@ interface ApplicationPath {
     readonly GetAllHotels: string;
     readonly GetHotelById: string;
     readonly AddHotel: string;
+    readonly AddHotelRoomsToHotel: string;
+    readonly GetHotelRoomsHotel: string;
+    readonly UpdateHotelRoomsHotel: string;
+    readonly DeleteHotelRoomsHotel: string;
+    readonly DeleteFoodsHotel: string;
+
+    readonly HotelRemoveRange: string;
+    readonly AddFoodsToHotel: string;
+    readonly GetFoodsHotel: string;
+    readonly UpdateFoodsHotel: string;
     readonly DeleteHotel: string;
     readonly UpdateHotel: string;
-    readonly HotelRemoveRange: string;
+    
+
 
 
     readonly TownRemoveRange: string;
@@ -305,6 +327,11 @@ export class IHotelServices {
    }
 }
 
+
+
+
+
+
 export const ForKidsServiceCostants: ForKidsHotelServiceConstants = ForKidsServiceCost;
 export const EntertainmentAndSportServiceCostants: EntertainmentAndSportHotelServiceConstants = EntertainmentAndSportCostants;
 export const BeachHotelServiceConstants: BeachHotelServiceConstants = BeachHotelConstants;
@@ -312,7 +339,7 @@ export const GenerelServiceConstants: GeneralHotelServiceConstants = GenerelServ
 
 
 
-
+export const HotelRoomConstants: HotelRommsConst = HotelRoom;
 export const TransportConstants: TransportConst = Transport;
 export const HotelServiceConstants: ServiceConstants = Service;
 export const FoodConstants: FoodConst = Food;

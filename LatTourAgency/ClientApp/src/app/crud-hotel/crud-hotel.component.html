@@ -2,12 +2,15 @@
 <div class="card" >
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
-        <button pButton pRipple label="New" icon="pi pi-plus" class="button-success mr-2" (click)="openNew()"></button>
-        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedHotels()"
+        <button pButton pRipple label="New" icon="pi pi-plus" class="button-success mr-2" 
+        (click)="openNew()"></button>
+        <button pButton pRipple [label]="Delete" icon="pi pi-trash" class="p-button-danger" 
+        (click)="deleteSelectedHotels()"
          [disabled]="!selectedHotels || !selectedHotels.length"></button>
     </ng-template>
     <ng-template pTemplate="right">
-        <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
+        <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" 
+        chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
         <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
     </ng-template>
    
@@ -75,7 +78,8 @@
 
 
 
-<p-dialog [(visible)]="hotelDialog" [style]="{width: '600px'}" header="Tour Details" [modal]="true" styleClass="fluid">
+<p-dialog [(visible)]="hotelDialog" [style]="{width: '600px'}" header="Hotel Details" 
+[modal]="true" styleClass="fluid">
 
   <ng-template pTemplate="content">
     <!-- <img [src]="tour.mainImage" [alt]="tour.mainImage" class="product-image" *ngIf="tour.mainImage">   -->
@@ -107,6 +111,13 @@
           [(ngModel)]="hotel.stars" class="inputfield w-full" mode="decimal" [showButtons]="true" 
           inputId="minmax-buttons" [min]="1" [max]="5">
           </p-inputNumber>
+        </div>
+        <div class="field">
+          <label for="site">Site</label>
+          <textarea rows="3"  class="inputfield w-full  p-inputtext " id="site" 
+          pInputTextarea autoResize="autoResize"
+            [(ngModel)]="hotel.site"></textarea>
+         
         </div>
         <div class="field">
             <label for="description">Description</label>
@@ -160,27 +171,245 @@
             [style]="{width: '535px'}" 
             [virtualScroll]="true"
             ></p-multiSelect>
-
-           
-           
+        
           </div>
-
-         
-
-  
-          
-     
 
 
       <div class="field">
         <div class="flex justify-content-center ">
 
-          <label class=" text-2xl " for="minmax-buttons">Cost</label>
+          <label class=" text-2xl " for="minmax-buttons">Price for one day</label>
           
         </div>
 
       </div>
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-vip">Vip Room: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="vipRoomCost" inputId="currency-us-vip"  mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-single">Single Room: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="singleRoom" inputId="currency-us-single"  mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
     
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-double">Double Room: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="doubleRoomCost" inputId="currency-us-double"  mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-triple">Triple Room: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="tripleRoomCost" inputId="currency-us-triple"  mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-extra_Bed">Extra Bed Room: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="extra_BedRoomCost" inputId="currency-us-extra_Bed"  mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-child">Child Room: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="childRoomCost" inputId="currency-us-child" 
+             mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="field">
+        <div class="flex justify-content-center ">
+
+          <label class=" text-2xl " for="minmax-buttons">Food price</label>
+          
+        </div>
+
+      </div>
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-foodUltra">Ultra: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="foodUltraCost" inputId="currency-us-foodUltra" 
+             mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-inclusive">All inclusive: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="foodAllInclusiveCost" inputId="currency-us-inclusive" 
+             mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-passion">Full Passion: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="foodFullPassionCost" 
+            inputId="currency-us-passion" 
+             mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-dinner">Dinner: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="foodDinnerCost" 
+            inputId="currency-us-dinner" 
+             mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="field card">
+
+        <div class="flex justify-content-between p-1 pl-2">
+          <div class="flex align-items-center">
+            <label  for="currency-us-breakfast">Breakfast: </label>
+
+          </div>
+          <div class="flex">
+            <p-inputNumber [(ngModel)]="foodBreakfastCost" 
+            inputId="currency-us-breakfast" 
+             mode="currency" currency="USD"
+             [minFractionDigits]="2">
+             </p-inputNumber>
+          </div>
+
+        </div>
+
+
+      </div>
+
   </div>
 
 
