@@ -10,7 +10,7 @@ export class TourpageComponent implements OnInit {
 
   tour: Tour = new Tour('name',
   'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',5,220.2,
-  "desc",'short desc',"1",10,1,10)
+  "desc",'short desc',"1",10)
 
   images: any[]=[
 

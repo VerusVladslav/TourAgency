@@ -76,8 +76,7 @@ export class Tour {
     public description?: string = "";
     public shortDescription?: string = "";
     public duration?: number = 0;
-    public minCountofPeople?: number = 0;
-    public maxCountofPeople?: number = 0;
+   
 
    
     
@@ -88,9 +87,8 @@ export class Tour {
         desc: string ="description", 
         shortD: string = "short Description",
         id:string = "randomID",
-        dur: number = 20, 
-        minpeople: number = 1, 
-        maxpeople: number = 10, 
+        dur: number = 20
+       
         
         ) {
 
@@ -103,8 +101,7 @@ export class Tour {
         this.shortDescription = shortD;
         this.id=id;
         this.duration=dur;
-        this.maxCountofPeople=maxpeople;
-        this.minCountofPeople=minpeople;
+       
     }
 }
 export interface SelectItem {
@@ -138,12 +135,13 @@ export class IHotelRoom {
     public  costinDoldarsForOneDay? :number=0;
     public  type? :string="";
     public  hotel? :string="";
+   
 
     /**
      *
      */
     constructor(type="",cost=0,
-    id="", hotel=""
+    id="", hotel="",
     ) {
         this.costinDoldarsForOneDay=cost;
         this.type=type;
@@ -155,17 +153,25 @@ export class IHotelRoom {
 export class IFood {
     public  costinDoldars? :number=0;
     public  type? :string="";
-   public  hotelId? :string="";
+  
+
+   
+   public  id? :string="";
+    public  foods? :string="";
+    public  description? :string="";
+   public  hotel? :string="";
 
     /**
      *
      */
-    constructor(type="",cost=0,
-    hotelId=""
+    constructor(type="",cost=0,id="",hotel="",name="",descr=""
     ) {
         this.costinDoldars=cost;
         this.type=type;
-       this.hotelId=hotelId;
+        this.id=id;
+        this.hotel=hotel;
+        this.foods=name;
+        this.description=descr;
         
     }
 }

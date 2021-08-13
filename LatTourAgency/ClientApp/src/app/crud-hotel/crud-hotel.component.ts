@@ -80,29 +80,25 @@ export class CrudHotelComponent implements OnInit {
     this.getServices();
 
     let roomList:IHotelRoom[]=[
-      new IHotelRoom(HotelRoomConstants.Vip,20),
-      new IHotelRoom(HotelRoomConstants.Single,30),
-      new IHotelRoom(HotelRoomConstants.Double,40)
+      new IHotelRoom(HotelRoomConstants.Vip,100,this.createId()),
+      new IHotelRoom(HotelRoomConstants.Single,100,this.createId()),
+      new IHotelRoom(HotelRoomConstants.Double,100,this.createId()),
+      new IHotelRoom(HotelRoomConstants.Double,150,this.createId())
+
       
     
       ];
       
-      this.hotelService.addHotelRommsToHotel(roomList,"30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
-      console.log("add");
-        
-        console.log(result);
-      });
-    // this.hotelService.getHotelRomms("30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
-    //   console.log("Res");
-    //     console.log(result);
+      
+    //   this.hotelService.addHotelRommsToHotel(roomList,"30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
+    //   console.log("add");
+    
     // });
+   
+     
 
-  //   this.hotelService.deleteHotelsRoomByIdHotel("30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
-  //     console.log(result);
-  //   });
-  //   this.hotelService.getHotelRomms("30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
-  //     console.log(result);
-  // });
+   
+  
   //   this.spinner.show()
     
   //   this.GetAllHotelsRequest();

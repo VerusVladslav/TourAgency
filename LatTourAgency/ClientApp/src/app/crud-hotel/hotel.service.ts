@@ -138,8 +138,8 @@ export class HotelService {
       return this.http.get<IFood[]>(ApplicationRoutes.GetFoodsHotel + id);
     }
 
-    updateHotelRomms(listhotel: IHotelRoom[]): Observable<ApiResponse> {
-      return this.http.put<ApiResponse>(ApplicationRoutes.UpdateHotelRoomsHotel, listhotel);
+    updateHotelRomms(listhotel: IHotelRoom[],idHotel:string): Observable<ApiResponse> {
+      return this.http.put<ApiResponse>(ApplicationRoutes.UpdateHotelRoomsHotel+idHotel, listhotel);
     }
 
     updateFoods(listhotel: IFood[]): Observable<ApiResponse> {
