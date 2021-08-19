@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
 import { Observable } from 'rxjs';
-import { ApiResponse, Hotel, IFood, IHotelRoom } from 'src/app/Models/model';
+import { ApiResponse, Hotel, IFood, IHotelRoom,IHotelServices } from 'src/app/Models/model';
 import { ApplicationRoutes, ForKidsServiceCostants,
   EntertainmentAndSportServiceCostants,BeachHotelServiceConstants,
-  GenerelServiceConstants, 
-  IHotelServices} from '../allConstans';
+  GenerelServiceConstants,
+  } from '../allConstans';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,79 +17,79 @@ export class HotelService {
 
   BleachServices :any[]=[
     
-      {name:BeachHotelServiceConstants.Beach_towels},
-      {name:BeachHotelServiceConstants.Own},
-      {name:BeachHotelServiceConstants.Sandy},
-      {name:BeachHotelServiceConstants.Sandy_pebble},
-      {name:BeachHotelServiceConstants.Sun_loungers},
-      {name:BeachHotelServiceConstants.Umbrellas},
-      {name:BeachHotelServiceConstants.Urban},
-      {name:BeachHotelServiceConstants.Windsurfing}
+      {service:BeachHotelServiceConstants.Beach_towels},
+      {service:BeachHotelServiceConstants.Own},
+      {service:BeachHotelServiceConstants.Sandy},
+      {service:BeachHotelServiceConstants.Sandy_pebble},
+      {service:BeachHotelServiceConstants.Sun_loungers},
+      {service:BeachHotelServiceConstants.Umbrellas},
+      {service:BeachHotelServiceConstants.Urban},
+      {service:BeachHotelServiceConstants.Windsurfing}
 
   ];
   EntertainmentAndSportServices: any[] = [
-    {name:EntertainmentAndSportServiceCostants.Aerobics},
-    {name:EntertainmentAndSportServiceCostants.Animation},
-    {name:EntertainmentAndSportServiceCostants.Aquapark},
-    {name:EntertainmentAndSportServiceCostants.Bath},
-    {name:EntertainmentAndSportServiceCostants.Bike_rental},
-    {name:EntertainmentAndSportServiceCostants.Billiards},
-    {name:EntertainmentAndSportServiceCostants.Disco},
-    {name:EntertainmentAndSportServiceCostants.Diving},
-    {name:EntertainmentAndSportServiceCostants.Event_organization_service},
-    {name:EntertainmentAndSportServiceCostants.Fitness_center},
-    {name:EntertainmentAndSportServiceCostants.Golf},
-    {name:EntertainmentAndSportServiceCostants.Gym},
-    {name:EntertainmentAndSportServiceCostants.Hamam},
-    {name:EntertainmentAndSportServiceCostants.Jacuzzi},
-    {name:EntertainmentAndSportServiceCostants.Organization_of_excursions},
-    {name:EntertainmentAndSportServiceCostants.Pier},
-    {name:EntertainmentAndSportServiceCostants.Pontoon},
-    {name:EntertainmentAndSportServiceCostants.Sauna},
-    {name:EntertainmentAndSportServiceCostants.Spa_center},
-    {name:EntertainmentAndSportServiceCostants.Table_tennis},
-    {name:EntertainmentAndSportServiceCostants.Tennis_court},
-    {name:EntertainmentAndSportServiceCostants.Volleyball},
-    {name:EntertainmentAndSportServiceCostants.Water_sports_on_the_beach},
-    {name:EntertainmentAndSportServiceCostants.Wellness_center},
-    {name:EntertainmentAndSportServiceCostants.Windsurfing}
+    {service:EntertainmentAndSportServiceCostants.Aerobics},
+    {service:EntertainmentAndSportServiceCostants.Animation},
+    {service:EntertainmentAndSportServiceCostants.Aquapark},
+    {service:EntertainmentAndSportServiceCostants.Bath},
+    {service:EntertainmentAndSportServiceCostants.Bike_rental},
+    {service:EntertainmentAndSportServiceCostants.Billiards},
+    {service:EntertainmentAndSportServiceCostants.Disco},
+    {service:EntertainmentAndSportServiceCostants.Diving},
+    {service:EntertainmentAndSportServiceCostants.Event_organization_service},
+    {service:EntertainmentAndSportServiceCostants.Fitness_center},
+    {service:EntertainmentAndSportServiceCostants.Golf},
+    {service:EntertainmentAndSportServiceCostants.Gym},
+    {service:EntertainmentAndSportServiceCostants.Hamam},
+    {service:EntertainmentAndSportServiceCostants.Jacuzzi},
+    {service:EntertainmentAndSportServiceCostants.Organization_of_excursions},
+    {service:EntertainmentAndSportServiceCostants.Pier},
+    {service:EntertainmentAndSportServiceCostants.Pontoon},
+    {service:EntertainmentAndSportServiceCostants.Sauna},
+    {service:EntertainmentAndSportServiceCostants.Spa_center},
+    {service:EntertainmentAndSportServiceCostants.Table_tennis},
+    {service:EntertainmentAndSportServiceCostants.Tennis_court},
+    {service:EntertainmentAndSportServiceCostants.Volleyball},
+    {service:EntertainmentAndSportServiceCostants.Water_sports_on_the_beach},
+    {service:EntertainmentAndSportServiceCostants.Wellness_center},
+    {service:EntertainmentAndSportServiceCostants.Windsurfing}
 
 
 
   ];
 
-  ForKidsServices :IHotelServices[]=[
-    {name:ForKidsServiceCostants.Children_menu_in_the_restaurant},
-    {name:ForKidsServiceCostants.Children_room},
-    {name:ForKidsServiceCostants.Children_swimming_pool},
-    {name:ForKidsServiceCostants.Mini_club},
-    {name:ForKidsServiceCostants.Nanny},
-    {name:ForKidsServiceCostants.Payground},
-    {name:ForKidsServiceCostants.Рighchairs_in_the_restaurant},
-    {name:ForKidsServiceCostants.Сot}
+  ForKidsServices :any[]=[
+    {service:ForKidsServiceCostants.Children_menu_in_the_restaurant},
+    {service:ForKidsServiceCostants.Children_room},
+    {service:ForKidsServiceCostants.Children_swimming_pool},
+    {service:ForKidsServiceCostants.Mini_club},
+    {service:ForKidsServiceCostants.Nanny},
+    {service:ForKidsServiceCostants.Payground},
+    {service:ForKidsServiceCostants.Рighchairs_in_the_restaurant},
+    {service:ForKidsServiceCostants.Сot}
 
   ];
 
   GeneralService: any[]=[
-    {name:GenerelServiceConstants.Bar},
-    {name:GenerelServiceConstants.Beauty_saloon},
-    {name:GenerelServiceConstants.Cafe},
-    {name:GenerelServiceConstants.Car_rental},
-    {name:GenerelServiceConstants.Conference_hall},
-    {name:GenerelServiceConstants.Currency_exchange},
-    {name:GenerelServiceConstants.Doctor},
-    {name:GenerelServiceConstants.Elconditions_for_disabled_people},
-    {name:GenerelServiceConstants.Elevator},
-    {name:GenerelServiceConstants.Late_check_out},
-    {name:GenerelServiceConstants.Laundry},
-    {name:GenerelServiceConstants.Non_smoking_rooms},
-    {name:GenerelServiceConstants.Open_pool},
-    {name:GenerelServiceConstants.Parking},
-    {name:GenerelServiceConstants.Payment_by_payment_cards},
-    {name:GenerelServiceConstants.Restaurant},
-    {name:GenerelServiceConstants.Safe},
-    {name:GenerelServiceConstants.Transfer_to_from_the_airport},
-    {name:GenerelServiceConstants.Wi_Fi}
+    {service:GenerelServiceConstants.Bar},
+    {service:GenerelServiceConstants.Beauty_saloon},
+    {service:GenerelServiceConstants.Cafe},
+    {service:GenerelServiceConstants.Car_rental},
+    {service:GenerelServiceConstants.Conference_hall},
+    {service:GenerelServiceConstants.Currency_exchange},
+    {service:GenerelServiceConstants.Doctor},
+    {service:GenerelServiceConstants.Elconditions_for_disabled_people},
+    {service:GenerelServiceConstants.Elevator},
+    {service:GenerelServiceConstants.Late_check_out},
+    {service:GenerelServiceConstants.Laundry},
+    {service:GenerelServiceConstants.Non_smoking_rooms},
+    {service:GenerelServiceConstants.Open_pool},
+    {service:GenerelServiceConstants.Parking},
+    {service:GenerelServiceConstants.Payment_by_payment_cards},
+    {service:GenerelServiceConstants.Restaurant},
+    {service:GenerelServiceConstants.Safe},
+    {service:GenerelServiceConstants.Transfer_to_from_the_airport},
+    {service:GenerelServiceConstants.Wi_Fi}
    
   ];
 
@@ -101,9 +101,13 @@ export class HotelService {
 
 
     getAllHotels(): Observable<Hotel[]> {
-      // this.GenreList = this.http.get<Genre[]>(this.GenreUrl);
-      // return this.GenreList;
+ 
       return this.http.get<Hotel[]>(ApplicationRoutes.GetAllHotels);
+    }
+
+    getAllHotelsByTownId(townid:string): Observable<Hotel[]> {
+     
+      return this.http.get<Hotel[]>(ApplicationRoutes.GetHotelsByTownId+townid);
     }
     getHotel(id: string): Observable<Hotel> {
       return this.http.get<Hotel>(ApplicationRoutes.GetHotelById + id);
@@ -115,8 +119,8 @@ export class HotelService {
     addHotel(hotel: Hotel): Observable<ApiResponse> {
       return this.http.post<ApiResponse>(ApplicationRoutes.AddHotel, hotel);
     }
-    deleteHotel(id: string): Observable<ApiResponse> {
-      return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteHotel + id);
+    deleteHotel(id: string): Observable<ApiResponse[]> {
+      return this.http.delete<ApiResponse[]>(ApplicationRoutes.DeleteHotel + id);
     }
     deleteHotelRange(hotel: Hotel[]): Observable<ApiResponse[]> {
       return this.http.put<ApiResponse[]>(ApplicationRoutes.HotelRemoveRange,hotel);
@@ -126,8 +130,12 @@ export class HotelService {
       return this.http.put<ApiResponse>(ApplicationRoutes.AddHotelRoomsToHotel+id, listRooms);
     }
 
-    addFoodToHotel(listFoods:IFood[]):Observable<ApiResponse>  {
-      return this.http.put<ApiResponse>(ApplicationRoutes.AddFoodsToHotel, listFoods);
+    addFoodToHotel(listFoods:IFood[],id:string):Observable<ApiResponse>  {
+      return this.http.put<ApiResponse>(ApplicationRoutes.AddFoodsToHotel+id, listFoods);
+    }
+
+    addServicesToHotel(listServices:IHotelServices[],id:string):Observable<ApiResponse>  {
+      return this.http.put<ApiResponse>(ApplicationRoutes.AddServiceByHotelId+id, listServices);
     }
 
     getHotelRomms(id: string): Observable<IHotelRoom[]> {
@@ -142,21 +150,28 @@ export class HotelService {
       return this.http.put<ApiResponse>(ApplicationRoutes.UpdateHotelRoomsHotel+idHotel, listhotel);
     }
 
-    updateFoods(listhotel: IFood[]): Observable<ApiResponse> {
-      return this.http.put<ApiResponse>(ApplicationRoutes.UpdateFoodsHotel, listhotel);
+    updateFoods(listfood: IFood[],idHotel:string): Observable<ApiResponse> {
+      return this.http.put<ApiResponse>(ApplicationRoutes.UpdateFoodsHotel+idHotel, listfood);
     }
 
-
-    deleteFoodsByIdHotel(idHotel: string): Observable<ApiResponse> {
-      return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteFoodsHotel + idHotel);
+    
+    updateServices(listService: IHotelServices[],idHotel:string): Observable<ApiResponse> {
+      return this.http.put<ApiResponse>(ApplicationRoutes.UpdateServiceByHotelId+idHotel, listService);
     }
+    // deleteFoodsByIdHotel(idHotel: string): Observable<ApiResponse> {
+    //   return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteFoodsHotel + idHotel);
+    // }
 
-    deleteHotelsRoomByIdHotel(idHotel: string): Observable<ApiResponse> {
-      return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteHotelRoomsHotel + idHotel);
-    }
+    // deleteServicesByIdHotel(idHotel: string): Observable<ApiResponse> {
+    //   return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteServiceByHotelId + idHotel);
+    // }
+
+    // deleteHotelsRoomByIdHotel(idHotel: string): Observable<ApiResponse> {
+    //   return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteHotelRoomsHotel + idHotel);
+    // }
 
 
-    getArrayForKids(): IHotelServices[]{
+    getArrayForKids(): any[]{
         return this.ForKidsServices;
     }
     getArrayBleach(): any[]{
@@ -168,6 +183,22 @@ export class HotelService {
   getArrayGeneral(): any[]{
       return this.GeneralService;
   }
+
+  getSportServices(hotelId:string): Observable<IHotelServices[]>{
+    return this.http.get<IHotelServices[]>(ApplicationRoutes.GetSportServiceByHotelId + hotelId);
+  }
+
+  getForKidsServices(hotelId:string): Observable<IHotelServices[]>{
+    return this.http.get<IHotelServices[]>(ApplicationRoutes.GetForKidsServiceByHotelId + hotelId);
+  }
+  getGeneralServices(hotelId:string): Observable<IHotelServices[]>{
+    return this.http.get<IHotelServices[]>(ApplicationRoutes.GetGeneralServiceByHotelId + hotelId);
+  }
+  getBeachServices(hotelId:string): Observable<IHotelServices[]>{
+    return this.http.get<IHotelServices[]>(ApplicationRoutes.GetBeachServiceByHotelId + hotelId);
+  }
+
+
 
   // changeGeneralServices(selected:string[]):string[]  {
    

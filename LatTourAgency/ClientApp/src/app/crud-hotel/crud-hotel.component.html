@@ -8,11 +8,7 @@
         (click)="deleteSelectedHotels()"
          [disabled]="!selectedHotels || !selectedHotels.length"></button>
     </ng-template>
-    <ng-template pTemplate="right">
-        <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" 
-        chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload>
-        <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help"></button>
-    </ng-template>
+   
    
 </p-toolbar>
 <p-table #tablehotel [value]="hotels" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
@@ -24,7 +20,9 @@
               <h5 class="m-0">Manage Hotels</h5>
               <span class="p-input-icon-left">
                   <i class="pi pi-search"></i>
-                  <input pInputText type="text" (input)="tablehotel.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                  <input pInputText type="text" 
+                  (input)="tablehotel.filterGlobal($event.target.value, 'contains')" 
+                  placeholder="Search..." />
               </span>
           </div>
      
@@ -55,7 +53,8 @@
             <td>{{hotel.name}}</td>
             <td><img [src]=" hotel.mainImage" [alt]="hotel.name" width="100" class="shadow-4" /></td>
             
-            <td>{{hotel.town}}</td>
+            <td *ngIf="hotel.town!=null">{{hotel.town }}</td>
+            <td *ngIf="hotel.town==null">NULL</td>
            
             <td><p-rating [ngModel]="hotel.stars" [readonly]="true" [cancel]="false"></p-rating></td>
             <td>
@@ -82,25 +81,40 @@
 [modal]="true" styleClass="fluid">
 
   <ng-template pTemplate="content">
-    <!-- <img [src]="tour.mainImage" [alt]="tour.mainImage" class="product-image" *ngIf="tour.mainImage">   -->
     <div class="">
-      
       <div class="field">
-          <label for="name">Name</label>
-          <input pInputText  type="text" class="inputfield w-full" id="name" [(ngModel)]="hotel.name" required autofocus>        
-          <small class="error" *ngIf="submitted && !hotel.name">Name is required.</small>
-      </div>
+        <label for="image">Name</label>
+        <input pInputText  type="text" class="inputfield w-full" id="image" [(ngModel)]="hotel.name" >        
+       
+    </div>
+    <div class="field">
+      <label for="image">Main Image</label>
+      <p-fileUpload name="demo[]" id="image"  
+      [multiple]="false"
+      (onSelect)="preview($event)" customUpload="true"
+      accept="image/*" maxFileSize="1000000" chooseLabel="Browse Image" 
+      [showUploadButton]="false" [auto]="true" >
+       
+    </p-fileUpload>  
+    </div>
       <div class="field">
         <label class="w-full" for="towns">Town</label>
         
-        <p-dropdown  class="max-w-min md:max-w-max" [options]="towns" [(ngModel)]="hotel.town"  
-        optionLabel="name" [showClear]="true"  [virtualScroll]="true" [itemSize]="10" 
-        [style]="{width: '535px'}" ></p-dropdown>
-      
+        <p-dropdown  class="max-w-min md:max-w-max" [options]="towns" 
+        [(ngModel)]="town"
+        optionLabel="name"
+       
+        [autoDisplayFirst]="true"
+       
+         [virtualScroll]="true" [itemSize]="5" 
+        [style]="{width: '535px'}"  ></p-dropdown>
+        
         </div>
         <div class="field">
           <label for="address" >Address</label>
-          <textarea rows="1"    class="inputfield w-full   p-inputtext " id="address" 
+          <textarea rows="1" 
+         
+          class="inputfield w-full   p-inputtext " id="address" 
           pInputTextarea autoResize="autoResize"
             [(ngModel)]="hotel.address"></textarea>
          
@@ -114,7 +128,7 @@
         </div>
         <div class="field">
           <label for="site">Site</label>
-          <textarea rows="3"  class="inputfield w-full  p-inputtext " id="site" 
+          <textarea rows="2"  class="inputfield w-full  p-inputtext " id="site" 
           pInputTextarea autoResize="autoResize"
             [(ngModel)]="hotel.site"></textarea>
          
@@ -137,7 +151,9 @@
           <div class="field">
             <label  class="w-full text-lg">General </label>
             <p-multiSelect [options]="general" [(ngModel)]="selectedGeneralService" 
-            optionLabel="name" id="general" display="chip"  [style]="{width: '535px'}" 
+            optionLabel="service"
+            
+            optionValue="service" id="general" display="chip"  [style]="{width: '535px'}" 
             [virtualScroll]="true" 
             ></p-multiSelect>
             
@@ -146,15 +162,19 @@
           <div class="field">
             <label for="entertainment" class="w-full">Entertainment and Sport Services</label>
             <p-multiSelect [options]="entertainment" [(ngModel)]="selectedEntertainmentService" 
-            optionLabel="name" id="entertainment" display="chip"  [style]="{width: '535px'}" 
+            optionLabel="service"
+            optionValue="service" id="entertainment" display="chip"  [style]="{width: '535px'}" 
             [virtualScroll]="true"
             ></p-multiSelect>
            
           </div>
           <div class="field">
             <label for="beach" class="w-full">Beach </label>
-            <p-multiSelect [options]="beach" [(ngModel)]="selectedBeach" 
-            optionLabel="name" id="beach" display="chip"  [style]="{width: '535px'}" 
+            <p-multiSelect [options]="beach" 
+            [(ngModel)]="selectedBeach" 
+            optionLabel="service"
+            optionValue="service"
+             id="beach" display="chip"  [style]="{width: '535px'}" 
             [virtualScroll]="true"
             ></p-multiSelect>
            
@@ -165,9 +185,9 @@
              
             <p-multiSelect [options]="forkids" [(ngModel)]="selectedForKids" 
             [selectedItems]="selectedForKids"
-            optionLabel="name" id="forkids" display="chip"
+            optionLabel="service" id="forkids" display="chip"
            
-            optionValue="name"
+            optionValue="service"
             [style]="{width: '535px'}" 
             [virtualScroll]="true"
             ></p-multiSelect>
@@ -210,7 +230,7 @@
 
           </div>
           <div class="flex">
-            <p-inputNumber [(ngModel)]="singleRoom" inputId="currency-us-single"  mode="currency" currency="USD"
+            <p-inputNumber [(ngModel)]="singleRoomCost" inputId="currency-us-single"  mode="currency" currency="USD"
              [minFractionDigits]="2">
              </p-inputNumber>
           </div>

@@ -6,19 +6,32 @@ let applicationPaths : ApplicationPath = {
     DeleteTour:"/api/Tour/Delete/",
     GetAllTours:"/api/Tour/All",
     Register:"/api/User/Register",
-
+    AddTourGallery:"/api/Tour/AddGallery/",
     GetAllHotels:"/api/Hotel/All",
+    GetHotelsByTownId:"/api/Hotel/ByTownId/",
     GetHotelById:"/api/Hotel/ById/",
     AddHotel:"/api/Hotel/Add",
     AddHotelRoomsToHotel:"/api/HotelRoom/Add/",
     GetHotelRoomsHotel:"/api/HotelRoom/All/",
     UpdateHotelRoomsHotel:"/api/HotelRoom/Update/",
-    DeleteHotelRoomsHotel:"/api/HotelRoom/Delete/",
+  //  DeleteHotelRoomsHotel:"/api/HotelRoom/Delete/",
 
     AddFoodsToHotel:"/api/Food/Add/",
     GetFoodsHotel:"/api/Food/All/",
     UpdateFoodsHotel:"/api/Food/Update/",
-    DeleteFoodsHotel:"/api/Food/Delete/",
+  //  DeleteFoodsHotel:"/api/Food/Delete/",
+    
+
+
+    GetBeachServiceByHotelId:"/api/Hotel/GetBeach/",
+  
+     GetGeneralServiceByHotelId: "/api/Hotel/GetGeneral/",
+     GetForKidsServiceByHotelId: "/api/Hotel/GetForKids/",
+     GetSportServiceByHotelId: "/api/Hotel/GetSport/",
+
+     AddServiceByHotelId:"/api/HotelService/Add/",
+     UpdateServiceByHotelId:"/api/HotelService/Update/",
+   //  DeleteServiceByHotelId:"/api/HotelService/Delete/",
 
 
     DeleteHotel:"/api/Hotel/Delete/",
@@ -41,15 +54,18 @@ interface ApplicationPath {
     readonly AddTour: string;
     readonly DeleteTour: string;
     readonly UpdateTour: string;
+    readonly AddTourGallery: string;
 
     readonly GetAllHotels: string;
+    readonly GetHotelsByTownId: string;
+
     readonly GetHotelById: string;
     readonly AddHotel: string;
     readonly AddHotelRoomsToHotel: string;
     readonly GetHotelRoomsHotel: string;
     readonly UpdateHotelRoomsHotel: string;
-    readonly DeleteHotelRoomsHotel: string;
-    readonly DeleteFoodsHotel: string;
+  //  readonly DeleteHotelRoomsHotel: string;
+  //  readonly DeleteFoodsHotel: string;
 
     readonly HotelRemoveRange: string;
     readonly AddFoodsToHotel: string;
@@ -58,6 +74,14 @@ interface ApplicationPath {
     readonly DeleteHotel: string;
     readonly UpdateHotel: string;
     
+    readonly GetBeachServiceByHotelId: string;
+    readonly GetGeneralServiceByHotelId: string;
+    readonly GetForKidsServiceByHotelId: string;
+    readonly GetSportServiceByHotelId: string;
+
+    readonly AddServiceByHotelId: string;
+    readonly UpdateServiceByHotelId: string;
+  //  readonly DeleteServiceByHotelId: string;
 
 
 
@@ -316,16 +340,7 @@ let HotelRoom:HotelRommsConst={
      Child  :"Child"
 }
 
-export class IHotelServices {
-    name: string
-   /**
-    *
-    */
-   constructor(name) {
-      this.name=name;
-       
-   }
-}
+
 
 
 

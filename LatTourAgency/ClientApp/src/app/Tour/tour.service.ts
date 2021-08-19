@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ApiResponse, Tour } from 'src/app/Models/model';
+import { ApiResponse, ImageTour, Tour } from 'src/app/Models/model';
 import { ApplicationRoutes } from '../allConstans';
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,9 @@ export class TourService {
     }
     deleteTour(id: string): Observable<ApiResponse> {
       return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteTour + id);
+    }
+    addGallery(galley:ImageTour[],idTour:string):Observable<ApiResponse> {
+      return this.http.put<ApiResponse>(ApplicationRoutes.AddTourGallery+idTour, galley);
     }
   
 }

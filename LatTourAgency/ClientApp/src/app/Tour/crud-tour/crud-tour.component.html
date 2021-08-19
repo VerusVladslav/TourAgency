@@ -36,11 +36,11 @@
               <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
               <th>Image</th>
               <th pSortableColumn="costinDolars">Price <p-sortIcon field="costinDolars"></p-sortIcon></th>
-              <th pSortableColumn="minCountofPeople">Min Count <p-sortIcon field="minCountofPeople"></p-sortIcon></th>
-              <th pSortableColumn="maxCountofPeople">Max Count <p-sortIcon field="maxCountofPeople"></p-sortIcon></th>
+              <th pSortableColumn="town">Town <p-sortIcon field="town"></p-sortIcon></th>
+              <th pSortableColumn="hotel">Hotel <p-sortIcon field="hotel"></p-sortIcon></th>
+
               <th pSortableColumn="duration">Duration <p-sortIcon field="duration"></p-sortIcon></th>
-              <th pSortableColumn="grade">Reviews <p-sortIcon field="grade"></p-sortIcon></th>
-             <th></th>
+              <th></th>
           </tr>
       </ng-template>
 
@@ -51,17 +51,21 @@
             </td>
             <td>{{tour.name}}</td>
             <td><img [src]="tour.mainImage" [alt]="tour.name" width="100" class="shadow-4" /></td>
-            <td>{{tour.costinDolars | currency:'USD'}}</td>
-            <td>{{tour.minCountofPeople}}</td>
-            <td>{{tour.maxCountofPeople}}</td>
+            <td>{{tour.costinDoldars | currency:'USD'}}</td>
+            <td>{{tour.town }}</td>
+            <td>{{tour.hotel }}</td>
+           
             <td>{{tour.duration}}</td>
-            <td><p-rating [ngModel]="tour.grade" [readonly]="true" [cancel]="false"></p-rating></td>
             <td>
                 <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editTour(tour)"></button>
                 <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteTour(tour)"></button>
             </td>
         </tr>
     </ng-template>
+
+
+
+
     <ng-template pTemplate="summary">
         <div class="flex align-items-center justify-content-between">
             In total there are {{tours ? tours.length : 0 }} tours.
@@ -73,7 +77,7 @@
 
 </div>
 
-<p-dialog [(visible)]="tourDialog" [style]="{width: '450px'}" header="Tour Details" [modal]="true" styleClass="fluid">
+<p-dialog [(visible)]="tourDialog" [style]="{width: '600px'}" header="Tour Details" [modal]="true" styleClass="fluid">
 
   <ng-template pTemplate="content">
     <!-- <img [src]="tour.mainImage" [alt]="tour.mainImage" class="product-image" *ngIf="tour.mainImage">   -->
@@ -83,6 +87,80 @@
           <label for="name">Name</label>
           <input pInputText  type="text" class="inputfield w-full" id="name" [(ngModel)]="tour.name" required autofocus>        
           <small class="error" *ngIf="submitted && !tour.name">Name is required.</small>
+      </div>
+      <div class="field">
+        <label for="image">Main Image</label>
+        <p-fileUpload name="demo[]" id="image"  
+        [multiple]="false"
+        (onSelect)="preview($event)" customUpload="true"
+        accept="image/*" maxFileSize="1000000" chooseLabel="Browse Image" 
+        [showUploadButton]="false" [auto]="true" >
+         
+      </p-fileUpload>  
+      </div>
+
+      <div class="field ">
+        <div class="flex align-items-center justify-content-between">
+          <div class="flex-1 flex-column">
+
+            <p-radioButton name="groupname" class="mb-1"  
+            inputId="add" value="Add" (onClick)="check($event)" [(ngModel)]="selectedValue"
+            
+            ></p-radioButton>
+            <label class="mt-1 ml-2 mb-0" for="add">Add to Gallery</label>
+        
+            </div>
+            <div class="flex-1 ml-2 flex-column">
+            
+              <p-radioButton name="groupname" class="mb-1" inputId="update" [disabled]="disablecheck === true"
+               value="Update" (onClick)="check($event)" [(ngModel)]="selectedValue"></p-radioButton>
+            <label class="mt-1 ml-2 mb-0" for="update">Update gallery</label>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label for="gallery">Gallery</label>
+        <p-fileUpload name="demo[]" id="gallery"  
+        [multiple]="true"
+        (onSelect)="gallery($event)" customUpload="true"
+        accept="image/*" maxFileSize="1000000"
+         chooseLabel="Browse Image" 
+        [showUploadButton]="false" 
+        [auto]="true" >
+         
+      </p-fileUpload>  
+      </div>
+
+      <div class="field ">
+        <div class="flex align-items-center justify-content-between">
+          <div class="flex flex-column">
+
+            <label for="price">Town</label>
+            <p-dropdown  class="max-w-min md:max-w-max" [options]="towns" 
+            [(ngModel)]="town"
+            optionLabel="name"
+           
+            [autoDisplayFirst]="true"
+            (onChange)="townSelected($event)"
+             [virtualScroll]="true" [itemSize]="5" 
+            [style]="{width: '250px'}"  ></p-dropdown>
+            </div>
+            <div class="flex ml-2 flex-column">
+            
+            <label for="duration">Hotel</label>
+            <p-dropdown  class="max-w-min md:max-w-max"
+            (onFocus)="townSelected($event)"
+             [options]="hotels" 
+            [(ngModel)]="hotel"
+            placeholder="Select town first"
+            optionLabel="name"
+           
+            [autoDisplayFirst]="true"
+           
+             [virtualScroll]="true" [itemSize]="5" 
+            [style]="{width: '250px'}"  ></p-dropdown>
+          </div>
+        </div>
       </div>
       <div class="field">
         <label for="shortdescription">Short Description</label>
@@ -99,25 +177,28 @@
        
       </div>
       <div class="field ">
-        <div class="flex align-items-center justify-content-center">
+        <div class="flex align-items-center justify-content-between">
           <div class="flex flex-column">
 
             <label for="price">Price</label>
             <p-inputNumber id="price"
-            
+            [style]="{width: '250px'}" 
             [(ngModel)]="tour.costinDolars" mode="currency" 
             currency="USD" locale="en-US"></p-inputNumber>
             </div>
             <div class="flex ml-2 flex-column">
             
-            <label for="price">Price</label>
-            <p-inputNumber id="price"
-            
-            [(ngModel)]="tour.costinDolars" mode="currency" 
-            currency="USD" locale="en-US"></p-inputNumber>
+            <label for="duration">Duration</label>
+            <p-inputNumber [style]="{width: '250px'}"  
+          [(ngModel)]="tour.duration" class="inputfield w-full" mode="decimal" [showButtons]="true" 
+          inputId="minmax-buttons" [min]="1" [max]="14">
+          </p-inputNumber>
           </div>
         </div>
       </div>
+
+
+    
   </div>
 
 

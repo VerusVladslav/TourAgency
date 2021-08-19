@@ -17,10 +17,10 @@ export class NavMenuComponent {
   isExpanded = false;
   items: MenuItem[];
   faGlobe=faGlobe;
-  public isAuthenticated: Observable<boolean>;
+  public isAuthenticated:boolean;
   public userName: Observable<string>;
   constructor(private authorizeService: AuthorizeService) { }
-
+  
   
    
   collapse() {
@@ -32,7 +32,9 @@ export class NavMenuComponent {
   }
 
   ngOnInit() {
-    this.isAuthenticated = this.authorizeService.isAuthenticated();
+    this.authorizeService.isAuthenticated().subscribe(data=>{
+      this.isAuthenticated =data
+    });
     this.userName = this.authorizeService.getUser().pipe(map(u => u && u.name));
     this.items = [
         {
@@ -57,21 +59,7 @@ export class NavMenuComponent {
 
           ]
       },
-  //       {
-  //         label:'CRUD Tours',
-  //         icon:'pi pi-fw pi-pencil',
-  //         routerLink: ['/crud-tour']
-  //     }, 
-  //      {
-  //       label:'CRUD Hotels',
-  //       icon:'pi pi-fw pi-pencil',
-  //       routerLink: ['/crud-hotel']
-  //   },
-  //   {
-  //     label:'CRUD Towns',
-  //     icon:'pi pi-fw pi-pencil',
-  //     routerLink: ['/crud-town']
-  // },
+ 
         {
             label:'Tour',
             icon:'pi pi-fw pi-user',
@@ -80,23 +68,23 @@ export class NavMenuComponent {
         {
             label:'Events',
             icon:'pi pi-fw pi-calendar',
-         
-        },
-        {
+        }
+    //     },
+    //     {
           
-          label:'Sign In',
-          icon:'pi pi-sign-in',
-          routerLink: ['/login-page']
+    //       label:'Sign In',
+    //       icon:'pi pi-sign-in',
+    //       routerLink: ['/login-page']
       
-      },
-      {
+    //   },
+    //   {
         
-        label:'Sign Up',
-        icon:'pi pi-user-plus',
-        routerLink: ApplicationPaths.Register
+    //     label:'Sign Up',
+    //     icon:'pi pi-user-plus',
+    //     routerLink: ApplicationPaths.Register
   
     
-    }
+    // }
     ];
 
     if(this.isAuthenticated)
@@ -136,8 +124,8 @@ export class NavMenuComponent {
   
   });
     }
-
-    console.log(this.isAuthenticated);
+  
+    
 }
 
 

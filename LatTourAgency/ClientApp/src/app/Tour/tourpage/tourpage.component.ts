@@ -8,9 +8,9 @@ import { Tour, Town } from 'src/app/Models/model';
 })
 export class TourpageComponent implements OnInit {
 
-  tour: Tour = new Tour('name',
-  'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',5,220.2,
-  "desc",'short desc',"1",10)
+  // tour: Tour = new Tour('name',
+  // 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',5,220.2,
+  // "desc",'short desc',"1",10)
 
   images: any[]=[
 
@@ -75,16 +75,16 @@ export class TourpageComponent implements OnInit {
 displayBasic: boolean;
 
 
-  towns: Town[]=[
-   new Town ('Rivne'),
-   new Town ('Kyiv'),
-   new Town ('Lviv'),
-   new Town ('Odessa'),
-   new Town ('Kharkiv'),
-   new Town ('Lyck'),
-   new Town ('Zhytomyr')
+  // towns: Town[]=[
+  //  new Town ('Rivne'),
+  //  new Town ('Kyiv'),
+  //  new Town ('Lviv'),
+  //  new Town ('Odessa'),
+  //  new Town ('Kharkiv'),
+  //  new Town ('Lyck'),
+  //  new Town ('Zhytomyr')
 
-  ];
+  // ];
 
   constructor() { }
 

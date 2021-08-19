@@ -1,5 +1,6 @@
 
-<p-galleria [(value)]="images" [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '850px'}" [numVisible]="7"
+<p-galleria [(value)]="images" [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions" 
+[containerStyle]="{'max-width': '850px'}" [numVisible]="7"
 [circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000"> 
 <ng-template pTemplate="item" let-item>
     <img [src]="item.previewImageSrc" style="width: 100%; display: block;"/>
@@ -17,7 +18,7 @@
     <div class="flex-1 flex justify-content-center">  
       <div class=" p-1 hover:bg-green-400 cursor-pointer">
 
-        <img [src]="tour.mainImage" style="height: 270px;" (click)="displayBasic = true"/>
+        <!-- <img [src]="tour.mainImage" style="height: 270px;" (click)="displayBasic = true"/> -->
       </div>
     </div>
   
@@ -27,7 +28,7 @@
 
          <div >
           <h2 >
-            {{tour.name}}
+            <!-- {{tour.name}} -->
           </h2>
         </div>
         
@@ -35,7 +36,7 @@
         
       </div>
       <div class="flex mt-4 ml-5">
-        {{tour.shortDescription}}
+        <!-- {{tour.shortDescription}} -->
       </div>
 
     </div>
@@ -52,12 +53,12 @@
       </div>
     
     
-        <div *ngFor="let town of towns">
+        <!-- <div *ngFor="let town of towns">
           <div class="ml-2 mt-1">
 
             {{town.name}}
           </div>
-        </div>
+        </div> -->
      
   </div>
 </div>

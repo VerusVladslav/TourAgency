@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Tour } from 'src/app/Models/model';
+import { ApiResponse, Hotel, ImageTour, Tour, Town } from 'src/app/Models/model';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { TourService } from '../tour.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { HttpErrorResponse } from '@angular/common/http';
+import { HotelService } from 'src/app/crud-hotel/hotel.service';
+import { TownService } from 'src/app/crud-town/town.service';
 
 @Component({
   selector: 'app-crud-tour',
@@ -13,39 +18,124 @@ export class CrudTourComponent implements OnInit {
   tourDialog: boolean;
   submitted: boolean;
   selectedTours:Tour[];
-
   tour:Tour;
+  response: ApiResponse[];
 
+
+
+  selectedValue:string ="Add";
+
+  town:Town;
+  towns:Town[];
+  hotel:Hotel;
+  hotels:Hotel[];
+
+  Gallery: ImageTour[]=new Array();
   
 tours: Tour[] 
-  = [
-   new Tour('name',
-   'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',5,220.2,
-   "desc",'short desc',"1",10) ,
-   new Tour('name1',
-   'https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'
-   ,4,20.2,"desc1",'short213 desc',"2",5) ,
-   new Tour('name2',
-   'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg'
-   ,3,220.2,"desc2",'short1231 desc',"3",5) ,
-   new Tour('name3',
-   'https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
-   2,220.2,"desc3",'short1111 desc',"4",20) ,
+  // = [
+  //  new Tour('name',
+  //  'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',220.2,
+  //  "desc",'short desc',10,"1","Rivne","Piece") ,
+  //  new Tour('name1',
+  //  'https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg'
+  //  ,20.2,"desc1",'short213 desc',5,"2","Odessa","Rand") ,
+  //  new Tour('name2',
+  //  'https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg'
+  //  ,220.2,"desc2",'short1231 desc',7,"3","Kyiv","Kyiv") ,
+  //  new Tour('name3',
+  //  'https://images.unsplash.com/photo-1612151855475-877969f4a6cc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80',
+  //  220.2,"desc3",'short1111 desc',7,"4","Lviv","Piece") ,
 
 
-  ]
-  ;
-  constructor( private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  // ]
+  // ;
+
+  disablecheck:boolean= true;
+ 
+  OldimagePath: any;
+
+  imgURL: any;
+
+  GalleryPath: any;
+  galeryURL: any;
+
+  constructor( private tourService:TourService,
+    private spinner:NgxSpinnerService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService,
+    private hotelService: HotelService,
+    private townService: TownService) { }
 
   ngOnInit() {
+    this.spinner.show()
+    this.GetTowns();
+    this.GetHotTours();
+    setTimeout(() => {
+     
+     
+      this.spinner.hide();
+    }, 5000);
+  }
+
+  check(event)
+  {
+    
+    console.log(this.selectedValue);
+
   }
 
   openNew() {
     this.tour =  {};
+    if( this.towns!= undefined)
+    this.town=this.towns[0];
+    this.disablecheck=true;
+    this.selectedValue="Add";
+    
     this.submitted = false;
     this.tourDialog = true;
 }
 
+GetTowns(){
+  this.townService.getAllTowns().subscribe(towns=>{
+    this.towns=towns;
+   // console.log(this.towns);
+    setTimeout(() => {
+    
+      this.spinner.hide();
+    }, 1000);
+  },
+  (error: HttpErrorResponse)=>{
+    setTimeout(() => {
+      this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+     
+      this.spinner.hide();
+    }, 5000);
+  }
+  
+  );
+}
+
+
+GetHotTours(){
+  this.tourService.getAllTours().subscribe(data=>{
+    this.tours=data;
+    console.log(data);
+    setTimeout(() => {
+    
+      this.spinner.hide();
+    }, 1000);
+  },
+  (error: HttpErrorResponse)=>{
+    setTimeout(() => {
+      this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+     
+      this.spinner.hide();
+    }, 5000);
+  }
+  
+  );
+}
 deleteSelectedTours() {
   this.confirmationService.confirm({
       message: 'Are you sure you want to delete the selected tours ?',
@@ -60,12 +150,14 @@ deleteSelectedTours() {
 }
 
 hideDialog() {
+  this.disablecheck=true;
   this.tourDialog = false;
   this.submitted = false;
 }
 
   editTour(tour: Tour) {
     this.tour = {...tour};
+    this.disablecheck=false;
     this.tourDialog = true;
 }
 
@@ -96,34 +188,226 @@ findIndexById(id: string): number {
 
 createId(): string {
   let id = '';
-  var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for ( var i = 0; i < 5; i++ ) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return id;
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0,
+      v = c == 'x' ? r : (r & 0x3 | 0x8);
+   id= v.toString(16);
+   return id;
+  });
+ 
 }
 
+showMessageResponse(){
+
+  this.response.forEach(element => {
+    switch(element.status.toString()){
+
+      case "200" :{
+        this.messageService.add({severity:'success', summary: 'Successful', detail: element.message, life: 3000});
+        break;       
+      }
+      default :
+      this.messageService.add({severity:'error', summary: 'Error', detail: element.message, life: 3000});
+     
+  }});
+   
+  
+   
+}
+  
+CreateTourRequest(tour:Tour)
+{
+  this.spinner.show();
+  this.response=[];
+  this.tourService.addTour(tour).subscribe(data=>{
+
+    this.response.push(data);
+    if(this.Gallery.length!=0)
+    {
+      this.tourService.addGallery(this.Gallery,tour.id).subscribe(data=>{
+    
+   
+        this.response.push(data);
+    
+         
+         
+          setTimeout(() => {    
+            this.spinner.hide();
+           
+          }, 1000); 
+       
+        },
+        (error: HttpErrorResponse)=>{
+          setTimeout(() => {
+            this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+           
+            this.spinner.hide();
+          }, 5000);
+        }
+        
+        )
+    }
+    this.GetHotTours();
+    setTimeout(() => {    
+      this.spinner.hide();
+      this.showMessageResponse();
+    }, 1000); 
+  },
+  (error: HttpErrorResponse)=>{
+    setTimeout(() => {
+      this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+     
+      this.spinner.hide();
+    }, 5000);
+  })
+}
 
 saveTour() {
   this.submitted = true;
 
-  if (this.tour.name.trim()) {
+  if(this.tour.name!==null && this.tour.name!==undefined) {
+
+    if(this.town===undefined)
+    {
+      this.town=this.towns[0];
+    }
+   if(this.hotel===undefined)
+    this.hotel=this.hotels[0];
+    this.tour.townId=this.town.id;
+    this.tour.town=this.town.name;
+    this.tour.hotel=this.hotel.name;
+    this.tour.hotelId=this.hotel.id;
+  
+
       if (this.tour.id) {
-          this.tours[this.findIndexById(this.tour.id)] = this.tour;                
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Tour Updated', life: 3000});
+ 
+ 
+ 
       }
       else {
-          this.tour.id = this.createId();
-          this.tour.mainImage = 'product-placeholder.svg';
-          this.tours.push(this.tour);
-          this.messageService.add({severity:'success', summary: 'Successful', detail: 'Tour Created', life: 3000});
-      }
+      //  this.tour.id = this.createId();
+       
 
-      this.tours = [...this.tours];
+        this.tour.mainImage=this.imgURL;
+      
+   
+      if(this.tour.mainImage==null||this.tour.mainImage=="")
+      {
+        this.hotel.mainImage="default.jpg"
+      }
+ 
+
+      this.CreateTourRequest(this.tour);
+
+    
       this.tourDialog = false;
-      this.tour = {};
+
+       }
+
+   
+    this.hotel = {};
+    this.imgURL=this.OldimagePath;
   }
 }
 
+
+
+townSelected(event)
+{
+ // console.log(this.town);
+ // console.log(event);
+if(this.town!=undefined)
+{
+
+
+ this.hotelService.getAllHotelsByTownId(this.town.id).subscribe(hotels=>{
+  this.hotels=hotels;
+ // console.log(this.towns);
+  // setTimeout(() => {
+  
+  //   this.spinner.hide();
+  // }, 1000);
+},
+(error: HttpErrorResponse)=>{
+  setTimeout(() => {
+    this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+   
+    this.spinner.hide();
+  }, 5000);
+}
+
+);
+}
+}
+
+
+preview(event) {
+
+  var reader = new FileReader();
+ 
+  reader.readAsDataURL(event.files[0]);
+  reader.onload = (_event) => {
+    this.imgURL = reader.result;
+   console.log(this.imgURL);
+    
+  }
+
+
+}
+
+gallery(event){
+  console.log("Galler");
+ // this.Gallery=[];
+  
+
+  
+  for (let index = 0; index < event.files.length; index++) {
+  
+    this.AddImage(event.files[index]);
+ 
+  }
+  console.log(typeof this.Gallery);
+
+  console.log(typeof this.Gallery);
+ 
+  this.tourService.addGallery(this.Gallery,"b1bd7552-bc51-4342-b383-5b27bbbd43eb").subscribe(data=>{
+    
+    console.log(data);
+ 
+
+     
+     
+      setTimeout(() => {    
+        this.spinner.hide();
+        this.showMessageResponse();
+      }, 1000); 
+   
+    },
+    (error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+       
+        this.spinner.hide();
+      }, 5000);
+    }
+    
+    )
+    
+ 
+}
+
+
+AddImage(file){
+  var reader = new FileReader();
+  reader.readAsDataURL(file);
+   reader.onload = (_event) => {
+    this.galeryURL = reader.result;
+   
+    
+   
+    this.Gallery.push(new ImageTour(this.galeryURL,this.createId()));
+  }
+  
+}
 
 }

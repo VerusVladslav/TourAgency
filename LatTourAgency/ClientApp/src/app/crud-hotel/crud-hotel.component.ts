@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ApiResponse, Hotel, IFood, IHotelRoom, Town } from '../Models/model';
+import { ApiResponse, Hotel, IFood, IHotelRoom, Town,IHotelServices } from '../Models/model';
 import { HotelService } from './hotel.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { TownService } from '../crud-town/town.service';
+
 import { HttpErrorResponse } from '@angular/common/http';
-import { FoodConstants, HotelRoomConstants, HotelServiceConstants, IHotelServices } from '../allConstans';
+import { FoodConstants, HotelRoomConstants, HotelServiceConstants } from '../allConstans';
+
+
 
 
 @Component({
@@ -19,55 +22,73 @@ export class CrudHotelComponent implements OnInit {
 
   hotelDialog: boolean;
   submitted: boolean;
-  selectedHotels:Hotel[];
+  selectedHotels:Hotel[]=[];
 
   hotel:  Hotel;
+  town:Town ;
   response: ApiResponse[];
-  public imagePath;
-  imageURl:any;
+ 
 
-  selectedForKids:IHotelServices[];
-  forkids:IHotelServices[];
+ 
+ 
+
+
+
+  selectedForKids:any[]=[];
+  forkids:any[];
 
 
   beach:any[];
-  selectedBeach:any[];
+  selectedBeach:any[]=[];
 
 
   general:any[];
-  selectedGeneralService:any[];
+  selectedGeneralService:any[]=[];
 
   entertainment:any[];
-  selectedEntertainmentService:any[];
+  selectedEntertainmentService:any[]=[];
 
 
-  vipRoomCost:number;
-  singleRoomCost:number;
-  doubleRoomCost:number;
-  tripleRoomCost:number;
-  extra_BedRoomCost:number;
-  childRoomCost:number;
+  vipRoomCost:number = 0;
+  singleRoomCost:number = 0;
+  doubleRoomCost:number  = 0;
+  tripleRoomCost:number  = 0;
+  extra_BedRoomCost:number  = 0;
+  childRoomCost:number  = 0;
 
 
-  foodUltraCost: number;
-  foodAllInclusiveCost : number;
-  foodFullPassionCost : number;
-  foodDinnerCost : number;
-  foodBreakfastCost : number;
+  foodUltraCost: number  = 0;
+  foodAllInclusiveCost : number  = 0;
+  foodFullPassionCost : number  = 0;
+  foodDinnerCost : number  = 0;
+  foodBreakfastCost : number  = 0;
 
 
   hotels: Hotel[] 
-  =[
-   new Hotel("Piece",
-   "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg",5,"Rivne","1"),
-   new Hotel("Kyiv",
-   "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/96/95/96959_v6.jpeg",5,"Kyiv","2"),
-   new Hotel("Rivne Hotel",
-   "https://cdn.galaxy.tf/thumb/sizeW1920/uploads/2s/cms_image/001/597/742/1597742695_5f3b9e671b2f4-thumb.jpg",4,"Rivne","3"),
-   new Hotel("Rivne",
-   "https://www.fairmont-ru.com/assets/0/104/1785/1790/5059/5067/ba5c8a82-6dd5-4635-8ac8-f29dc63c9e9a.jpg",3,"Rivne","4"),
-  ];
+  // =[
+  //  new Hotel("Piece",
+  //  "https://media-cdn.tripadvisor.com/media/photo-s/16/1a/ea/54/hotel-presidente-4s.jpg",5,"Rivne","1"),
+  //  new Hotel("Kyiv",
+  //  "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/96/95/96959_v6.jpeg",5,"Kyiv","2"),
+  //  new Hotel("Rivne Hotel",
+  //  "https://cdn.galaxy.tf/thumb/sizeW1920/uploads/2s/cms_image/001/597/742/1597742695_5f3b9e671b2f4-thumb.jpg",4,"Rivne","3"),
+  //  new Hotel("Rivne",
+  //  "https://www.fairmont-ru.com/assets/0/104/1785/1790/5059/5067/ba5c8a82-6dd5-4635-8ac8-f29dc63c9e9a.jpg",3,"Rivne","4"),
+  // ];
   towns: Town[];
+  imagePath: any;
+  OldimagePath: any;
+
+  imgURL: any;
+
+
+
+  // =[
+  //   new Town("Odessa"),
+  //   new Town("Rivne"),
+  //   new Town("Kyiv")
+
+  // ];
 
   constructor( private messageService: MessageService, 
     private confirmationService: ConfirmationService,
@@ -79,33 +100,14 @@ export class CrudHotelComponent implements OnInit {
   ngOnInit() {
     this.getServices();
 
-    let roomList:IHotelRoom[]=[
-      new IHotelRoom(HotelRoomConstants.Vip,100,this.createId()),
-      new IHotelRoom(HotelRoomConstants.Single,100,this.createId()),
-      new IHotelRoom(HotelRoomConstants.Double,100,this.createId()),
-      new IHotelRoom(HotelRoomConstants.Double,150,this.createId())
-
-      
-    
-      ];
-      
-      
-    //   this.hotelService.addHotelRommsToHotel(roomList,"30d5bfb6-2fda-41eb-9ccd-d50421e3d6cc").subscribe(result=>{
-    //   console.log("add");
-    
-    // });
-   
-     
-
-   
   
-  //   this.spinner.show()
+    this.spinner.show()
     
-  //   this.GetAllHotelsRequest();
-  //   setTimeout(() => {
+    this.GetAllHotelsRequest();
+    setTimeout(() => {
      
-  //     this.spinner.hide();
-  //   }, 5000);
+      this.spinner.hide();
+    }, 5000);
   
   }
 
@@ -113,27 +115,17 @@ export class CrudHotelComponent implements OnInit {
     
     
     this.hotelService.getAllHotels().subscribe(data=>{
+     
       this.hotels=data;
-      console.log(data);
-      // setTimeout(() => {
-      
-      //   this.spinner.hide();
-      // }, 1000);
-    },
-    (error: HttpErrorResponse)=>{
+     
       setTimeout(() => {
-        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
-       
+      
         this.spinner.hide();
-      }, 5000);
-    }
-    
-    )
-
-
+      }, 1000);
+      
     this.townService.getAllTowns().subscribe(data=>{
       this.towns=data;
-     console.log(data);
+   
       setTimeout(() => {
       
         this.spinner.hide();
@@ -148,19 +140,105 @@ export class CrudHotelComponent implements OnInit {
     }
     
     )
+    },
+    (error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+       
+        this.spinner.hide();
+      }, 5000);
+    }
+    
+    )
+
+
   }
   
   
   CreateHotelRequest(hotel:Hotel){ 
+  
     this.spinner.show();
     this.response=[];
     this.hotelService.addHotel(hotel).subscribe(data=>{
       
       this.response.push(data);
-      setTimeout(() => {    
-        this.spinner.hide();
-        this.showMessageResponse();
-      }, 1000); 
+
+   
+
+      this.hotelService.addHotelRommsToHotel(this.createRoomlist(),hotel.id).subscribe(data=>{
+        
+        this.response.push(data);
+        this.hotelService.addServicesToHotel(this.createService(),hotel.id).subscribe(data=>{
+
+   
+       
+     
+          this.response.push(data);
+          
+
+         
+         
+          this.hotelService.addFoodToHotel(this.createFoodlist(),hotel.id).subscribe(data=>{
+     
+            this.response.push(data);
+
+           
+           
+            this.hotelService.getAllHotels().subscribe(data=>{
+     
+              this.hotels=data;
+   
+             
+             
+              setTimeout(() => {    
+                this.spinner.hide();
+                this.showMessageResponse();
+              }, 2000); 
+           
+            },
+            (error: HttpErrorResponse)=>{
+              setTimeout(() => {
+                this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+               
+                this.spinner.hide();
+              }, 5000);
+            }
+            
+            )
+         
+          },
+          (error: HttpErrorResponse)=>{
+            setTimeout(() => {
+              this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+             
+              this.spinner.hide();
+            }, 5000);
+          }
+          
+          )
+       
+        },
+        (error: HttpErrorResponse)=>{
+          setTimeout(() => {
+            this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+           
+            this.spinner.hide();
+          }, 5000);
+        }
+        
+        )
+     
+      },
+      (error: HttpErrorResponse)=>{
+        setTimeout(() => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+         
+          this.spinner.hide();
+        }, 5000);
+      }
+      
+      )
+      
     },
     (error: HttpErrorResponse)=>{
       setTimeout(() => {
@@ -174,26 +252,84 @@ export class CrudHotelComponent implements OnInit {
     
    
   }
-  
+  check(event){
+    console.log(event);
+    console.log(typeof this.selectedGeneralService);
+  }
   UpdateHotelRequest(hotel:Hotel){ 
     this.spinner.show(); 
     this.response= [] ;
-    this.hotelService.updateHotel(hotel).subscribe(data=>{
+    this.hotelService.updateHotelRomms(this.createRoomlist(),hotel.id).subscribe(resHotelRooms=>{
+      this.response.push(resHotelRooms);
+
       
-      this.response.push(data);
-      setTimeout(() => {  
-  
-        this.spinner.hide();
-        this.showMessageResponse();
+      this.hotelService.updateFoods(this.createFoodlist(),hotel.id).subscribe(resFood=>{
+      this.response.push(resFood);
+
+
+      
+      this.hotelService.updateServices(this.createService(),hotel.id).subscribe(data=>{
+        this.response.push(data);
+      this.hotelService.updateHotel(hotel).subscribe(data=>{
+      
+
+
+
+          this.response.push(data);
+        this.hotelService.getAllHotels().subscribe(data=>{
+     
+        this.hotels=data;
+     
+       
+        setTimeout(() => {
         
-      }, 1000); 
+          this.spinner.hide();
+          this.showMessageResponse();
+        }, 2000);
+        
+     
+      },
+      (error: HttpErrorResponse)=>{
+        setTimeout(() => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+         
+          this.spinner.hide();
+        }, 5000);
+      }
+      
+      )
+     
+      
+   
     },
     (error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+       
+        this.spinner.hide();
+      }, 5000);
+    }
+    
+    )
+      });
+
+
+
+      },(error: HttpErrorResponse)=>{
+        setTimeout(() => {
+          this.spinner.hide();
+          this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
+        }, 5000);
+      });
+
+    
+    },(error: HttpErrorResponse)=>{
       setTimeout(() => {
         this.spinner.hide();
         this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
       }, 5000);
     })
+   
   }
   
   DeleteSelectedHotelRequest(){ 
@@ -201,10 +337,26 @@ export class CrudHotelComponent implements OnInit {
     this.response=[];
     this.hotelService.deleteHotelRange(this.selectedHotels).subscribe(data=>{   
       this.response=data;
-      setTimeout(() => {    
-        this.spinner.hide();
-        this.showMessageResponse();
-      }, 1000); 
+      this.hotelService.getAllHotels().subscribe(data=>{
+     
+        this.hotels=data;
+       
+       
+        setTimeout(() => {    
+          this.spinner.hide();
+          this.showMessageResponse();
+        }, 1000); 
+     
+      },
+      (error: HttpErrorResponse)=>{
+        setTimeout(() => {
+          this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+         
+          this.spinner.hide();
+        }, 5000);
+      }
+      
+      )
     },
     (error: HttpErrorResponse)=>{
       setTimeout(() => {
@@ -222,33 +374,86 @@ export class CrudHotelComponent implements OnInit {
   DeleteHotelRequest(id:string){ 
     this.spinner.show();
     this.response=[];
-    this.hotelService.deleteHotel(id).subscribe(data=>{   
-      this.response.push(data);
-      console.log( this.response);
   
-      setTimeout(() => {    
-        this.spinner.hide();
-        this.showMessageResponse();
-      }, 1000); 
-    },
-    (error: HttpErrorResponse)=>{
-      setTimeout(() => {
-        this.spinner.hide();
-        console.log(error);
-        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
-       
-      }, 5000);
-    })
+         
+           
+            this.hotelService.deleteHotel(id).subscribe(data=>{
+           
+              data.forEach(element => {
+                this.response.push(element);
+            
+              }); 
+             
+              this.hotelService.getAllHotels().subscribe(data=>{
+           
+                this.hotels=data;
+               
+               
+                setTimeout(() => {    
+                  this.spinner.hide();
+                  this.showMessageResponse();
+                }, 1000); 
+             
+              },
+              (error: HttpErrorResponse)=>{
+                setTimeout(() => {
+                  this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+                 
+                  this.spinner.hide();
+                }, 5000);
+              }
+              
+              )
+           
+           
+            },
+            (error: HttpErrorResponse)=>{
+              setTimeout(() => {
+                this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+               
+                this.spinner.hide();
+              }, 5000);
+            }
+            
+            )
+        
+         
+   
      
   
     
    
-  }
+ }
 
   openNew() {
     this.hotel =  {};
+    
+   this.RefreshValue();
+
     this.submitted = false;
     this.hotelDialog = true;
+}
+
+
+RefreshValue()
+{
+  this.selectedBeach=[];
+  this.selectedForKids=[];
+  this.selectedGeneralService=[];
+  this.selectedEntertainmentService=[];
+
+  this.vipRoomCost = 0;
+  this.singleRoomCost = 0;
+  this.doubleRoomCost  = 0;
+  this.tripleRoomCost  = 0;
+  this.extra_BedRoomCost  = 0;
+  this.childRoomCost  = 0;
+
+  this.foodUltraCost  = 0;
+  this.foodAllInclusiveCost   = 0;
+  this.foodFullPassionCost   = 0;
+  this.foodDinnerCost = 0;
+  this.foodBreakfastCost   = 0;
 }
 
 deleteSelectedHotels() {
@@ -259,10 +464,7 @@ deleteSelectedHotels() {
       accept: () => {
         this.DeleteSelectedHotelRequest();
       
-        if(this.checkIfSuccess)
-        {
-          this.hotels = this.hotels.filter(val => !this.selectedHotels.includes(val));
-        }
+       
        
         this.selectedHotels = null;   }
   });
@@ -273,9 +475,195 @@ hideDialog() {
   this.submitted = false;
 }
 
+
+setcostHotelRoom(hotelroomlist:IHotelRoom[]){
+  hotelroomlist.forEach(element => {
+    switch(element.type){
+      case HotelRoomConstants.Child:{
+        this.childRoomCost=element.costinDoldarsForOneDay;
+        break;
+      }
+      case HotelRoomConstants.Single:{
+        this.singleRoomCost=element.costinDoldarsForOneDay;
+        break;
+      }
+      case HotelRoomConstants.Double:{
+        this.doubleRoomCost=element.costinDoldarsForOneDay;
+        break;
+      }
+      case HotelRoomConstants.Extra_Bed:{
+        this.extra_BedRoomCost=element.costinDoldarsForOneDay;
+        break;
+      }
+      case HotelRoomConstants.Triple:{
+        this.tripleRoomCost=element.costinDoldarsForOneDay;
+        break;
+      }
+      case HotelRoomConstants.Vip:{
+        this.vipRoomCost=element.costinDoldarsForOneDay;
+        break;
+      }
+    }
+    
+  });
+
+  
+}
+
+
+setcostFood(foodList:IFood[]){
+  foodList.forEach(element => {
+    switch(element.type){
+      case FoodConstants.Food_AllInclusive:{
+        this.foodAllInclusiveCost=element.costinDoldars;
+        break;
+      }
+      case FoodConstants.Food_Breakfast:{
+        this.foodBreakfastCost=element.costinDoldars;
+        break;
+      }
+      case FoodConstants.Food_Dinner:{
+        this.foodDinnerCost=element.costinDoldars;
+        break;
+      }
+      case FoodConstants.Food_FullPassion:{
+        this.extra_BedRoomCost=element.costinDoldars;
+        break;
+      }
+      case FoodConstants.Food_Ultra:{
+        this.foodUltraCost=element.costinDoldars;
+        break;
+      }
+     
+    }
+    
+  });
+
+  
+}
+
+InitilizeServices(hotelid:string){
+  this.hotelService.getBeachServices(hotelid).subscribe(BeachServices=>{
+      
+    // BeachServices.forEach(element => {
+    //   this.selectedBeach.push(element.service)
+    // });
+    console.log("BeachServices");
+    
+    console.log(BeachServices);
+    
+    this.hotelService.getGeneralServices(hotelid).subscribe(General=>{
+  
+      // BeachServices.forEach(element => {
+      //   this.selectedBeach.push(element.service)
+      // });
+      console.log("General");
+    
+      console.log(General);
+      
+      this.hotelService.getForKidsServices(hotelid).subscribe(Forkids=>{
+  
+        // BeachServices.forEach(element => {
+        //   this.selectedBeach.push(element.service)
+        // });
+        console.log("Forkids");
+      
+        console.log(Forkids);
+        
+     
+        this.hotelService.getSportServices(hotelid).subscribe(sport=>{
+  
+          // BeachServices.forEach(element => {
+          //   this.selectedBeach.push(element.service)
+          // });
+          console.log("Sport");
+        
+          console.log(sport);
+          
+          setTimeout(() => {  
+          
+           
+            this.hotelDialog = true;
+            this.spinner.hide();
+             
+          }, 5000); 
+        
+        },(error: HttpErrorResponse)=>{
+          setTimeout(() => {
+            this.spinner.hide();
+            this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
+          }, 5000);
+        });
+      },(error: HttpErrorResponse)=>{
+        setTimeout(() => {
+          this.spinner.hide();
+          this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
+        }, 5000);
+      });
+    
+    },(error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.spinner.hide();
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
+      }, 5000);
+    });
+  
+  },(error: HttpErrorResponse)=>{
+    setTimeout(() => {
+      this.spinner.hide();
+      this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
+    }, 5000);
+  });
+}
+
+
+InitializeData(hotelId:string){
+  this.hotelService.getHotelRomms(hotelId).subscribe(resHotelRooms=>{
+   
+    this.setcostHotelRoom(resHotelRooms);
+    
+  
+    this.hotelService.getFoods(hotelId).subscribe(resFood=>{
+      this.setcostFood(resFood);
+
+      this.InitilizeServices(hotelId);
+     
+    },(error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.spinner.hide();
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
+      }, 5000);
+    });
+
+  
+  },(error: HttpErrorResponse)=>{
+    setTimeout(() => {
+      this.spinner.hide();
+      this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
+    }, 5000);
+  })
+}
+
   editHotel(hotel: Hotel) {
-    this.hotel = {...hotel};
-    this.hotelDialog = true;
+    // console.log("Selected hotel");
+    // console.log(this.hotel);
+    this.spinner.show(); 
+    this.response= [] ;
+
+   
+
+   this.InitializeData(hotel.id);
+    setTimeout(() => {  
+      this.hotel = {...hotel};
+     
+      this.hotelDialog = true;
+      this.spinner.hide();
+      this.showMessageResponse();
+      
+    }, 5000); 
+   
+  
+   
 }
 
 deleteHotel(hotel: Hotel) {
@@ -320,40 +708,56 @@ createId(): string {
 
 saveHotel() {
   this.submitted = true;
+
+
 if(this.hotel.name!==null && this.hotel.name!==undefined){
-
-
+ 
+   
+    if(this.town==undefined)
+    {
+      this.town=this.towns[0];
+    }
+    
+    this.hotel.town=this.town.name;
+    this.hotel.townId=this.town.id;
+  
   if (this.hotel.name.trim()) {
+
       if (this.hotel.id) {
+
         this.UpdateHotelRequest(this.hotel);             
-        if(this.checkIfSuccess){
+      //   if(this.checkIfSuccess){
          
-         this.hotels[this.findIndexById(this.hotel.id)] = this.hotel;   
-       }
-      
+      //    this.hotels[this.findIndexById(this.hotel.id)] = this.hotel;   
+      //  }
+
         this.hotelDialog = false;
-            }
+    
+      
+      }
       else {
-        this.hotel.id = this.createId();
+          this.hotel.id=this.createId();
+       
 
-     //   this.CreateHotelRequest(this.hotel);
-        // console.log(this.createFoodlist());
-        // console.log(this.createRoomlist());
-       // console.log(this.createFoodlist());
-      //  console.log(this.createRoomlist());
-
-
-
-        if(this.checkIfSuccess){
-
-          this.hotels.push(this.hotel);
+          this.hotel.mainImage=this.imgURL;
+        
+     
+        if(this.hotel.mainImage==null||this.hotel.mainImage=="")
+        {
+          this.hotel.mainImage="default.jpg"
         }
+   
+
+        this.CreateHotelRequest(this.hotel);
+
+      
         this.hotelDialog = false;
 
          }
 
      
       this.hotel = {};
+      this.imgURL=this.OldimagePath;
   }
 }
   else {
@@ -362,27 +766,20 @@ if(this.hotel.name!==null && this.hotel.name!==undefined){
 }
 
 
-preview(files) {
-  if (files.length === 0)
-    return;
+preview(event) {
 
-  var mimeType = files[0].type;
-  if (mimeType.match(/image\/*/) == null) {
-    this.messageService.add({severity:'error', summary: 'Error', detail: "Only images are supported.", life: 3000});
+    var reader = new FileReader();
+    this.imagePath = event.files;  
+    reader.readAsDataURL(event.files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+      
+    }
 
-    
-    return;
-  }
-
-  var reader = new FileReader();
-  this.imagePath = files;
-  reader.readAsDataURL(files[0]);
-  reader.onload = (_event) => {
-    this.imageURl = reader.result;
   
   }
-  this.hotel.mainImage=this.imageURl;
-}
+
+
 
 showMessageResponse(){
 
@@ -391,6 +788,10 @@ showMessageResponse(){
 
       case "200" :{
         this.messageService.add({severity:'success', summary: 'Successful', detail: element.message, life: 3000});
+        break;       
+      }
+      case "100" :{
+        this.messageService.add({severity:'warn', summary: 'Warning', detail: element.message, life: 3000});
         break;       
       }
       default :
@@ -423,13 +824,49 @@ getServices() {
 
 }
 
-createFoodlist(idHotel:string){
+createService(){
+ let services: IHotelServices[]=[];
+
+  for (let index = 0; index < this.selectedForKids.length; index++) {
+    const element = this.selectedForKids[index];
+   services.push(new IHotelServices(HotelServiceConstants.ForKids,element));
+    
+  }
+  for (let index = 0; index < this.selectedGeneralService.length; index++) {
+    const element = this.selectedGeneralService[index];
+    services.push(new IHotelServices(HotelServiceConstants.General,element));
+   
+    
+  }
+  for (let index = 0; index < this.selectedEntertainmentService.length; index++) {
+    const element = this.selectedEntertainmentService[index];
+    services.push(new IHotelServices(HotelServiceConstants.Sport,element));
+   
+   
+    
+  }
+  for (let index = 0; index < this.selectedBeach.length; index++) {
+    const element = this.selectedBeach[index];
+   services.push(new IHotelServices(HotelServiceConstants.Beach,element));
+   
+    
+  }
+  
+  
+ 
+ 
+ 
+  return services;
+}
+
+
+createFoodlist(){
  let foodList:IFood[]=[
-  new IFood(FoodConstants.Food_Ultra,this.foodUltraCost,idHotel),
-  new IFood(FoodConstants.Food_AllInclusive,this.foodAllInclusiveCost,idHotel),
-  new IFood(FoodConstants.Food_FullPassion,this.foodFullPassionCost,idHotel),
-  new IFood(FoodConstants.Food_Dinner,this.foodDinnerCost,idHotel),
-  new IFood(FoodConstants.Food_Breakfast,this.foodBreakfastCost,idHotel),
+  new IFood(FoodConstants.Food_Ultra,this.foodUltraCost),
+  new IFood(FoodConstants.Food_AllInclusive,this.foodAllInclusiveCost),
+  new IFood(FoodConstants.Food_FullPassion,this.foodFullPassionCost),
+  new IFood(FoodConstants.Food_Dinner,this.foodDinnerCost),
+  new IFood(FoodConstants.Food_Breakfast,this.foodBreakfastCost),
 
   ];
 
@@ -439,14 +876,14 @@ createFoodlist(idHotel:string){
 }
 
 
-createRoomlist(idHotel:string){
+createRoomlist(){
   let roomList:IHotelRoom[]=[
-   new IHotelRoom(HotelRoomConstants.Vip,this.vipRoomCost,idHotel),
-   new IHotelRoom(HotelRoomConstants.Single,this.singleRoomCost,idHotel),
-   new IHotelRoom(HotelRoomConstants.Double,this.doubleRoomCost,idHotel),
-   new IHotelRoom(HotelRoomConstants.Triple,this.tripleRoomCost,idHotel),
-   new IHotelRoom(HotelRoomConstants.Extra_Bed,this.extra_BedRoomCost,idHotel),
-   new IHotelRoom(HotelRoomConstants.Child,this.childRoomCost,idHotel)
+   new IHotelRoom(HotelRoomConstants.Vip,this.vipRoomCost),
+   new IHotelRoom(HotelRoomConstants.Single,this.singleRoomCost),
+   new IHotelRoom(HotelRoomConstants.Double,this.doubleRoomCost),
+   new IHotelRoom(HotelRoomConstants.Triple,this.tripleRoomCost),
+   new IHotelRoom(HotelRoomConstants.Extra_Bed,this.extra_BedRoomCost),
+   new IHotelRoom(HotelRoomConstants.Child,this.childRoomCost)
  
    ];
 

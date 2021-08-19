@@ -83,10 +83,24 @@ CreateTownRequest(town:Town){
   this.townService.addTown(town).subscribe(data=>{
     
     this.response.push(data);
-    setTimeout(() => {    
-      this.spinner.hide();
-      this.showMessageResponse();
-    }, 1000); 
+    this.townService.getAllTowns().subscribe(data=>{
+      this.towns=data;
+      console.log(data);
+      setTimeout(() => {
+      
+        this.spinner.hide();
+        this.showMessageResponse();
+      }, 1000);
+    },
+    (error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+       
+        this.spinner.hide();
+      }, 5000);
+    }
+    
+    )
   },
   (error: HttpErrorResponse)=>{
     setTimeout(() => {
@@ -107,12 +121,25 @@ UpdateTownRequest(town:Town){
   this.townService.updateTown(town).subscribe(data=>{
     
     this.response.push(data);
-    setTimeout(() => {  
-
-      this.spinner.hide();
-      this.showMessageResponse();
+    this.townService.getAllTowns().subscribe(data=>{
+      this.towns=data;
+      console.log(data);
+      setTimeout(() => {
       
-    }, 1000); 
+        this.spinner.hide();
+        this.showMessageResponse();
+
+      }, 1000);
+    },
+    (error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+       
+        this.spinner.hide();
+      }, 5000);
+    }
+    
+    )
   },
   (error: HttpErrorResponse)=>{
     setTimeout(() => {
@@ -127,10 +154,25 @@ DeleteSelectedTownRequest(){
   this.response=[];
   this.townService.deleteTownRange(this.selectedTowns).subscribe(data=>{   
     this.response=data;
-    setTimeout(() => {    
-      this.spinner.hide();
-      this.showMessageResponse();
-    }, 1000); 
+    this.townService.getAllTowns().subscribe(data=>{
+      this.towns=data;
+      console.log(data);
+      setTimeout(() => {
+      
+        this.spinner.hide();
+        this.showMessageResponse();
+
+      }, 1000);
+    },
+    (error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+       
+        this.spinner.hide();
+      }, 5000);
+    }
+    
+    )
   },
   (error: HttpErrorResponse)=>{
     setTimeout(() => {
@@ -152,10 +194,25 @@ DeleteTownRequest(id:string){
     this.response.push(data);
     console.log( this.response);
 
-    setTimeout(() => {    
-      this.spinner.hide();
-      this.showMessageResponse();
-    }, 1000); 
+    this.townService.getAllTowns().subscribe(data=>{
+      this.towns=data;
+      console.log(data);
+      setTimeout(() => {
+      
+        this.spinner.hide();
+        this.showMessageResponse();
+
+      }, 1000);
+    },
+    (error: HttpErrorResponse)=>{
+      setTimeout(() => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
+       
+        this.spinner.hide();
+      }, 5000);
+    }
+    
+    )
   },
   (error: HttpErrorResponse)=>{
     setTimeout(() => {
@@ -205,17 +262,17 @@ checkIfSuccess(): boolean{
 
 deleteSelectedTowns() {
   this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected towns ?',
+      message: 'Are you sure you want to delete the selected towns ? All hotels in this city will be deleted',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
           
           this.DeleteSelectedTownRequest();
       
-          if(this.checkIfSuccess)
-          {
-            this.towns = this.towns.filter(val => !this.selectedTowns.includes(val));
-          }
+          // if(this.checkIfSuccess)
+          // {
+          //   this.towns = this.towns.filter(val => !this.selectedTowns.includes(val));
+          // }
          
           this.selectedTowns = null;
        }
@@ -234,14 +291,14 @@ hideDialog() {
 
 deleteTown(town: Town) {
     this.confirmationService.confirm({
-        message: 'Are you sure you want to delete "' + town.name + '" ?',
+        message: 'Are you sure you want to delete "' + town.name + '" ?  All hotels in this city will be deleted',
         header: 'Confirm',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {
           this.DeleteTownRequest(town.id);
-          if(this.checkIfSuccess){
-            this.towns = this.towns.filter(val => val.id !== town.id); 
-          }
+          // if(this.checkIfSuccess){
+          //   this.towns = this.towns.filter(val => val.id !== town.id); 
+          // }
        
        
             this.town = {};
@@ -279,21 +336,21 @@ saveTown() {
   if (this.town.name.trim()) {
       if (this.town.id) {
         this.UpdateTownRequest(this.town);             
-        if(this.checkIfSuccess){
+      //   if(this.checkIfSuccess){
          
-         this.towns[this.findIndexById(this.town.id)] = this.town;   
-       }
+      //    this.towns[this.findIndexById(this.town.id)] = this.town;   
+      //  }
       
         this.townDialog = false;
           
      }
       else {
-          this.town.id = this.createId();
+      //    this.town.id = this.createId();
           this.CreateTownRequest(this.town);
-          if(this.checkIfSuccess){
+          // if(this.checkIfSuccess){
 
-            this.towns.push(this.town);
-          }
+          //   this.towns.push(this.town);
+          // }
           this.townDialog = false;
 
          

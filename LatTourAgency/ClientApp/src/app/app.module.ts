@@ -47,10 +47,11 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {FileUploadModule} from 'primeng/fileupload';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {MessageModule} from 'primeng/message';
-import { CreateOwnTourComponent } from './Tour/create-own-tour/create-own-tour.component';
+
 import { TourpageComponent } from './Tour/tourpage/tourpage.component';
 import {GalleriaModule} from 'primeng/galleria';
 import {MultiSelectModule} from 'primeng/multiselect';
+import {RadioButtonModule} from 'primeng/radiobutton';
 @NgModule({
   declarations: [		
     AppComponent,
@@ -65,7 +66,6 @@ import {MultiSelectModule} from 'primeng/multiselect';
     CrudTourComponent,
       CrudHotelComponent,
       CrudTownComponent,
-      CreateOwnTourComponent,
       TourpageComponent
    ],
   imports: [
@@ -104,8 +104,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
     KeyFilterModule,
     MessageModule,
     GalleriaModule,
-    MultiSelectModule
-
+    MultiSelectModule,
+    RadioButtonModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
