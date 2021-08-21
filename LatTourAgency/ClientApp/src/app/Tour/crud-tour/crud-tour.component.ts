@@ -11,6 +11,12 @@ import { TownService } from 'src/app/crud-town/town.service';
   selector: 'app-crud-tour',
   templateUrl: './crud-tour.component.html',
   styleUrls: ['./crud-tour.component.css'],
+  styles: [`
+  .outofstock {
+      font-weight: 700;
+      color: #FF5252;
+      text-decoration: line-through;
+  }`],
   providers:[ConfirmationService]
 })
 export class CrudTourComponent implements OnInit {
@@ -32,7 +38,7 @@ export class CrudTourComponent implements OnInit {
 
   Gallery: ImageTour[]=new Array();
   
-tours: Tour[] 
+  tours: Tour[] 
   // = [
   //  new Tour('name',
   //  'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',220.2,
@@ -280,7 +286,10 @@ saveTour() {
   
 
       if (this.tour.id) {
- 
+        if(this.imgURL==this.OldimagePath)
+        {
+          this.hotel.mainImage=""
+        }
  
  
       }

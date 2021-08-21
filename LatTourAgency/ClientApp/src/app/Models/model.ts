@@ -71,7 +71,7 @@ export class Tour {
     public name?: string = "";
     public mainImage?: string ="";
    
-    public costinDolars?: number =0;
+    public costinDoldars?: number =0;
     public description?: string = "";
     public shortDescription?: string = "";
     public duration?: number = 0;
@@ -100,7 +100,7 @@ export class Tour {
 
             this.town=town;
             this.hotel=hotel;
-        this.costinDolars = cost;
+        this.costinDoldars = cost;
         this.name = name;
         this.mainImage = mainimage;
         this.description = desc;
@@ -151,10 +151,10 @@ export class SignInModel{
 }
 
 export class IHotelRoom {
-    public  id? :string="";
+    public  id? :string;
     public  costinDoldarsForOneDay? :number=0;
     public  type? :string="";
-    public  hotel? :string="";
+    public  hotel? :string;
    
 
     /**
@@ -171,14 +171,14 @@ export class IHotelRoom {
 
 export class IFood {
     public  costinDoldars? :number=0;
-    public  type? :string="";
+    public  type? :string;
   
 
    
-   public  id? :string="";
-    public  foods? :string="";
-    public  description? :string="";
-   public  hotel? :string="";
+   public  id? :string;
+    public  foods? :string;
+    public  description? :string;
+   public  hotel? :string;
    public  hotelId? :string;
 
 
@@ -220,25 +220,26 @@ export class IHotelServices {
 }
 
 
-export class FilterTourRequest {
+export class FilterDTO {
     public   departureDate? :Date;
     public   arrivalDate? :Date;
-    public   town? :string;
-    public   hotel? :string;
+    public   townid? :string;
+    public   hotelid? :string;
     public   minCountNight? :number;
     public   maxCountNight? :number;
 
 
-  constructor(town="",hotel="",
-  minCountNight=1,
-  maxCountNight=Number.MAX_VALUE,
+  constructor(townid="",
+  minCountNight=3,
+  maxCountNight=14,
+  hotelid="",
   departureDate=new Date(Date.now()),
-  arrivalDate=new Date(Date.now()+1)
+  arrivalDate=new Date(Date.now()+ 72*3600*1000)
  ) {
     
 
-    this.hotel=hotel;
-    this.town=town;
+    this.hotelid=hotelid;
+    this.townid=townid;
      this.arrivalDate=arrivalDate;
     this.departureDate=departureDate;
     this.minCountNight=minCountNight;

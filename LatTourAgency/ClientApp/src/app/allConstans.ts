@@ -1,12 +1,17 @@
 
 let applicationPaths : ApplicationPath = {
     GetTourById:"/api/Tour/ById/",
+   
+  //  GetTourById:"/api/Tour/ById/",
     AddTour:"/api/Tour/Add",
     UpdateTour:"/api/Tour/Update",
     DeleteTour:"/api/Tour/Delete/",
     GetAllTours:"/api/Tour/All",
     Register:"/api/User/Register",
     AddTourGallery:"/api/Tour/AddGallery/",
+    GetFilteredTours:"/api/Tour/Filter",
+
+
     GetAllHotels:"/api/Hotel/All",
     GetHotelsByTownId:"/api/Hotel/ByTownId/",
     GetHotelById:"/api/Hotel/ById/",
@@ -55,6 +60,8 @@ interface ApplicationPath {
     readonly DeleteTour: string;
     readonly UpdateTour: string;
     readonly AddTourGallery: string;
+    readonly GetFilteredTours: string;
+
 
     readonly GetAllHotels: string;
     readonly GetHotelsByTownId: string;
@@ -64,8 +71,7 @@ interface ApplicationPath {
     readonly AddHotelRoomsToHotel: string;
     readonly GetHotelRoomsHotel: string;
     readonly UpdateHotelRoomsHotel: string;
-  //  readonly DeleteHotelRoomsHotel: string;
-  //  readonly DeleteFoodsHotel: string;
+    
 
     readonly HotelRemoveRange: string;
     readonly AddFoodsToHotel: string;

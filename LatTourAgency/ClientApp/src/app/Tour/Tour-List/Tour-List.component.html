@@ -3,7 +3,8 @@
         [sortField]="sortField" [sortOrder]="sortOrder" >
         <ng-template pTemplate="header">
             <div class="flex justify-content-between  flex-wrap">
-                <p-dropdown class="mb-2" [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
+                <p-dropdown class="mb-2" [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" 
+                (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
                 <span class="p-input-icon-left mb-2 mb-md-0">
                     <i class="pi pi-search"></i>
                     <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
@@ -76,38 +77,4 @@
             </ng-template>
         </p-dataView>
         
-        <!-- <ng-template let-tour pTemplate="listItem" >
-           
-                <div class="flex ">
-
-               
-                <div class=" flex-shrink-1 font-bold  shadow-1 m-6 flex align-items-center justify-content-center ">
-                    <img [src]="tour.mainImage" [alt]="tour.name"/>
-                </div>
-                    <div class="flex-shrink-0 font-bold    flex align-items-center justify-content-center">
-                        <div class="tour-name">{{tour.name}}</div>
-                        
-                        <div class="tour-description">{{tour.shortDescription}}</div>
-                        <p-rating [ngModel]="tour.grade" [readonly]="true" [cancel]="false"></p-rating>
-                    </div>
-                    <div class="flex-grow-1 flex-shrink-1    flex align-items-center justify-content-center">
-                        <div class="flex-wrap ">
-                            <div class=" ">
-
-                                <span class="tour-price">$  {{tour.costinDoldars}}</span>
-                            </div>
-                            <div class="">
-
-                            <p-button icon="pi pi-shopping-cart" label="Add to Cart" ></p-button>
-                            </div>  
-                        </div>
-                    </div>
-                </div>
-         
-           
-        </ng-template> -->
-   
-        
-      
-    <!-- </p-dataView>
-</div> -->
+     

@@ -19,7 +19,6 @@ import {CardModule} from 'primeng/card';
 import {MenuModule} from 'primeng/menu';
 import {RatingModule} from 'primeng/rating';
 import {DataViewModule} from 'primeng/dataview';
-import { CardExapleComponent } from './home/card-exaple/card-exaple.component';
 import { BenefitsComponent } from './home/benefits/benefits.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -52,6 +51,12 @@ import { TourpageComponent } from './Tour/tourpage/tourpage.component';
 import {GalleriaModule} from 'primeng/galleria';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { FilterTourComponent } from './Tour/filter-tour/filter-tour.component';
+import {SliderModule} from 'primeng/slider';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { TourFilteredDemoComponent } from './Tour/TourFilteredDemo/TourFilteredDemo.component';
+import {TabViewModule} from 'primeng/tabview';
+
 @NgModule({
   declarations: [		
     AppComponent,
@@ -60,13 +65,14 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     CounterComponent,
     FetchDataComponent,
     FooterComponent,
-    CardExapleComponent,
     BenefitsComponent,
     TourListComponent,
     CrudTourComponent,
       CrudHotelComponent,
       CrudTownComponent,
-      TourpageComponent
+      TourpageComponent,
+      FilterTourComponent,
+      TourFilteredDemoComponent
    ],
   imports: [
    // BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -88,11 +94,13 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     FontAwesomeModule,
     RatingModule,
     MenuModule,
+    SliderModule,
     DataViewModule,
     MenubarModule,
     InputMaskModule,
     ReactiveFormsModule,
     ToastModule,
+    DynamicDialogModule,
     RegisterModule,
     ToolbarModule,
     TableModule,
@@ -105,7 +113,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
     MessageModule,
     GalleriaModule,
     MultiSelectModule,
-    RadioButtonModule
+    RadioButtonModule,
+    TabViewModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

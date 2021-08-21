@@ -15,7 +15,13 @@ import { FoodConstants, HotelRoomConstants, HotelServiceConstants } from '../all
   selector: 'app-crud-hotel',
   templateUrl: './crud-hotel.component.html',
   styleUrls: ['./crud-hotel.component.css'],
-  providers:[ConfirmationService]
+  providers:[ConfirmationService],
+  styles: [`
+  .outofstock {
+      font-weight: 700;
+      color: #FF5252;
+      text-decoration: line-through;
+  }`]
 
 })
 export class CrudHotelComponent implements OnInit {
@@ -724,7 +730,10 @@ if(this.hotel.name!==null && this.hotel.name!==undefined){
   if (this.hotel.name.trim()) {
 
       if (this.hotel.id) {
-
+          if(this.imgURL==this.OldimagePath)
+          {
+            this.hotel.mainImage=""
+          }
         this.UpdateHotelRequest(this.hotel);             
       //   if(this.checkIfSuccess){
          

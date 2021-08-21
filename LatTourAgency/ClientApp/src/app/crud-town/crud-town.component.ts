@@ -336,21 +336,15 @@ saveTown() {
   if (this.town.name.trim()) {
       if (this.town.id) {
         this.UpdateTownRequest(this.town);             
-      //   if(this.checkIfSuccess){
-         
-      //    this.towns[this.findIndexById(this.town.id)] = this.town;   
-      //  }
+    
       
         this.townDialog = false;
           
      }
       else {
-      //    this.town.id = this.createId();
+     
           this.CreateTownRequest(this.town);
-          // if(this.checkIfSuccess){
-
-          //   this.towns.push(this.town);
-          // }
+         
           this.townDialog = false;
 
          

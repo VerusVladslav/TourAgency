@@ -54,7 +54,7 @@
             <td><img [src]=" hotel.mainImage" [alt]="hotel.name" width="100" class="shadow-4" /></td>
             
             <td *ngIf="hotel.town!=null">{{hotel.town }}</td>
-            <td *ngIf="hotel.town==null">NULL</td>
+            <td *ngIf="hotel.town==null" [ngClass]="{'outofstock': hotel.town==null}">NULL</td>
            
             <td><p-rating [ngModel]="hotel.stars" [readonly]="true" [cancel]="false"></p-rating></td>
             <td>
@@ -100,7 +100,9 @@
       <div class="field">
         <label class="w-full" for="towns">Town</label>
         
-        <p-dropdown  class="max-w-min md:max-w-max" [options]="towns" 
+        <p-dropdown  class="max-w-min md:max-w-max" 
+        [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Town"
+        [options]="towns" 
         [(ngModel)]="town"
         optionLabel="name"
        

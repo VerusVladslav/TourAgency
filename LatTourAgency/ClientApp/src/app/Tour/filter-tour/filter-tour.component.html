@@ -1,0 +1,60 @@
+
+<div class="card ">
+  <h2 class="flex align-items-center justify-content-center m-4"> Filter</h2>
+  <div class="field  m-3">
+    <div class="flex flex-wrap">
+      <div class="flex-1   justify-content-around ">
+
+        <label class="w-full" for="price">Town</label>
+        <p-dropdown  class="max-w-min md:max-w-max" [options]="towns" 
+        [(ngModel)]="town"
+        optionLabel="name"
+        [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Town"
+        [autoDisplayFirst]="true"
+        (onChange)="townSelected($event)"
+         [virtualScroll]="true" [itemSize]="5" 
+        [style]="{width: '250px'}"  ></p-dropdown>
+        </div>
+        <div class="flex-1 flex-column">
+        
+        <label class="w-full" >Hotel</label>
+        <p-dropdown  class="max-w-min md:max-w-max"
+        (onFocus)="townSelected($event)"
+         [options]="hotels" 
+        [(ngModel)]="hotel"
+        [filter]="true" filterBy="name" [showClear]="true" 
+        placeholder="Select town first"
+        optionLabel="name"
+       
+        [autoDisplayFirst]="true"
+       
+         [virtualScroll]="true" [itemSize]="5" 
+        [style]="{width: '250px'}"  ></p-dropdown>
+      </div>
+
+
+    </div>
+   
+  </div>
+  <div class="field   m-3">
+    <div class="flex flex-wrap ">
+      <div class="flex-1 pr-1 mr-1 flex align-items-left justify-content-between">
+
+        <p-calendar [(ngModel)]="rangeDates"  [showIcon]="true" placeholder="Select Dates"  
+        selectionMode="range" [readonlyInput]="true" inputId="range"></p-calendar>
+      </div>
+      <div class="flex-1    ml-2    ">
+        <label>
+          <i class="pi pi-moon mt-1"></i>
+          : {{rangeValues[0] + ' - ' + rangeValues[1]}}</label>
+        <p-slider [(ngModel)]="rangeValues" [max]="14" [min]="3" [range]="true"></p-slider>
+      </div>
+      <div class="flex-1  flex align-items-center justify-content-around">
+        <button pButton type="button" label="Found" (click)="filterReq($event)" ></button>
+      </div>
+    </div>
+  </div>
+ 
+
+ 
+</div>

@@ -48,7 +48,13 @@ export class NavMenuComponent {
             icon:'pi pi-fw pi-calendar',
             routerLink: ['/tour-list']
         },
-
+        
+ 
+        {
+            label:'Filter',
+            icon:'pi pi-fw pi-filter',
+            routerLink: ['/filter-tour']
+        },
         {
           label: 'CRUD',
           icon: 'pi pi-fw pi-pencil',
@@ -58,17 +64,7 @@ export class NavMenuComponent {
               {label: 'Towns', icon: 'pi pi-fw pi-pencil', routerLink: ['/crud-town']},
 
           ]
-      },
- 
-        {
-            label:'Tour',
-            icon:'pi pi-fw pi-user',
-            routerLink: ['/tour']
-        },
-        {
-            label:'Events',
-            icon:'pi pi-fw pi-calendar',
-        }
+      }
     //     },
     //     {
           

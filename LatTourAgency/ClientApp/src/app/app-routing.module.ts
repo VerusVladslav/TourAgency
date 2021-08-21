@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterComponent } from './register/register.component';
 import { CrudTourComponent } from './Tour/crud-tour/crud-tour.component';
+import { FilterTourComponent } from './Tour/filter-tour/filter-tour.component';
 
 import { TourListComponent } from './Tour/Tour-List/Tour-List.component';
 import { TourpageComponent } from './Tour/tourpage/tourpage.component';
@@ -25,8 +26,10 @@ const routes: Routes = [
     {path:'crud-tour',component:CrudTourComponent,pathMatch:'full'},
     {path:'crud-hotel',component:CrudHotelComponent,pathMatch:'full'},
     {path:'crud-town',component:CrudTownComponent,pathMatch:'full'},
-    {path: 'tour-list',component:TourListComponent},
-    {path:'tour',component:TourpageComponent}
+    {path: 'tour-list',component:TourListComponent,pathMatch:'full'},
+    {path:'filter-tour',component:FilterTourComponent,pathMatch:'full'},
+    {path:'tour/:id',component:TourpageComponent},
+
     
 
 
