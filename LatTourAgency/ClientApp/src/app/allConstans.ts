@@ -53,7 +53,14 @@ let applicationPaths: ApplicationPath = {
     AddTown: "/api/Town/Add",
     DeleteTown: "/api/Town/Delete/",
     UpdateTown: "/api/Town/Update",
-    TownRemoveRange: "/api/Town/DeleteRange/"
+    TownRemoveRange: "/api/Town/DeleteRange/",
+
+
+
+    CheckLogin:"/api/User/checkLogin",
+    Login:"/api/User/login",
+    Logout:"/api/User/logout",
+
 }
 
 interface ApplicationPath {
@@ -107,6 +114,15 @@ interface ApplicationPath {
     readonly AddTown: string;
     readonly DeleteTown: string;
     readonly UpdateTown: string;
+
+
+
+
+    readonly CheckLogin: string;
+    readonly Login: string;
+    readonly Logout: string;
+
+
 }
 
 

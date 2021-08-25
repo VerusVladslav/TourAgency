@@ -3,7 +3,7 @@
 export class ApiResponse {
     public status?: number;
     public message?: string;
-
+    public token?: string;
 }
 
 export class Hotel {
@@ -112,7 +112,10 @@ export interface SelectItem {
     label: string;
     value: any;
 }
-
+export interface LoginModel {
+    email: string;
+    password: string;
+  }
 
 export class ImageTour {
     public id?:string;

@@ -1,0 +1,22 @@
+
+.form-group{
+    margin: auto;
+    min-width: 216px !important;
+}
+.minwidth{
+
+    width: 216px !important;
+}
+h3{
+    display: block;
+    margin: auto;
+    color: #4caf50;
+   
+}
+
+:host .input-mask{
+    width: 216px !important;
+
+}
+
+

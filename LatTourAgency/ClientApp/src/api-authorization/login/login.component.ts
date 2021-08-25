@@ -3,6 +3,9 @@ import { AuthorizeService, AuthenticationResultStatus } from '../authorize.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { LoginActions, QueryParameterNames, ApplicationPaths, ReturnUrlType } from '../api-authorization.constants';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { ApiResponse, SignInModel } from 'src/app/Models/model';
 
 // The main responsibility of this component is to handle the user's login process.
 // This is the starting point for the login process. Any component that needs to authenticate
@@ -16,12 +19,44 @@ import { LoginActions, QueryParameterNames, ApplicationPaths, ReturnUrlType } fr
 export class LoginComponent implements OnInit {
   public message = new BehaviorSubject<string>(null);
 
+
+  model:SignInModel;
+  loginForm: FormGroup;
+  result:ApiResponse;
+ 
+
+ 
+  onSubmit(){
+    try {
+      if (this.loginForm.invalid ) {
+            return;
+       }
+      this.model = {
+        Email: this.loginForm.controls.Email.value,
+        Password: this.loginForm.controls.Password.value,
+      };
+
+      this.login("")
+ 
+    } catch(error) {
+        this.messageService.add({severity:'error', summary: 'Error ', detail: error})
+      }
+  }
+
   constructor(
     private authorizeService: AuthorizeService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private messageService: MessageService,
+    private formBuilder: FormBuilder) { }
 
   async ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      Email: ['', Validators.required],
+      Password: ['', Validators.required]
+     
+  
+    });
     const action = this.activatedRoute.snapshot.url[1];
     switch (action.path) {
       case LoginActions.Login:
@@ -49,6 +84,7 @@ export class LoginComponent implements OnInit {
   private async login(returnUrl: string): Promise<void> {
     const state: INavigationState = { returnUrl };
     const result = await this.authorizeService.signIn(state);
+    console.log(result);
     this.message.next(undefined);
     switch (result.status) {
       case AuthenticationResultStatus.Redirect:
