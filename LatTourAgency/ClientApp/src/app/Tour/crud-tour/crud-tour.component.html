@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+
 <div class="card" >
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
@@ -108,7 +108,7 @@
           <div class="flex-1 flex-column">
 
             <p-radioButton name="groupname" class="mb-1"  
-            inputId="add" value="Add" (onClick)="check($event)" [(ngModel)]="selectedValue"
+            inputId="add" value="Add" [(ngModel)]="selectedValue"
             
             ></p-radioButton>
             <label class="mt-1 ml-2 mb-0" for="add">Add to Gallery</label>
@@ -117,7 +117,7 @@
             <div class="flex-1 ml-2 flex-column">
             
               <p-radioButton name="groupname" class="mb-1" inputId="update" [disabled]="disablecheck === true"
-               value="Update" (onClick)="check($event)" [(ngModel)]="selectedValue"></p-radioButton>
+               value="Update"  [(ngModel)]="selectedValue"></p-radioButton>
             <label class="mt-1 ml-2 mb-0" for="update">Update gallery</label>
           </div>
         </div>
@@ -139,7 +139,7 @@
         <div class="flex align-items-center justify-content-between">
           <div class="flex flex-column">
 
-            <label for="price">Town</label>
+            <label for="town">Town</label>
             <p-dropdown  class="max-w-min md:max-w-max" [options]="towns" 
             [(ngModel)]="town"
             optionLabel="name"
@@ -188,7 +188,7 @@
             <label for="price">Price</label>
             <p-inputNumber id="price"
             [style]="{width: '250px'}" 
-            [(ngModel)]="tour.costinDolars" mode="currency" 
+            [(ngModel)]="tour.costinDoldars" mode="currency" 
             currency="USD" locale="en-US"></p-inputNumber>
             </div>
             <div class="flex ml-2 flex-column">
@@ -196,7 +196,7 @@
             <label for="duration">Duration</label>
             <p-inputNumber [style]="{width: '250px'}"  
           [(ngModel)]="tour.duration" class="inputfield w-full" mode="decimal" [showButtons]="true" 
-          inputId="minmax-buttons" [min]="1" [max]="14">
+          inputId="minmax-buttons" [min]="3" [max]="14">
           </p-inputNumber>
           </div>
         </div>

@@ -1,18 +1,20 @@
-<p-galleria [(value)]="images" [(visible)]="displayBasic" [responsiveOptions]="responsiveOptions"
+
+
+<p-galleria [(value)]="images" [(visible)]="displayBasic" 
   [containerStyle]="{'max-width': '850px'}" [numVisible]="7" [circular]="true" [fullScreen]="true"
   [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000">
   <ng-template pTemplate="item" let-item>
-    <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
+    <img [src]="item.path" style="width: 100%; display: block;" />
   </ng-template>
 </p-galleria>
 
 
-<div class="card p-3 ">
+<div *ngIf="ifTourNotNull()" class="card p-3 ">
   <div class="flex flex-wrap flex-column justify-content-center">
 
     <div class="flex align-items-center justify-content-center  m-2 ">
 
-      <p class="text-2xl font-italic ">
+      <p  class="text-2xl font-italic ">
 
         {{tour.name}}
       </p>
@@ -26,7 +28,7 @@
         <a (click)="viewGallery()">
 
           <img [src]="tour.mainImage"
-            class="cursor-pointer border-1 border-solid p-1 border-green-400 hover:border-green-600"
+            class="cursor-pointer p-shadow-7 border-2 border-solid p-1 border-green-400 hover:border-green-600"
             [style]="{width:'350px' ,height:'450px'}" />
         </a>
 
@@ -74,8 +76,14 @@
 
           <span>Description</span>
         </ng-template>
+        <div class="flex justify-content-center">
+          <b >
+            {{tour.town}}
+          </b>
+        </div>
         <p class="text-justify mt-2">
-
+            
+        
           Lorem ipsum dolor sit, amet consectetur
           adipisicing elit. Voluptas incidunt labore
           deleniti beatae accusantium aperiam! Voluptate
@@ -92,11 +100,11 @@
         </ng-template>
         <div class="flex flex-wrap justify-content-around">
 
-          <div *ngIf="!ifDefaultImg()" class="flex p-2 justify-content-center align-items-center">
+          <div *ngIf="!ifDefaultImg()" class="flex p-2 justify-content-center ">
             <div class="flex flex-column">
 
-              <span class="flex align-items-center justify-content-center  text-2xl pb-3">{{hotel.name}}</span>
-              <img [src]="hotel.mainImage" [style]="{width:'350px' ,height:'450px'}" />
+              <span *ngIf="ifHotelNoteNull()"  class="flex align-items-center justify-content-center  text-2xl pb-3">{{hotel.name}}</span>
+              <img *ngIf="ifHotelNoteNull()" [src]="hotel.mainImage" [style]="{width:'350px' ,height:'450px'}" />
             </div>
           </div>
           <div class="flex flex-wrap justify-content-center ">
@@ -115,7 +123,7 @@
                     <li *ngFor="let item of GeneralServices">{{item.service}}</li>
                   </ul>
                 </div>
-              
+
                 <div *ngIf="ifFokKidsNotEmpty()" class="flex ml-4 justify-content-center">
 
                   <fa-icon [style]="{width:'60px'}" class="icon text-green-400 text-6xl" [icon]="faChild"> </fa-icon>
@@ -125,14 +133,16 @@
                 </div>
                 <div *ngIf="ifSportNotEmpty()" class="flex ml-4  justify-content-center">
 
-                  <fa-icon [style]="{width:'60px'}" class="icon text-green-400 text-6xl" [icon]="faVolleyballBall"></fa-icon>
+                  <fa-icon [style]="{width:'60px'}" class="icon text-green-400 text-6xl" [icon]="faVolleyballBall">
+                  </fa-icon>
                   <ul>
                     <li *ngFor="let item of SportServices">{{item.service}}</li>
                   </ul>
                 </div>
                 <div *ngIf="ifBeachNotEmpty()" class="flex  ml-4 justify-content-center">
 
-                  <fa-icon [style]="{width:'60px'}" class="icon text-green-400 text-6xl" [icon]="faUmbrellaBeach"></fa-icon>
+                  <fa-icon [style]="{width:'60px'}" class="icon text-green-400 text-6xl" [icon]="faUmbrellaBeach">
+                  </fa-icon>
                   <ul>
                     <li *ngFor="let item of BeachServices">{{item.service}}</li>
                   </ul>
@@ -153,19 +163,64 @@
 
         </ng-template>
       
-        <!-- <h5>Dynamic</h5>
-        <button pButton pRipple type="button" icon="pi pi-plus" 
-        title="Add Column" (click)="addColumn()" [disabled]="columns.length === 20" class="p-mr-2"></button>
-        <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()"[disabled]="columns.length === 1"></button>
-        
-        <div class="p-grid p-mt-2">
-            <div class="p-col" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
-                <div class="box">{{i + 1}}</div>
-            </div>
-        </div> -->
-        <p>
+          <div class="flex justify-content-between flex-wrap ">
+            <div class="flex">
 
-        </p>
+              <h5>Hotels Room</h5>
+            </div>
+            <div class="flex">
+
+              <h5 class="mr-4">Duration: {{tour.duration}} nights</h5>
+            </div>
+            <div class="flex">
+
+              <h5 class="mr-4">Cost Tour: {{tour.costinDoldars}} $</h5>
+            </div>
+          </div>
+          <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()"
+          [disabled]="columns.length === 20" class="mr-2 mt-2"></button>
+          <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()"
+          [disabled]="columns.length === 0"></button>
+          
+          <div class="mt-4">
+            <div  *ngFor="let col of columns; let i=index" [@animation]="'visible'">
+              <div class="card m-2 z-0">
+                <div class="flex flex-wrap justify-content-between ">
+
+                  <div class="flex p-4">{{i + 1}}</div>
+                  <div class="flex align-items-center p-4 ">
+                    <p-dropdown baseZIndex=10 class="max-w-min md:max-w-max z-3" 
+                   [showClear]="true" placeholder="Select a Room"
+                    [options]="roomlist" 
+                    optionLabel="name"
+                    appendTo="body"
+                    optionValue="name"
+                    [style]="{width:'220px'}"
+                   
+                      (onChange)="roomSelected(i,$event)"
+                     [virtualScroll]="true" [itemSize]="6" 
+                    ></p-dropdown>
+                  </div>
+                  <div class="flex align-items-center pr-5 p-4 ">
+                    <p-dropdown baseZIndex=10 class="max-w-min md:max-w-max z-3" 
+                    [showClear]="true" placeholder="Select a Food Service"
+                    [options]="foodlist" 
+                    (onChange)="foodSelected(i,$event)"
+                    appendTo="body"
+                    optionValue="name"
+                   
+                    optionLabel="name"
+                   [style]="{width:'220px'}"
+                   
+                     [virtualScroll]="true" [itemSize]="6" 
+                    ></p-dropdown>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+     
       </p-tabPanel>
       <p-tabPanel header="Review">
         <ng-template pTemplate="header">

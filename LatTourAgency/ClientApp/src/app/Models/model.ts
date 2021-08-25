@@ -15,8 +15,7 @@ export class Hotel {
     public mainImage?: string ="";
     public stars?: number = 0;
     public address?: string ="";
-    public description?: string = "";
-    public site?: string ="";
+
   
     public town?: string = "";
     public townId?: string;
@@ -30,9 +29,8 @@ export class Hotel {
         stars: number= 5,
         town: string = "town",
         id:string ,
-        address: string = "adress", 
-        desc: string ="description",
-        site: string ="site"
+        address: string = "adress"
+      
       
       
       
@@ -42,9 +40,8 @@ export class Hotel {
         this.address = address;
         this.name = name;
         this.mainImage = mainimage;
-        this.description = desc;
         this.stars = stars;
-        this.site=site;
+      
         this.id=id;
         this.town=town;
       
@@ -74,7 +71,7 @@ export class Tour {
     public costinDoldars?: number =0;
     public description?: string = "";
     public shortDescription?: string = "";
-    public duration?: number = 0;
+    public duration?: number = 3;
     public hotel?: string ;
     public town?: string ;
     public hotelId?: string ;
@@ -122,8 +119,8 @@ export class ImageTour {
     public path?:string;
    
 
-    constructor(path:string,id:string) {
-        this.id=id;
+    constructor(path:string) {
+        
         this.path=path;
 
     }
@@ -176,8 +173,7 @@ export class IFood {
 
    
    public  id? :string;
-    public  foods? :string;
-    public  description? :string;
+  
    public  hotel? :string;
    public  hotelId? :string;
 
@@ -249,4 +245,27 @@ export class FilterDTO {
    
  
 
+}
+
+export class Gallery {
+    
+    public id : string;
+    public path : string;
+   
+ 
+    
+}
+
+
+export class ICostFilter {
+    public id:number;
+    public RoomType:string;
+    public FoodType:string;
+    public RoomCostForOneDay:number;
+    public FoodCostForOneDay:number;
+ 
+    constructor(index:number)
+    {
+        this.id=index
+    }
 }

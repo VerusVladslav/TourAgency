@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User, UserManager, WebStorageStateStore } from 'oidc-client';
 import { BehaviorSubject, concat, from, Observable } from 'rxjs';
 import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
+import { ApiResponse } from 'src/app/Models/model';
 import { ApplicationPaths, ApplicationName } from './api-authorization.constants';
 
 export type IAuthenticationResult =
@@ -196,4 +197,7 @@ export class AuthorizeService {
         mergeMap(() => this.userManager.getUser()),
         map(u => u && u.profile));
   }
+
+
+  
 }

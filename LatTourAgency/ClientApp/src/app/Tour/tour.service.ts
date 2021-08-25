@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ApiResponse, FilterDTO, ImageTour, Tour } from 'src/app/Models/model';
+import { ApiResponse, FilterDTO, Gallery, ImageTour, Tour } from 'src/app/Models/model';
 import { ApplicationRoutes } from '../allConstans';
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,9 @@ export class TourService {
     getTour(id:string): Observable<Tour> {
       return this.http.get<Tour>(ApplicationRoutes.GetTourById+id);
     }
-  
+    getTourGallery(id:string): Observable<Gallery[]> {
+      return this.http.get<Gallery[]>(ApplicationRoutes.GetTourGallery+id);
+    }
     updateTour(tour: Tour): Observable<ApiResponse> {
       return this.http.put<ApiResponse>(ApplicationRoutes.UpdateTour, tour);
     }
@@ -31,8 +33,11 @@ export class TourService {
     deleteTour(id: string): Observable<ApiResponse> {
       return this.http.delete<ApiResponse>(ApplicationRoutes.DeleteTour + id);
     }
-    addGallery(galley:ImageTour[],idTour:string):Observable<ApiResponse> {
-      return this.http.put<ApiResponse>(ApplicationRoutes.AddTourGallery+idTour, galley);
+    addGallery(gallery:ImageTour[],idTour:string):Observable<ApiResponse> {
+      return this.http.put<ApiResponse>(ApplicationRoutes.AddTourGallery+idTour, gallery);
+    }
+    UpdateGallery(gallery:ImageTour[],idTour:string):Observable<ApiResponse> {
+      return this.http.put<ApiResponse>(ApplicationRoutes.UpdateTourGallery+idTour, gallery);
     }
 
     setFilter(filter:FilterDTO){
@@ -46,5 +51,7 @@ export class TourService {
      
       return this.http.post<Tour[]>(ApplicationRoutes.GetFilteredTours,this.filterTours);
     }
-  
+    deleteTOurRange(tours: Tour[]): Observable<ApiResponse[]> {
+      return this.http.put<ApiResponse[]>(ApplicationRoutes.DeleteRangeTour,tours);
+    }
 }

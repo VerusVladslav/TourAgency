@@ -5,6 +5,7 @@ import {SelectItem} from '../../Models/model';
 import { NgxSpinnerService } from "ngx-spinner";
 import { HttpErrorResponse } from '@angular/common/http';
 import {  MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-Tour-List',
@@ -15,7 +16,8 @@ export class TourListComponent implements OnInit {
 
   constructor(private tourService:TourService,
     private spinner:NgxSpinnerService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private router:Router) { }
   Tours: Tour[] 
   // = [
   //  new Tour('name',
@@ -58,7 +60,9 @@ export class TourListComponent implements OnInit {
      
 
   }
-
+  selectTour(tour: Tour) {
+     this.router.navigate(['/tour/',  tour.id]);
+}
   GetHotTours(){
     this.tourService.getAllTours().subscribe(data=>{
       this.Tours=data;
@@ -81,6 +85,13 @@ export class TourListComponent implements OnInit {
 
   tourinfo(id:string){
     console.log(id);
+  }
+
+
+  ifTownAndHotelNotNull(tour:Tour):boolean
+  {
+  
+    return tour.hotel!=null && tour.town!=null
   }
 
   onSortChange(event) {

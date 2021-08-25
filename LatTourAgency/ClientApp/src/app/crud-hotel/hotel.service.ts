@@ -7,6 +7,8 @@ import { ApiResponse, Hotel, IFood, IHotelRoom,IHotelServices } from 'src/app/Mo
 import { ApplicationRoutes, ForKidsServiceCostants,
   EntertainmentAndSportServiceCostants,BeachHotelServiceConstants,
   GenerelServiceConstants,
+  HotelRoomConstants,
+  FoodConstants,
   } from '../allConstans';
 @Injectable({
   providedIn: 'root'
@@ -93,8 +95,25 @@ export class HotelService {
    
   ];
 
+  HotelRooms:any[]=[
+    {name:HotelRoomConstants.Single},
+    {name:HotelRoomConstants.Double},
+    {name:HotelRoomConstants.Child},
+    {name:HotelRoomConstants.Triple},
+    {name:HotelRoomConstants.Extra_Bed},
+    {name:HotelRoomConstants.Vip}
+  ];
 
+  HotelFood:any[]=[
+    {name:FoodConstants.Food_Without},
+    {name:FoodConstants.Food_Breakfast},
+    {name:FoodConstants.Food_Dinner},
+    {name:FoodConstants.Food_FullPassion},
+    {name:FoodConstants.Food_Ultra},
+    {name:FoodConstants.Food_AllInclusive},
 
+   
+  ];
 
   constructor(private http: HttpClient,
     private router: Router) { }
@@ -198,8 +217,17 @@ export class HotelService {
     return this.http.get<IHotelServices[]>(ApplicationRoutes.GetBeachServiceByHotelId + hotelId);
   }
 
+  getAllServices(hotelId:string): Observable<IHotelServices[]>{
+    return this.http.get<IHotelServices[]>(ApplicationRoutes.GetAllHotelService + hotelId);
+  }
 
 
+  getHotelRoomConstantsList(): any[]{
+    return this.HotelRooms;
+  }
+  getHotelFoodsConstantsList(): any[]{
+    return this.HotelFood;
+  }
   // changeGeneralServices(selected:string[]):string[]  {
    
   //    let GenerealArray=this.GeneralService;

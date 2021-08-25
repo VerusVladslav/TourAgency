@@ -46,7 +46,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {FileUploadModule} from 'primeng/fileupload';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {MessageModule} from 'primeng/message';
-
+import {MessagesModule} from 'primeng/messages';
 import { TourpageComponent } from './Tour/tourpage/tourpage.component';
 import {GalleriaModule} from 'primeng/galleria';
 import {MultiSelectModule} from 'primeng/multiselect';
@@ -80,6 +80,7 @@ import {TabViewModule} from 'primeng/tabview';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MessagesModule,
     FormsModule,
     ApiAuthorizationModule,
     ButtonModule,

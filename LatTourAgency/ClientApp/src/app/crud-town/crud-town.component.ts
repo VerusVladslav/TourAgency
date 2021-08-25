@@ -262,7 +262,7 @@ checkIfSuccess(): boolean{
 
 deleteSelectedTowns() {
   this.confirmationService.confirm({
-      message: 'Are you sure you want to delete the selected towns ? All hotels in this city will be deleted',
+      message: 'Are you sure you want to delete the selected towns ? ',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -291,7 +291,7 @@ hideDialog() {
 
 deleteTown(town: Town) {
     this.confirmationService.confirm({
-        message: 'Are you sure you want to delete "' + town.name + '" ?  All hotels in this city will be deleted',
+        message: 'Are you sure you want to delete "' + town.name + '" ? ',
         header: 'Confirm',
         icon: 'pi pi-exclamation-triangle',
         accept: () => {

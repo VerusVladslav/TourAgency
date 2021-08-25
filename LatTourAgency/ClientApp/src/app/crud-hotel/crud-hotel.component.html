@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+
 <div class="card" >
   <p-toolbar styleClass="mb-4">
     <ng-template pTemplate="left">
@@ -80,9 +80,9 @@
 <p-dialog [(visible)]="hotelDialog" [style]="{width: '600px'}" header="Hotel Details" 
 [modal]="true" styleClass="fluid">
 
-  <ng-template pTemplate="content">
+  <ng-template  pTemplate="content">
     <div class="">
-      <div class="field">
+      <div  class="field">
         <label for="image">Name</label>
         <input pInputText  type="text" class="inputfield w-full" id="image" [(ngModel)]="hotel.name" >        
        
@@ -128,20 +128,7 @@
           inputId="minmax-buttons" [min]="1" [max]="5">
           </p-inputNumber>
         </div>
-        <div class="field">
-          <label for="site">Site</label>
-          <textarea rows="2"  class="inputfield w-full  p-inputtext " id="site" 
-          pInputTextarea autoResize="autoResize"
-            [(ngModel)]="hotel.site"></textarea>
-         
-        </div>
-        <div class="field">
-            <label for="description">Description</label>
-            <textarea rows="3"  class="inputfield w-full  p-inputtext " id="description" 
-            pInputTextarea autoResize="autoResize"
-              [(ngModel)]="hotel.description"></textarea>
-           
-          </div>
+      
           <div class="field">
             <div class="flex justify-content-center ">
     
@@ -152,10 +139,14 @@
           </div>
           <div class="field">
             <label  class="w-full text-lg">General </label>
-            <p-multiSelect [options]="general" [(ngModel)]="selectedGeneralService" 
-            optionLabel="service"
-            
-            optionValue="service" id="general" display="chip"  [style]="{width: '535px'}" 
+            <p-multiSelect 
+            [options]="general" 
+            [(ngModel)]="selectedGeneralService" 
+            optionLabel="service"           
+            optionValue="service" 
+            id="general" 
+            display="chip"  
+            [style]="{width: '535px'}" 
             [virtualScroll]="true" 
             ></p-multiSelect>
             
@@ -163,9 +154,14 @@
 
           <div class="field">
             <label for="entertainment" class="w-full">Entertainment and Sport Services</label>
-            <p-multiSelect [options]="entertainment" [(ngModel)]="selectedEntertainmentService" 
+            <p-multiSelect
+             [options]="entertainment"
+              [(ngModel)]="selectedEntertainmentService" 
             optionLabel="service"
-            optionValue="service" id="entertainment" display="chip"  [style]="{width: '535px'}" 
+            optionValue="service" 
+            id="entertainment" 
+            display="chip"  
+            [style]="{width: '535px'}" 
             [virtualScroll]="true"
             ></p-multiSelect>
            

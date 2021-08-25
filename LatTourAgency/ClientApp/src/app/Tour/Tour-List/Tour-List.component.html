@@ -1,80 +1,93 @@
-
-        <p-dataView #dv [value]="Tours" [paginator]="true" [rows]="9" filterBy="name"
-        [sortField]="sortField" [sortOrder]="sortOrder" >
-        <ng-template pTemplate="header">
-            <div class="flex justify-content-between  flex-wrap">
-                <p-dropdown class="mb-2" [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" 
+<p-dataView #dv [value]="Tours" [paginator]="true" [rows]="9" filterBy="name" [sortField]="sortField"
+    [sortOrder]="sortOrder">
+    <ng-template pTemplate="header">
+        <div class="flex justify-content-between  flex-wrap">
+            <p-dropdown class="mb-2" [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price"
                 (onChange)="onSortChange($event)" styleClass="p-mb-2 p-mb-md-0"></p-dropdown>
-                <span class="p-input-icon-left mb-2 mb-md-0">
-                    <i class="pi pi-search"></i>
-                    <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
-                </span>
-              </div>
-        </ng-template>
-      
+            <span class="p-input-icon-left mb-2 mb-md-0">
+                <i class="pi pi-search"></i>
+                <input type="search" pInputText placeholder="Search by Name" (input)="dv.filter($event.target.value)">
+            </span>
+        </div>
+    </ng-template>
 
-        
-            <ng-template let-tour pTemplate="listItem">
-              
-                <div class="list-item">
-                    <div class=" m-3 mr-3">
-                        
-                        <div (click)="tourinfo(tour.id)" class="flex  border-solid   hover:border-green-600  border-green-400   flex-wrap justify-content-around ">
 
-                                <div class="mt-4 border-double  border-green-400 mb-4 flex align-items-center justify-content-center">
-                                  <div class="m-1">
 
-                                      <img [src]="tour.mainImage"/>
-                                  </div>
-                                   
-                                    
-                                </div>
-                                <div class="flex   m-5 align-items-center justify-content-center">
-                                    
-                                    <div class="flex flex-column text-center">
-                                        
-                                        <div class="flex align-items-center justify-content-center  text-lg font-bold">
-                                            
-                                            {{tour.name}}
-                                        </div>
-                                        
-                                        <div class="flex text-center">
-                                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae possimus, l
-                                            {{tour.shortDescription}}
-                                        </div>
-                                        <div class="flex mt-4 flex-row-reverse ">
-                                            <div class="flex ">
-                                                <span> {{tour.duration}}
-                                                    <i class="pi pi-clock ml-1 mt-2 text-green-400"></i>
-                                                    
-                                                    nights</span>
-                                            </div>
-                                            
-                                            
-                                        </div>
-                                       
-                                        
-                                        <div class="flex mt-2 flex-row-reverse">
-                                            
-                                            <p-button  icon="pi pi-shopping-cart" ></p-button>
-                                        </div>
-                                    </div>
-                                
-                           
-                                
-                          
+    <ng-template let-tour pTemplate="listItem">
+
+        <div class="list-item">
+            <div class=" m-3 mr-3">
+
+                <div (click)="tourinfo(tour.id)"
+                    class="flex  border-solid   hover:border-green-600  border-green-400   flex-wrap justify-content-around ">
+
+                    <div
+                        class="mt-4 border-double  border-green-400 mb-4 flex align-items-center justify-content-center">
+                        <div class="m-1">
+
+                            <img [src]="tour.mainImage" />
                         </div>
-                              
-                          
-                          
-                      
-                        </div>
+
+
                     </div>
-                        
+                    <div class="flex   m-5 align-items-center justify-content-center">
+
+                        <div class="flex flex-column text-center">
+
+                            <div class="flex align-items-center justify-content-center  text-lg font-bold">
+
+                                {{tour.name}}
+                            </div>
+
+                            <div class="flex text-center">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae possimus, l
+                                {{tour.shortDescription}}
+                            </div>
+                            <div class="flex mt-4 justify-content-between">
+                                <div class="flex  ">
+                                    <div *ngIf="ifTownAndHotelNotNull(tour)" class="flex flex-wrap">
+                                        <span class="flex"><b class="pr-1">City: </b> {{tour.town}}
+                                           </span>
+                                           <span class="flex ml-4"><b class="pr-1">Hotel: </b> {{tour.hotel}}
+                                        </span>
+                                    </div>
+
+                                </div>
+                                <div class="flex  flex-wrap flex-column">
+                                    <div class="flex ">
+                                        <span> {{tour.duration}}
+                                            <i class="pi pi-clock ml-1 mt-2 text-green-400"></i>
+
+                                            nights</span>
+                                    </div>
+                                    <div class="flex ">
+                                        <span> <b>{{tour.costinDoldars}} $ </b></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex mt-2 flex-row-reverse">
+
+                                <button type="button" pButton icon="pi pi-info-circle" label="More Info"
+                                    (click)="selectTour(tour)"></button>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
                 </div>
-              
-          
-            </ng-template>
-        </p-dataView>
-        
-     
+            </div>
+
+        </div>
+
+
+    </ng-template>
+</p-dataView>

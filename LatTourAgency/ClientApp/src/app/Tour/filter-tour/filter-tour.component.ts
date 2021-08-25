@@ -101,7 +101,12 @@ export class FilterTourComponent implements OnInit {
 
     // console.log(this.town);
     // console.log(this.hotel);
-   
+   if(this.town==null)
+   {
+    this.messageService.add( {severity:'warn', summary:'Warning', detail:'Town not selected'},);
+
+     return;
+   }
     let filter=new FilterDTO(
       this.town.id,   
       this.rangeValues[0],

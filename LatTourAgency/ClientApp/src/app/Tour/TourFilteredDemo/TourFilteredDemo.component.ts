@@ -24,6 +24,11 @@ export class TourFilteredDemoComponent implements OnInit {
 
       this.tourService.getFilteredTourList().subscribe(tours => {
         this.tours = tours
+        if(tours.length==0)
+        {
+        this.messageService.add( {severity:'warn', summary:'Warning', detail:'Not found'},);
+          
+        }
         setTimeout(() => {
      
       this.spinner.hide();

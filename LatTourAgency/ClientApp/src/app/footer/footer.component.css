@@ -3,15 +3,17 @@ footer{
     min-height: 250px;
     color: white;
     bottom: 0;
+    z-index: 2;
 }
 a {
     color: white;
     text-decoration: underline;
+    z-index: 2;
 }
 a:hover{
     color:lightgray;
     text-decoration:transparent;
-
+    
 }
 i:hover{
     color:lightgray;
