@@ -43,30 +43,33 @@
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae possimus, l
                                 {{tour.shortDescription}}
                             </div>
-                            <div class="flex mt-4 justify-content-between">
+                            <div class="flex mt-4 justify-content-around">
                                 <div class="flex  ">
                                     <div *ngIf="ifTownAndHotelNotNull(tour)" class="flex flex-wrap">
-                                        <span class="flex"><b class="pr-1">City: </b> {{tour.town}}
+                                        <span class="flex align-items-center">City:<b class="pl-1"> {{tour.town}}</b> 
                                            </span>
-                                           <span class="flex ml-4"><b class="pr-1">Hotel: </b> {{tour.hotel}}
-                                        </span>
+                                           
                                     </div>
 
                                 </div>
-                                <div class="flex  flex-wrap flex-column">
-                                    <div class="flex ">
-                                        <span> {{tour.duration}}
-                                            <i class="pi pi-clock ml-1 mt-2 text-green-400"></i>
-
-                                            nights</span>
-                                    </div>
-                                    <div class="flex ">
-                                        <span> <b>{{tour.costinDoldars}} $ </b></span>
-                                    </div>
+                                <div class="flex">
+                                    <span class="flex align-items-center">Hotel:<b class="pl-1">  {{tour.hotel}}</b>
+                                    </span>
                                 </div>
+                              
 
                             </div>
+                            <div class="flex  flex-wrap flex-column">
+                                <div class="flex justify-content-end">
+                                    <span>Duration: {{tour.duration}}
+                                        <i class="pi pi-clock ml-1 mt-2 text-green-400"></i>
 
+                                        nights</span>
+                                </div>
+                                <div class="flex justify-content-end">
+                                    <span>Price: <b> {{tour.costinDoldars}} $ </b></span>
+                                </div>
+                            </div>
 
                             <div class="flex mt-2 flex-row-reverse">
 

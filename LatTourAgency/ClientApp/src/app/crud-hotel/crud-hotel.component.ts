@@ -528,107 +528,46 @@ export class CrudHotelComponent implements OnInit {
 
   InitilizeServices(hotelid: string) {
 
-    // this.hotelService.getAllServices(hotelid).subscribe(services => {
-    // 
-    //   services.forEach(element => {
-    //   
-    //     switch (element.type) {
-    //       case HotelServiceConstants.Beach:
-    //         this.selectedBeach.push(element.service)
-    //         break;
-    //         case HotelServiceConstants.ForKids:
-    //         this.selectedForKids.push(element.service)
-    //         break;
-    //         case HotelServiceConstants.General:
-    //           this.selectedGeneralService.push(element.service)
-    //           break;
-    //           case HotelServiceConstants.Sport:
-    //             this.selectedEntertainmentService.push(element.service)
-    //             break;
+    this.hotelService.getAllServices(hotelid).subscribe(services => {
+    
+      services.forEach(element => {
+      
+        switch (element.type) {
+          case HotelServiceConstants.Beach:
+            this.selectedBeach.push(element.service)
+            break;
+            case HotelServiceConstants.ForKids:
+            this.selectedForKids.push(element.service)
+            break;
+            case HotelServiceConstants.General:
+              this.selectedGeneralService.push(element.service)
+              break;
+              case HotelServiceConstants.Sport:
+                this.selectedEntertainmentService.push(element.service)
+                break;
           
-    //     }
+        }
 
 
         
-    //   });
-
-    //   setTimeout(() => {
-
-
-    //     this.hotelDialog = true;
-    //     this.spinner.hide();
-
-    //   }, 2000);
-
-    // }, (error: HttpErrorResponse) => {
-    //   setTimeout(() => {
-    //     this.spinner.hide();
-    //     this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 });
-    //   }, 5000);
-   // });
-    this.hotelService.getBeachServices(hotelid).subscribe(BeachServices=>{
-
-      BeachServices.forEach(element => {
-
-
-        this.selectedBeach.push(element.service)
       });
+     // this.hotelDialog = true;
+
+      setTimeout(() => {
 
 
-      this.hotelService.getGeneralServices(hotelid).subscribe(General=>{
+        this.hotelDialog = true;
+        this.spinner.hide();
 
-        General.forEach(element => {
-          this.selectedGeneralService.push(element.service)
-        });
+      }, 1000);
 
-        this.hotelService.getForKidsServices(hotelid).subscribe(Forkids=>{
-
-          Forkids.forEach(element => {
-            this.selectedForKids.push(element.service)
-          });
-
-
-
-          this.hotelService.getSportServices(hotelid).subscribe(sport=>{
-
-            sport.forEach(element => {
-              this.selectedEntertainmentService.push(element.service)
-            });
-
-            setTimeout(() => {  
-
-
-              this.hotelDialog = true;
-              this.spinner.hide();
-
-            }, 1000); 
-
-          },(error: HttpErrorResponse)=>{
-            setTimeout(() => {
-              this.spinner.hide();
-              this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
-            }, 5000);
-          });
-        },(error: HttpErrorResponse)=>{
-          setTimeout(() => {
-            this.spinner.hide();
-            this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
-          }, 5000);
-        });
-
-      },(error: HttpErrorResponse)=>{
-        setTimeout(() => {
-          this.spinner.hide();
-          this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
-        }, 5000);
-      });
-
-    },(error: HttpErrorResponse)=>{
+    }, (error: HttpErrorResponse) => {
       setTimeout(() => {
         this.spinner.hide();
-        this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});  
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 });
       }, 5000);
-    });
+   });
+   
 }
 
   InitializeData(hotelId: string) {
@@ -677,7 +616,7 @@ export class CrudHotelComponent implements OnInit {
     setTimeout(() => {
       this.hotel = { ...hotel };
 
-      this.hotelDialog = true;
+    //  this.hotelDialog = true;
       this.spinner.hide();
       this.showMessageResponse();
 

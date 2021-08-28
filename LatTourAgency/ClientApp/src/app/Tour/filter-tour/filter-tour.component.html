@@ -2,7 +2,7 @@
 <div class="card ">
   <h2 class="flex align-items-center justify-content-center m-4"> Filter</h2>
   <div class="field  m-3">
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap flex-column">
       <div class="flex-1   justify-content-around p-2">
 
         <label class="w-full" for="price">Town</label>
@@ -15,7 +15,7 @@
          [virtualScroll]="true" [itemSize]="5" 
         [style]="{width: '100%'}"  ></p-dropdown>
         </div>
-        <div class="flex-1 flex-column p-2">
+        <div class="flex-1  justify-content-around p-2">
         
         <label class="w-full" >Hotel</label>
         <p-dropdown  class="max-w-min md:max-w-max"
@@ -31,25 +31,25 @@
          [virtualScroll]="true" [itemSize]="5" 
         [style]="{width: '100%'}"  ></p-dropdown>
       </div>
-
+      <div class="flex-1  flex-column   p-2">
+        <label class="w-full" >Dates</label>
+        <p-calendar  [style]="{width: '100%'}" [(ngModel)]="rangeDates"  [showIcon]="true" placeholder="Select Dates"  
+        selectionMode="range" [readonlyInput]="true" inputId="range"></p-calendar>
+      </div>
 
     </div>
    
   </div>
   <div class="field   m-3">
     <div class="flex flex-wrap ">
-      <div class="flex-1 pr-1 mr-1 flex align-items-left justify-content-between">
-
-        <p-calendar [(ngModel)]="rangeDates"  [showIcon]="true" placeholder="Select Dates"  
-        selectionMode="range" [readonlyInput]="true" inputId="range"></p-calendar>
-      </div>
-      <div class="flex-1    ml-2    ">
+     
+      <div class="flex-1    ml-3    ">
         <label>
           <i class="pi pi-moon mt-1"></i>
           : {{rangeValues[0] + ' - ' + rangeValues[1]}}</label>
         <p-slider [(ngModel)]="rangeValues" [max]="14" [min]="3" [range]="true"></p-slider>
       </div>
-      <div class="flex-1  flex align-items-center justify-content-around">
+      <div class="flex-1  flex align-items-center justify-content-end p-2">
         <button pButton type="button" label="Found" (click)="filterReq($event)" ></button>
       </div>
     </div>
