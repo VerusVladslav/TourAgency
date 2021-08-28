@@ -56,10 +56,13 @@ let applicationPaths: ApplicationPath = {
     TownRemoveRange: "/api/Town/DeleteRange/",
 
 
+    AddReview: "/api/TourReview/Add",
+    GetReviews: "/api/TourReview/",
+
+
 
     CheckLogin:"/api/User/checkLogin",
-    Login:"/api/User/login",
-    Logout:"/api/User/logout",
+    Login:"/api/User/login"
 
 }
 
@@ -104,6 +107,9 @@ interface ApplicationPath {
 
     readonly AddServiceByHotelId: string;
     readonly UpdateServiceByHotelId: string;
+    readonly AddReview: string;
+    readonly GetReviews: string;
+
     //  readonly DeleteServiceByHotelId: string;
 
 
@@ -120,11 +126,39 @@ interface ApplicationPath {
 
     readonly CheckLogin: string;
     readonly Login: string;
-    readonly Logout: string;
+ 
 
 
 }
 
+let NavigationRoutes: NavigationPath = {
+    Login: "login-page",
+
+    
+    Register: "register",
+    Logout: "logout",
+    Filter: "filter-tour",
+    CrudTour: "crud-tour",
+    CrudHotel: "crud-hotel",
+    CrudTown: "crud-town",
+    Home: "/",
+    TourList: "tour-list"
+   
+}
+
+interface NavigationPath {
+    readonly Login: string;
+    readonly Register: string;
+    readonly Logout: string;
+    readonly Filter: string;
+    readonly CrudTour: string;
+    readonly CrudHotel: string;
+    readonly CrudTown: string;
+    readonly Home: string;
+    readonly TourList: string;
+
+
+}
 
 interface FoodConst {
 
@@ -368,7 +402,7 @@ export const EntertainmentAndSportServiceCostants: EntertainmentAndSportHotelSer
 export const BeachHotelServiceConstants: BeachHotelServiceConstants = BeachHotelConstants;
 export const GenerelServiceConstants: GeneralHotelServiceConstants = GenerelServiceConst;
 
-
+export const Navigation:NavigationPath = NavigationRoutes;
 
 export const HotelRoomConstants: HotelRommsConst = HotelRoom;
 

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { AuthorizeService } from '../../api-authorization/authorize.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { ApplicationPaths } from '../../api-authorization/api-authorization.constants';
+import { LoginService } from '../login-page/login.service';
+import { Navigation } from '../allConstans';
 
 
 
@@ -16,13 +18,13 @@ import { ApplicationPaths } from '../../api-authorization/api-authorization.cons
 export class NavMenuComponent {
   isExpanded = false;
   items: MenuItem[];
-  faGlobe=faGlobe;
-  public isAuthenticated:boolean;
-  public userName: Observable<string>;
-  constructor(private authorizeService: AuthorizeService) { }
-  
-  
-   
+  faGlobe = faGlobe;
+
+  constructor(private loginService: LoginService) { }
+
+  isLogin = false;
+  isAdmin = false;
+  UserName;
   collapse() {
     this.isExpanded = false;
   }
@@ -32,98 +34,191 @@ export class NavMenuComponent {
   }
 
   ngOnInit() {
-    this.authorizeService.isAuthenticated().subscribe(data=>{
-      this.isAuthenticated =data
-    });
-    this.userName = this.authorizeService.getUser().pipe(map(u => u && u.name));
-    this.items = [
-        {
-            label:'Home',
-            icon:'pi pi-home',
-            routerLink: ['/']
+   const token = localStorage.getItem('token');
+  
+
+    if (token != null) {
+      this.UserName = this.loginService.getUserName();
+      this.isLogin = true;
+      this.isAdmin = this.loginService.isAdmin();
+    } else {
+      this.isLogin = false;
+      this.isAdmin = false;
+
+    }
+    this.loginService.statusLogin.subscribe(
+      (data) => {
       
-        },
-        {
-            label:'Tours',
-            icon:'pi pi-fw pi-calendar',
-            routerLink: ['/tour-list']
-        },
-        
- 
-        {
-            label:'Filter',
-            icon:'pi pi-fw pi-filter',
-            routerLink: ['/filter-tour']
-        },
+
+        this.isAdmin = this.loginService.isAdmin();
+        this.isLogin = data;
+        if (this.isLogin)
+          this.UserName = this.loginService.getUserName();
+       this.InitNavMenu();
+      }
+    );
+
+   
+  this.InitNavMenu();
+    // this.items = [];
+    // this.items = [
+    //   {
+    //     label: 'Home',
+    //     icon: 'pi pi-home',
+    //     routerLink: Navigation.Home
+
+    //   },
+    //   {
+    //     label: 'Tours',
+    //     icon: 'pi pi-fw pi-calendar',
+    //     routerLink: Navigation.TourList
+    //   },
+
+
+    //   {
+    //     label: 'Filter',
+    //     icon: 'pi pi-fw pi-filter',
+    //     routerLink: Navigation.Filter
+    //   }
+
+
+    // ];
+
+    // if (this.isAdmin) {
+    //   this.items.push(
+    //     {
+    //       label: 'CRUD',
+    //       icon: 'pi pi-fw pi-pencil',
+    //       items: [
+    //         { label: 'Tours', icon: 'pi pi-fw pi-pencil', routerLink: Navigation.CrudTour },
+    //         { label: 'Hotels', icon: 'pi pi-fw pi-pencil', routerLink: Navigation.CrudHotel },
+    //         { label: 'Towns', icon: 'pi pi-fw pi-pencil', routerLink: Navigation.CrudTown },
+
+    //       ]
+    //     });
+    // }
+
+
+    // if (this.isLogin) {
+    //   this.items.push(
+    //     {
+
+    //       label: String(this.UserName),
+    //       icon: 'pi pi-user'
+
+
+    //     },
+    //     {
+
+    //       label: 'Log out',
+    //       icon: 'pi pi-sign-out',
+    //       routerLink: Navigation.Logout
+
+    //     });
+    // }
+
+
+
+    // if (!this.isLogin) {
+    //   this.items.push({
+
+    //     label: 'Sign In',
+    //     icon: 'pi pi-sign-in',
+    //     routerLink: Navigation.Login
+
+
+    //   },
+    //     {
+
+    //       label: 'Sign Up',
+    //       icon: 'pi pi-user-plus',
+    //       routerLink: Navigation.Register
+
+
+    //     });
+    // }
+
+  }
+
+  InitNavMenu() {
+   
+    this.items = [];
+    this.items = [
+      {
+        label: 'Home',
+        icon: 'pi pi-home',
+        routerLink: Navigation.Home
+
+      },
+      {
+        label: 'Tours',
+        icon: 'pi pi-fw pi-calendar',
+        routerLink: Navigation.TourList
+      },
+
+
+      {
+        label: 'Filter',
+        icon: 'pi pi-fw pi-filter',
+        routerLink: Navigation.Filter
+      }
+
+
+    ];
+
+    if (this.isAdmin) {
+      this.items.push(
         {
           label: 'CRUD',
           icon: 'pi pi-fw pi-pencil',
           items: [
-              {label: 'Tours', icon: 'pi pi-fw pi-pencil', routerLink: ['/crud-tour']},
-              {label: 'Hotels', icon: 'pi pi-fw pi-pencil', routerLink: ['/crud-hotel']},
-              {label: 'Towns', icon: 'pi pi-fw pi-pencil', routerLink: ['/crud-town']},
+            { label: 'Tours', icon: 'pi pi-fw pi-pencil', routerLink: Navigation.CrudTour },
+            { label: 'Hotels', icon: 'pi pi-fw pi-pencil', routerLink: Navigation.CrudHotel },
+            { label: 'Towns', icon: 'pi pi-fw pi-pencil', routerLink: Navigation.CrudTown },
 
           ]
-      }
-    //     },
-    //     {
-          
-    //       label:'Sign In',
-    //       icon:'pi pi-sign-in',
-    //       routerLink: ['/login-page']
-      
-    //   },
-    //   {
-        
-    //     label:'Sign Up',
-    //     icon:'pi pi-user-plus',
-    //     routerLink: ApplicationPaths.Register
-  
-    
-    // }
-    ];
+        });
+    }
 
-    if(this.isAuthenticated)
-    {
+
+    if (this.isLogin) {
       this.items.push(
         {
-        
-          label: String(this.userName) ,
-          icon:'pi pi-user',         
-          routerLink: ApplicationPaths.Profile
-      
+
+          label: String(this.UserName),
+          icon: 'pi pi-user'
+
+
         },
         {
-        
-        label:'Log out',
-        icon:'pi pi-sign-out',
-        routerLink: ApplicationPaths.LogOut
-    
-      });
+
+          label: 'Log out',
+          icon: 'pi pi-sign-out',
+          routerLink: Navigation.Logout
+
+        });
     }
-    if(!this.isAuthenticated)
-    {
-      this.items.push( {
-          
-        label:'Sign In',
-        icon:'pi pi-sign-in',
-        routerLink: ['/login-page']
 
-    
-    },
-    {
-      
-      label:'Sign Up',
-      icon:'pi pi-user-plus',
-      routerLink: ApplicationPaths.Register
 
-  
-  });
+
+    if (!this.isLogin) {
+      this.items.push({
+
+        label: 'Sign In',
+        icon: 'pi pi-sign-in',
+        routerLink: Navigation.Login
+
+
+      },
+        {
+
+          label: 'Sign Up',
+          icon: 'pi pi-user-plus',
+          routerLink: Navigation.Register
+
+
+        });
     }
-  
-    
-}
+  }
 
-
-isTourLink
 }

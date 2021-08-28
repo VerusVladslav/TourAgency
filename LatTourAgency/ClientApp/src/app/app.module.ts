@@ -15,50 +15,56 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './footer/footer.component';
 import { LoginPageModule } from './login-page/login-page.module';
-import {CardModule} from 'primeng/card';
-import {MenuModule} from 'primeng/menu';
-import {RatingModule} from 'primeng/rating';
-import {DataViewModule} from 'primeng/dataview';
+import { CardModule } from 'primeng/card';
+import { MenuModule } from 'primeng/menu';
+import { RatingModule } from 'primeng/rating';
+import { DataViewModule } from 'primeng/dataview';
 import { BenefitsComponent } from './home/benefits/benefits.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
-import {AccordionModule} from 'primeng/accordion'; 
-import {MenubarModule} from 'primeng/menubar';
+import { AccordionModule } from 'primeng/accordion';
+import { MenubarModule } from 'primeng/menubar';
 import { CommonModule } from '@angular/common';
 import { PasswordModule } from 'primeng/password';
 import { ToastModule } from 'primeng/toast';
-import {InputMaskModule} from 'primeng/inputmask';
-import {CalendarModule} from 'primeng/calendar';
+import { InputMaskModule } from 'primeng/inputmask';
+import { CalendarModule } from 'primeng/calendar';
 import { RegisterModule } from './register/register.module';
 import { TourListComponent } from './Tour/Tour-List/Tour-List.component';
 import { CrudTourComponent } from './Tour/crud-tour/crud-tour.component';
-import {ToolbarModule} from 'primeng/toolbar';
-import {TableModule} from 'primeng/table';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {DialogModule} from 'primeng/dialog';
-import {InputNumberModule} from 'primeng/inputnumber';
+import { ToolbarModule } from 'primeng/toolbar';
+import { TableModule } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { CrudHotelComponent } from './crud-hotel/crud-hotel.component';
 import { CrudTownComponent } from './crud-town/crud-town.component';
 import { NgxSpinnerModule } from "ngx-spinner";
-import {FileUploadModule} from 'primeng/fileupload';
-import {KeyFilterModule} from 'primeng/keyfilter';
-import {MessageModule} from 'primeng/message';
-import {MessagesModule} from 'primeng/messages';
+import { FileUploadModule } from 'primeng/fileupload';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { MessageModule } from 'primeng/message';
+import { MessagesModule } from 'primeng/messages';
 import { TourpageComponent } from './Tour/tourpage/tourpage.component';
-import {GalleriaModule} from 'primeng/galleria';
-import {MultiSelectModule} from 'primeng/multiselect';
-import {RadioButtonModule} from 'primeng/radiobutton';
+import { GalleriaModule } from 'primeng/galleria';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { FilterTourComponent } from './Tour/filter-tour/filter-tour.component';
-import {SliderModule} from 'primeng/slider';
-import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { SliderModule } from 'primeng/slider';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { TourFilteredDemoComponent } from './Tour/TourFilteredDemo/TourFilteredDemo.component';
-import {TabViewModule} from 'primeng/tabview';
-
+import { TabViewModule } from 'primeng/tabview';
+import { LogoutComponent } from './Logout/Logout.component';
+import { AdminGuard } from './guards/admin.guard';
+import { Page404Component } from './page404/page404.component';
+import { TokenInterceptor } from './interceptor';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { AvatarModule } from 'primeng/avatar';
+import {PanelModule} from 'primeng/panel';
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -66,15 +72,18 @@ import {TabViewModule} from 'primeng/tabview';
     BenefitsComponent,
     TourListComponent,
     CrudTourComponent,
-      CrudHotelComponent,
-      CrudTownComponent,
-      TourpageComponent,
-      FilterTourComponent,
-      TourFilteredDemoComponent
-   ],
+    CrudHotelComponent,
+    CrudTownComponent,
+    TourpageComponent,
+    FilterTourComponent,
+    TourFilteredDemoComponent,
+    LogoutComponent,
+    Page404Component
+  ],
   imports: [
-   // BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),
+    // BrowserModule,//.withServerTransition({ appId: 'ng-cli-universal' }),
     CommonModule,
+    PanelModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -88,7 +97,7 @@ import {TabViewModule} from 'primeng/tabview';
     CalendarModule,
     DropdownModule,
     BrowserAnimationsModule,
-    AccordionModule, 
+    AccordionModule,
     CardModule,
     FontAwesomeModule,
     RatingModule,
@@ -113,11 +122,19 @@ import {TabViewModule} from 'primeng/tabview';
     GalleriaModule,
     MultiSelectModule,
     RadioButtonModule,
-    TabViewModule
+    TabViewModule,
+    AvatarModule
+
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
-  ],
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
+    [MessageService, ConfirmationService],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

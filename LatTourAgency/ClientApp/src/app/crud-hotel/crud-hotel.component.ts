@@ -243,10 +243,7 @@ export class CrudHotelComponent implements OnInit {
 
 
   }
-  check(event) {
-    console.log(event);
-    console.log(typeof this.selectedGeneralService);
-  }
+  
   UpdateHotelRequest(hotel: Hotel) {
     this.spinner.show();
     this.response = [];
@@ -532,9 +529,9 @@ export class CrudHotelComponent implements OnInit {
   InitilizeServices(hotelid: string) {
 
     // this.hotelService.getAllServices(hotelid).subscribe(services => {
-    //   console.log(services);
+    // 
     //   services.forEach(element => {
-    //     console.log(element);
+    //   
     //     switch (element.type) {
     //       case HotelServiceConstants.Beach:
     //         this.selectedBeach.push(element.service)
@@ -644,7 +641,7 @@ export class CrudHotelComponent implements OnInit {
 
     })
     this.hotelService.getHotelRomms(hotelId).subscribe(resHotelRooms => {
-      console.log(resHotelRooms);
+   
       this.setcostHotelRoom(resHotelRooms);
 
 
@@ -670,8 +667,7 @@ export class CrudHotelComponent implements OnInit {
   }
 
   editHotel(hotel: Hotel) {
-    // console.log("Selected hotel");
-    // console.log(this.hotel);
+
     this.spinner.show();
     this.response = [];
     this.RefreshValue();

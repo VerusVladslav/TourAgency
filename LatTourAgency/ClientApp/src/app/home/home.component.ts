@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -7,8 +8,9 @@ import { Component } from '@angular/core';
   styleUrls:[  './home.component.css']
 })
 
-export class HomeComponent {
-
+export class HomeComponent implements OnInit {
+   
+    constructor( private spinner:NgxSpinnerService){}
  images=[
    "../../assets/Image/image1.jpg",
    "../../assets/Image/image2.jpg",
@@ -18,6 +20,14 @@ export class HomeComponent {
    "../../assets/Image/image6.jpg"
  ];
 
-
+ ngOnInit() {
+       this.spinner.show();
+    
+       
+        setTimeout(() => {
+         
+          this.spinner.hide();
+        }, 750);
+ }
     
 }

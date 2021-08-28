@@ -147,7 +147,14 @@ export class SignInModel{
     public Email: string;
     public Password: string;
 
-
+    /**
+     *
+     */
+    constructor(email:string,pass:string) {
+       this.Email=email;
+       this.Password=pass;
+        
+    }
 }
 
 export class IHotelRoom {
@@ -259,7 +266,15 @@ export class Gallery {
     
 }
 
-
+export class LoginToken {
+    
+    public id : string;
+    public name : string;
+    public roles : string[];
+  
+ 
+    
+}
 export class ICostFilter {
     public id:number;
     public RoomType:string;
@@ -271,4 +286,26 @@ export class ICostFilter {
     {
         this.id=index
     }
+}
+
+export class Review {
+    public id?:number;
+    public user?:string;
+    public tourId?:string;
+    public userId?:string;
+    public review?:string;
+    public dateReview?:Date;
+    public Localdate?:string;
+    public grade?:number;
+  
+   
+    constructor(tourId:string,userId:string,grade:number,date:Date,review:string,user:string){
+        this.tourId=tourId;
+        this.userId=userId;
+        this.grade=grade;
+        this.dateReview=date;
+        this.review=review;
+        this.user=user;
+    }
+  
 }

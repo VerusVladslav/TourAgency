@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiResponse, SignUpModel } from '../Models/model';
+import { ApiResponse, LoginToken, SignInModel, SignUpModel } from '../Models/model';
 import { RegisterService } from './register.service';
 import { MessageService } from 'primeng/api';
 import { NgxSpinnerService } from "ngx-spinner";
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
+import { Navigation } from '../allConstans';
+import { LoginService } from '../login-page/login.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-register',
@@ -21,12 +24,15 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private messageService: MessageService,
     private spinner :NgxSpinnerService,
-    private authService:AuthorizeService) {
+   
+    private loginService:LoginService) {
 
 
   }
   currentYear: string = new Date().getFullYear().toString();
   model: SignUpModel;
+  
+  token:LoginToken;
   registerForm: FormGroup;
   result:ApiResponse ;
  register(){
@@ -35,15 +41,15 @@ export class RegisterComponent implements OnInit {
     this.registerService.SignUp(this.model).subscribe(data => {
       this.result=data;
       if(this.result.status==200){
-        setTimeout(() => {
-          
+     
+      
+         setTimeout(() => {
           this.spinner.hide();
+       
+          this.router.navigate([Navigation.Login]);
           this.messageService.add({severity:'success', summary: 'Success ', detail: this.result.message})
-        }, 1000);
-        setTimeout(() => {
-          //this.authService.signIn()
-       // this.router.navigate(['/']);
-        },2000);
+         this.spinner.hide();
+       }, 1000);
       }
          else{
           this.spinner.hide();

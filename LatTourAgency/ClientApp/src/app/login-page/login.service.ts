@@ -3,8 +3,9 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApplicationPaths } from 'src/api-authorization/api-authorization.constants';
-import { ApplicationRoutes } from '../allConstans';
-import { ApiResponse, SignInModel } from '../Models/model';
+import { ApplicationRoutes, Navigation } from '../allConstans';
+import { ApiResponse, LoginToken, SignInModel } from '../Models/model';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -12,50 +13,72 @@ import { ApiResponse, SignInModel } from '../Models/model';
 export class LoginService {
 
   constructor(private http: HttpClient,
-    private router:Router
+    private router: Router
   ) { }
+  token: LoginToken;
   statusLogin = new EventEmitter<boolean>();
-  checkLogin(model:SignInModel):Observable<ApiResponse>{
-  return  this.http.post<ApiResponse>(ApplicationRoutes.CheckLogin,model)
-  
+  checkLogin(model: SignInModel): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(ApplicationRoutes.CheckLogin, model)
+
   }
-  Login(model:SignInModel):Observable<ApiResponse>{
-    return  this.http.post<ApiResponse>(ApplicationRoutes.Login,model)
+
+  Login(model: SignInModel): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(ApplicationRoutes.Login, model)
+
+  }
+
+  
+  getUserId(){
+    const token = localStorage.getItem('token');
+    if (token != null) {
+      return this.token.id;
+    } 
+  }
+
+  Logout() {
+    localStorage.removeItem('token');
+
+
+    this.statusLogin.emit(false);
     
+
+    this.router.navigate([Navigation.Home]);
+  }
+
+  isLoggedIn() {
+    const token = localStorage.getItem('token');
+    if (token != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  getUserName(){
+    let tokenfromStorage = localStorage.getItem('token');
+    if (tokenfromStorage != null) {
+    this.token = jwt_decode(tokenfromStorage);
+      return this.token.name;
+    } 
+  }
+
+
+  isAdmin() {
+    
+    let tokenfromStorage = localStorage.getItem('token');
+    if(tokenfromStorage==null)
+    {
+     
+      return false;
     }
 
-    LogOut(){
-        this.http.post(ApplicationRoutes.Logout,null);
-      
-      }
+    this.token = jwt_decode(tokenfromStorage);
 
-
-      Logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('role');
-    
-        this.statusLogin.emit(false);
-        this.router.navigate(['/']);
-      }
-    
-      isLoggedIn() {
-        const token = localStorage.getItem('token');
-        if (token != null) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    
-      isAdmin() {
-    
-        const roles = localStorage.getItem('roles');
-        console.log(roles);
-       // const decoded = jwt_decode(token);
-        if (roles === 'Admin') {
-          return true;
-        } else {
-          return false;
-        }
-      }
+    if (this.token.roles.indexOf('Admin') != -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
+
+

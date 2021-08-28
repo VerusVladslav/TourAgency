@@ -59,7 +59,7 @@ GetAllTownsRequest(){
 
   this.townService.getAllTowns().subscribe(data=>{
     this.towns=data;
-    console.log(data);
+    
     setTimeout(() => {
     
       this.spinner.hide();
@@ -85,7 +85,7 @@ CreateTownRequest(town:Town){
     this.response.push(data);
     this.townService.getAllTowns().subscribe(data=>{
       this.towns=data;
-      console.log(data);
+  
       setTimeout(() => {
       
         this.spinner.hide();
@@ -123,7 +123,7 @@ UpdateTownRequest(town:Town){
     this.response.push(data);
     this.townService.getAllTowns().subscribe(data=>{
       this.towns=data;
-      console.log(data);
+   
       setTimeout(() => {
       
         this.spinner.hide();
@@ -156,7 +156,7 @@ DeleteSelectedTownRequest(){
     this.response=data;
     this.townService.getAllTowns().subscribe(data=>{
       this.towns=data;
-      console.log(data);
+     
       setTimeout(() => {
       
         this.spinner.hide();
@@ -192,11 +192,11 @@ DeleteTownRequest(id:string){
   this.response=[];
   this.townService.deleteTown(id).subscribe(data=>{   
     this.response.push(data);
-    console.log( this.response);
+ 
 
     this.townService.getAllTowns().subscribe(data=>{
       this.towns=data;
-      console.log(data);
+   
       setTimeout(() => {
       
         this.spinner.hide();
@@ -217,7 +217,7 @@ DeleteTownRequest(id:string){
   (error: HttpErrorResponse)=>{
     setTimeout(() => {
       this.spinner.hide();
-      console.log(error);
+ 
       this.messageService.add({severity:'error', summary: 'Error', detail: error.message, life: 3000});
      
     }, 5000);

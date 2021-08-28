@@ -1,8 +1,5 @@
-
-
-<p-galleria [(value)]="images" [(visible)]="displayBasic" 
-  [containerStyle]="{'max-width': '850px'}" [numVisible]="7" [circular]="true" [fullScreen]="true"
-  [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000">
+<p-galleria [(value)]="images" [(visible)]="displayBasic" [containerStyle]="{'max-width': '850px'}" [numVisible]="7"
+  [circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000">
   <ng-template pTemplate="item" let-item>
     <img [src]="item.path" style="width: 100%; display: block;" />
   </ng-template>
@@ -14,7 +11,7 @@
 
     <div class="flex align-items-center justify-content-center  m-2 ">
 
-      <p  class="text-2xl font-italic ">
+      <p class="text-2xl font-italic ">
 
         {{tour.name}}
       </p>
@@ -77,22 +74,17 @@
           <span>Description</span>
         </ng-template>
         <div class="flex justify-content-center">
-          <b >
+          <b>
             {{tour.town}}
           </b>
         </div>
         <p class="text-justify mt-2">
-            
-        
-          Lorem ipsum dolor sit, amet consectetur
-          adipisicing elit. Voluptas incidunt labore
-          deleniti beatae accusantium aperiam! Voluptate
-          repudiandae qui consequuntur sequi labore quod
-          tempore quidem nihil tempora. Libero quaerat hic in!
+
+
           {{tour.description}}
         </p>
       </p-tabPanel>
-      <p-tabPanel header="Hotel">
+      <p-tabPanel *ngIf="!ifDefaultImg() && IfServicesNotEmpty()" header="Hotel">
         <ng-template pTemplate="header">
           <fa-icon class="icon text-green-400 text-2xl mr-2" [icon]="faHotel"></fa-icon>
 
@@ -103,7 +95,8 @@
           <div *ngIf="!ifDefaultImg()" class="flex p-2 justify-content-center ">
             <div class="flex flex-column">
 
-              <span *ngIf="ifHotelNoteNull()"  class="flex align-items-center justify-content-center  text-2xl pb-3">{{hotel.name}}</span>
+              <span *ngIf="ifHotelNoteNull()"
+                class="flex align-items-center justify-content-center  text-2xl pb-3">{{hotel.name}}</span>
               <img *ngIf="ifHotelNoteNull()" [src]="hotel.mainImage" [style]="{width:'350px' ,height:'450px'}" />
             </div>
           </div>
@@ -162,87 +155,129 @@
           <span>Price</span>
 
         </ng-template>
-      
-          <div class="flex justify-content-between flex-wrap ">
-            <div class="flex">
 
-              <h5>Hotels Room</h5>
-            </div>
-            <div class="flex">
+        <div class="flex justify-content-between flex-wrap ">
+          <div class="flex">
 
-              <h5 class="mr-4">Duration: {{tour.duration}} nights</h5>
-            </div>
-            <div class="flex">
-
-              <h5 class="mr-4">Cost Tour: {{tour.costinDoldars}} $</h5>
-            </div>
+            <h5>Hotels Room</h5>
           </div>
-          <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()"
-          [disabled]="columns.length === 20" class="mr-2 mt-2"></button>
-          <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()"
-          [disabled]="columns.length === 0"></button>
-          
-          <div class="mt-4">
-            <div  *ngFor="let col of columns; let i=index" [@animation]="'visible'">
-              <div class="card m-2 z-0">
-                <div class="flex flex-wrap justify-content-between ">
+          <div class="flex">
 
-                  <div class="flex p-4">{{i + 1}}</div>
-                  <div class="flex align-items-center p-4 ">
-                    <p-dropdown baseZIndex=10 class="max-w-min md:max-w-max z-3" 
-                   [showClear]="true" placeholder="Select a Room"
-                    [options]="roomlist" 
-                    optionLabel="name"
-                    appendTo="body"
-                    optionValue="name"
-                    [style]="{width:'220px'}"
-                   
-                      (onChange)="roomSelected(i,$event)"
-                     [virtualScroll]="true" [itemSize]="6" 
-                    ></p-dropdown>
-                  </div>
-                  <div class="flex align-items-center pr-5 p-4 ">
-                    <p-dropdown baseZIndex=10 class="max-w-min md:max-w-max z-3" 
-                    [showClear]="true" placeholder="Select a Food Service"
-                    [options]="foodlist" 
-                    (onChange)="foodSelected(i,$event)"
-                    appendTo="body"
-                    optionValue="name"
-                   
-                    optionLabel="name"
-                   [style]="{width:'220px'}"
-                   
-                     [virtualScroll]="true" [itemSize]="6" 
-                    ></p-dropdown>
-                  </div>
+            <h5 class="mr-4">Duration: {{tour.duration}} nights</h5>
+          </div>
+          <div class="flex">
+
+            <h5 class="mr-4">Cost Tour: {{tour.costinDoldars}} $</h5>
+          </div>
+        </div>
+        <button pButton pRipple type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()"
+          [disabled]="columns.length === 20" class="mr-2 mt-2"></button>
+        <button pButton pRipple type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()"
+          [disabled]="columns.length === 0"></button>
+
+        <div class="mt-4">
+          <div *ngFor="let col of columns; let i=index" [@animation]="'visible'">
+            <div class="card m-2 z-0">
+              <div class="flex flex-wrap justify-content-between ">
+
+                <div class="flex p-4">{{i + 1}}</div>
+                <div class="flex align-items-center p-4 ">
+                  <p-dropdown baseZIndex=10 class="max-w-min md:max-w-max z-3" [showClear]="true"
+                    placeholder="Select a Room" [options]="roomlist" optionLabel="name" appendTo="body"
+                    optionValue="name" [style]="{width:'220px'}" (onChange)="roomSelected(i,$event)"
+                    [virtualScroll]="true" [itemSize]="6"></p-dropdown>
+                </div>
+                <div class="flex align-items-center pr-5 p-4 ">
+                  <p-dropdown baseZIndex=10 class="max-w-min md:max-w-max z-3" [showClear]="true"
+                    placeholder="Select a Food Service" [options]="foodlist" (onChange)="foodSelected(i,$event)"
+                    appendTo="body" optionValue="name" optionLabel="name" [style]="{width:'220px'}"
+                    [virtualScroll]="true" [itemSize]="6"></p-dropdown>
                 </div>
               </div>
             </div>
           </div>
-       
-     
-      </p-tabPanel>
-      <p-tabPanel header="Review">
-        <ng-template pTemplate="header">
-          <fa-icon class="icon text-green-400 text-2xl mr-2" [icon]="faComment"></fa-icon>
-
-          <span>Reviews</span>
-
-        </ng-template>
-        <p>
-          Your rating
-        </p>
-        <p-rating [(ngModel)]="rating" [cancel]="false"></p-rating>
-        <p>Your Review</p>
-        <textarea rows="10" class="inputfield w-full  p-inputtext " id="shortdescription" pInputTextarea
-          autoResize="autoResize"></textarea>
-        <div class="flex flex-row-reverse mt-5">
-          <div class="flex">
-
-            <button pButton label="Send" class=" minwidth"></button>
-          </div>
         </div>
 
+
+      </p-tabPanel>
+      <p-tabPanel header="Review">
+       
+
+          <ng-template pTemplate="header">
+            <fa-icon class="icon text-green-400 text-2xl mr-2" [icon]="faComment"></fa-icon>
+            
+            <span>Reviews</span>
+            
+          </ng-template>
+          <p>
+            Your rating
+          </p>
+          <p-rating [(ngModel)]="rating" [cancel]="false"></p-rating>
+          <p>Your Review</p>
+          <textarea [(ngModel)]="reviewText" rows="5" class="inputfield w-full  p-inputtext " id="shortdescription"
+          pInputTextarea autoResize="autoResize"></textarea>
+          <div class="flex flex-row-reverse mt-5">
+            <div class="flex">
+              
+              <button pButton label="Send" (click)="AddReview()" class=" minwidth"></button>
+            </div>
+          </div>
+      
+        <div *ngIf="!isReviewsEmpty()" class="card mt-3">
+          <div class="mt-4 flex justify-content-center align-items-center">
+            <p class="text-2xl">
+              Reviews
+            </p>
+          </div>
+          <p-dataView #dv [value]="Reviews" [paginator]="true" [rows]="9" filterBy="name" 
+           >
+         
+
+
+
+            <ng-template let-review pTemplate="listItem">
+
+              <div class="list-item">
+                <div class=" m-3 mr-3">
+
+                  <p-panel >
+                    <ng-template pTemplate="header">
+                      <div class="flex">
+                        <div class="flex align-items-center">
+                          <p-avatar icon="pi pi-user" styleClass="mr-2 text-green-400" size="large" shape="circle"></p-avatar>
+                      
+                        </div>
+                    
+                        <div class="flex flex-column">
+                          <div class="flex">
+                           
+
+                              {{review.user}}
+                         
+                          </div>
+                          <div class="flex">
+                            <p-rating [ngModel]="review.grade" readonly="true" stars="5" [cancel]="false"></p-rating>
+                           
+                          </div>
+                          <div class="flex">
+                           <p class="text-xs">
+                            
+                            {{review.Localdate}}
+                           </p>
+                          </div>
+                      
+                        </div>
+                      </div>
+                    </ng-template>
+                    {{review.review}}
+                   
+                </p-panel>
+                </div>
+              </div>
+            </ng-template>
+          </p-dataView>
+         
+        </div>
       </p-tabPanel>
     </p-tabView>
 

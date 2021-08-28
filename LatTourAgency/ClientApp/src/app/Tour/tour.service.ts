@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ApiResponse, FilterDTO, Gallery, ImageTour, Tour } from 'src/app/Models/model';
+import { ApiResponse, FilterDTO, Gallery, ImageTour, Review, Tour } from 'src/app/Models/model';
 import { ApplicationRoutes } from '../allConstans';
 @Injectable({
   providedIn: 'root'
@@ -54,4 +54,13 @@ export class TourService {
     deleteTOurRange(tours: Tour[]): Observable<ApiResponse[]> {
       return this.http.put<ApiResponse[]>(ApplicationRoutes.DeleteRangeTour,tours);
     }
+
+    addReview(review:Review):Observable<ApiResponse> {
+      return this.http.post<ApiResponse>(ApplicationRoutes.AddReview,review);
+    }
+
+    getReviews(tourId:string):Observable<Review[]> {
+      return this.http.get<Review[]>(ApplicationRoutes.GetReviews+tourId);
+    }
+
 }

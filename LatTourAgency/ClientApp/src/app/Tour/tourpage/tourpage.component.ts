@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Hotel, ICostFilter, IFood, IHotelRoom, IHotelServices, Tour, Town } from 'src/app/Models/model';
+import { ApiResponse, Hotel, ICostFilter, IFood, IHotelRoom, IHotelServices, Review, SelectItem, Tour, Town } from 'src/app/Models/model';
 import { ActivatedRoute } from '@angular/router';
 import { TourService } from '../tour.service';
 import { MessageService } from 'primeng/api';
@@ -19,7 +19,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { FoodConstants } from 'src/app/allConstans';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import { LoginService } from 'src/app/login-page/login.service';
+import {formatDate} from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import { Inject } from '@angular/core';
 
 
 @Component({
@@ -62,21 +65,21 @@ export class TourpageComponent implements OnInit {
   faComment = faComment;
   rating = 0;
   faDollarSign = faDollarSign;
-
+  response: ApiResponse[];
   tour: Tour
 
   images: any[] = [];
 
-
+  reviewText: string;
 
 
   public isAuthenticated: Observable<boolean>;
   public userName: Observable<string>;
 
- 
 
-  
-  
+
+
+
 
   displayBasic: boolean;
 
@@ -94,37 +97,37 @@ export class TourpageComponent implements OnInit {
   roomlist: any[];
   foodlist: any[];
 
-
-
-
+  Reviews: Review[] = [];
+ 
 
   constructor(private spinner: NgxSpinnerService,
     private tourService: TourService,
     private messageService: MessageService,
     private activateRoute: ActivatedRoute,
     private hotelService: HotelService,
-    private router:Router,
+    private router: Router,
+    private authService: LoginService,
+    @Inject(LOCALE_ID) private locale: string
+
   ) { }
 
   ngOnInit() {
 
-    //   this.spinner.show();
-  //  this.isAuthenticated = this.authorizeService.isAuthenticated();
-  //  this.userName = this.authorizeService.getUser().pipe(map(u => u && u.name));
-  
 
 
-  this.spinner.show()
+    this.spinner.show()
 
-   this.getTourAndHOtel();
+    this.getTourAndHOtel();
 
 
     setTimeout(() => {
 
       this.spinner.hide();
     }, 5000);
-
+  
   }
+  
+
 
   ifTourNotNull(): boolean {
     return this.tour != null;
@@ -158,14 +161,14 @@ export class TourpageComponent implements OnInit {
         item.FoodCostForOneDay = food.costinDoldars;
 
 
-    
-       
-        this.tour.costinDoldars += (item.FoodCostForOneDay * this.tour.duration);
-   
+
+
+      this.tour.costinDoldars += (item.FoodCostForOneDay * this.tour.duration);
+
 
     }
     else {
-     console.log(item);
+      console.log(item);
       if (event.value != FoodConstants.Food_Without)
         this.tour.costinDoldars -= (item.FoodCostForOneDay * this.tour.duration);
 
@@ -210,15 +213,15 @@ export class TourpageComponent implements OnInit {
 
   removeColumn() {
     let item = this.columns[this.columns.length - 1];
-    if (item.FoodType == FoodConstants.Food_Without||
-      item.FoodType ==null||
-      item.FoodType ==""
-      ) {
+    if (item.FoodType == FoodConstants.Food_Without ||
+      item.FoodType == null ||
+      item.FoodType == ""
+    ) {
       item.FoodCostForOneDay = 0;
     }
-    if (    item.RoomType ==null||
-      item.RoomType ==""
-      ) {
+    if (item.RoomType == null ||
+      item.RoomType == ""
+    ) {
       item.RoomCostForOneDay = 0;
     }
     this.tour.costinDoldars -= (item.RoomCostForOneDay * this.tour.duration);
@@ -236,9 +239,10 @@ export class TourpageComponent implements OnInit {
 
 
     this.tourService.getTour(id).subscribe(tour => {
-      if(tour==null)
+      if (tour == null)
         this.router.navigate(['/']);
       this.tour = tour;
+      this.GetReviews();
       this.getHotel();
       this.getHotelServices();
       this.getGallery();
@@ -259,11 +263,11 @@ export class TourpageComponent implements OnInit {
     );
   }
 
-  getGallery(){
+  getGallery() {
     this.tourService.getTourGallery(this.tour.id).subscribe(gallery => {
-      this.images=gallery;
-     console.log(gallery);
-      
+      this.images = gallery;
+     
+
 
       setTimeout(() => {
 
@@ -405,5 +409,105 @@ export class TourpageComponent implements OnInit {
   viewGallery() {
 
     this.displayBasic = true;
+  }
+
+
+  IfServicesNotEmpty() {
+    return this.ifFokKidsNotEmpty() &&
+      this.ifGenearalNotEmpty() &&
+      this.ifBeachNotEmpty() &&
+      this.ifSportNotEmpty();
+  }
+
+  isReviewsEmpty(){
+    return this.Reviews.length==0;
+  }
+
+  AddReview() {
+    if (!this.authService.isLoggedIn()) {
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Log in first' });
+      return;
+
+    }
+
+    if (this.reviewText == "" || this.reviewText == null) {
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Text review is empty' });
+      return;
+    }
+
+    let userId = this.authService.getUserId();
+    let userName = this.authService.getUserName();
+    let date = new Date(Date.now());
+    let review = new Review(this.tour.id, userId, this.rating, date, this.reviewText,userName);
+
+
+   
+    this.spinner.show();
+    this.response=[];
+    this.tourService.addReview(review).subscribe(response => {
+      this.response.push(response);
+
+      this.GetReviews();
+      setTimeout(() => {
+
+        this.spinner.hide();
+        this.showMessageResponse();
+
+
+      }, 1000);
+    }, (error: HttpErrorResponse) => {
+      setTimeout(() => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 });
+
+        this.spinner.hide();
+      }, 5000);
+    });
+
+
+
+
+
+
+  }
+  showMessageResponse(){
+
+    this.response.forEach(element => {
+      switch(element.status.toString()){
+  
+        case "200" :{
+          this.messageService.add({severity:'success', summary: 'Successful', detail: element.message, life: 3000});
+          break;       
+        }
+        default :
+        this.messageService.add({severity:'error', summary: 'Error', detail: element.message, life: 3000});
+       
+    }});
+     
+    
+     
+  }
+
+
+
+  GetReviews() {
+    this.tourService.getReviews(this.tour.id).subscribe(response => {
+      this.Reviews = response;
+      if(this.Reviews.length!=0){
+        this.Reviews.forEach(element => {
+          element.Localdate = formatDate(element.dateReview,'yyyy-MM-dd',this.locale);
+      
+        
+
+        });
+      }
+      console.log(this.Reviews);
+    }, (error: HttpErrorResponse) => {
+      setTimeout(() => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.message, life: 3000 });
+
+        this.spinner.hide();
+      }, 5000);
+    });
+
   }
 }

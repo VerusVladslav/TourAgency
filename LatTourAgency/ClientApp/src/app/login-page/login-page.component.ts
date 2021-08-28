@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SignInModel,ApiResponse } from '../Models/model';
+import { SignInModel,ApiResponse, LoginToken } from '../Models/model';
 import { MessageService } from 'primeng/api';
 import { LoginService } from './login.service';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { map } from 'rxjs/operators';
-
+import jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
+import { Navigation } from '../allConstans';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -13,14 +16,16 @@ import { map } from 'rxjs/operators';
 })
 export class LoginPageComponent implements OnInit {
 
-
+  token:LoginToken;
   model:SignInModel;
   loginForm: FormGroup;
   result:ApiResponse;
   constructor(private messageService: MessageService,
     private formBuilder: FormBuilder,
     private loginService:LoginService,
-    private authService:AuthorizeService) { }
+    private router :Router,
+    private spinner:NgxSpinnerService,
+    ) { }
     
 
   ngOnInit() {
@@ -32,9 +37,12 @@ export class LoginPageComponent implements OnInit {
     });
   }
   onSubmit(){
+    this.spinner.show();
     try {
       if (this.loginForm.invalid ) {
-            return;
+    this.spinner.hide();
+            
+        return;
        }
       this.model = {
         Email: this.loginForm.controls.Email.value,
@@ -48,10 +56,15 @@ export class LoginPageComponent implements OnInit {
         this.loginService.Login(this.model).subscribe(response=>{
          if(response!=null)
          {
-           console.log(response);
+          window.localStorage.setItem('token', response.token);
+          this.token = jwt_decode(response.token);
+          this.loginService.statusLogin.emit(true);
+          console.log(this.loginService.statusLogin);
+          this.spinner.hide();
+        
+          this.router.navigate([Navigation.Home]);
           this.messageService.add({severity:'success', summary: 'Success ', detail: response.message})
-       //   window.localStorage.setItem('token', token);
-         // const decoded = jwt_decode(token);
+       
          }
       
         });
