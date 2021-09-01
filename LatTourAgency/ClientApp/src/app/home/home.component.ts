@@ -11,18 +11,19 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class HomeComponent implements OnInit {
    
     constructor( private spinner:NgxSpinnerService){}
- images=[
-   "../../assets/Image/image1.jpg",
-   "../../assets/Image/image2.jpg",
-   "../../assets/Image/image3.jpg",
-   "../../assets/Image/image4.jpg",
-   "../../assets/Image/image5.jpg",
-   "../../assets/Image/image6.jpg"
- ];
+ images=[];
+ 
 
  ngOnInit() {
        this.spinner.show();
-    
+       this.images=[
+        "../../assets/Image/image1.jpg",
+        "../../assets/Image/image2.jpg",
+        "../../assets/Image/image3.jpg",
+        "../../assets/Image/image4.jpg",
+        "../../assets/Image/image5.jpg",
+        "../../assets/Image/image6.jpg"
+      ];
        
         setTimeout(() => {
          

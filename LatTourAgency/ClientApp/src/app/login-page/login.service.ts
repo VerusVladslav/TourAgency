@@ -48,6 +48,7 @@ export class LoginService {
   isLoggedIn() {
     const token = localStorage.getItem('token');
     if (token != null) {
+      
       return true;
     } else {
       return false;
@@ -57,6 +58,7 @@ export class LoginService {
     let tokenfromStorage = localStorage.getItem('token');
     if (tokenfromStorage != null) {
     this.token = jwt_decode(tokenfromStorage);
+    console.log( this.token);
       return this.token.name;
     } 
   }
